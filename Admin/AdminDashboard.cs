@@ -138,5 +138,11 @@ namespace Elibse
             // Gọi hàm gửi mail đã viết ở trên
             EmailService.SendEmail(emailNguoiNhan, tieuDe, noiDung + signature);
         }
+
+        private void tàiKhoảnGửiMailThôngBáoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Admin.NotificationServiceEmail configForm = new Admin.NotificationServiceEmail();
+            configForm.ShowDialog();
+        }
     }
 }
