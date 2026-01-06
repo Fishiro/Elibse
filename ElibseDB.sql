@@ -1,75 +1,104 @@
 ﻿-- 1. Tạo Database
-CREATE DATABASE ElibseDB;
+-- Lưu ý: Nếu Database đã tồn tại, bạn cần xóa cũ (DROP DATABASE ElibseDB) trước khi chạy lại từ đầu, 
+-- hoặc chỉ chạy đoạn lệnh tạo bảng SYSTEM_CONFIG nếu dữ liệu cũ đang quan trọng.
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'ElibseDB')
+BEGIN
+    CREATE DATABASE ElibseDB;
+END
 GO
 
 USE ElibseDB;
 GO
 
 -- 2. Tạo bảng ADMINS (Quản trị viên)
--- Dù bạn chọn phương án đơn giản, ta vẫn cần bảng này để lưu mật khẩu.
--- Sau này nếu muốn mở rộng nhiều Admin thì chỉ cần thêm dòng vào đây.
-CREATE TABLE ADMINS (
-    AdminID INT IDENTITY(1,1) PRIMARY KEY, -- Mã tự tăng
-    Username VARCHAR(50) NOT NULL UNIQUE,  -- Tên đăng nhập (Mặc định sẽ dùng 'admin')
-    Password VARCHAR(100) NOT NULL,        -- Mật khẩu đăng nhập
-    FullName NVARCHAR(100)                 -- Tên hiển thị (VD: Quản Trị Viên)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ADMINS]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE ADMINS (
+        AdminID INT IDENTITY(1,1) PRIMARY KEY, 
+        Username VARCHAR(50) NOT NULL UNIQUE,  
+        Password VARCHAR(100) NOT NULL,        
+        FullName NVARCHAR(100)                 
+    );
+END
 GO
 
 -- 3. Tạo bảng CATEGORIES (Thể loại sách)
--- Dùng cho ComboBox chọn thể loại
-CREATE TABLE CATEGORIES (
-    CategoryID INT IDENTITY(1,1) PRIMARY KEY,
-    CategoryName NVARCHAR(100) NOT NULL UNIQUE -- Tên thể loại (VD: Kinh tế, IT...)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CATEGORIES]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE CATEGORIES (
+        CategoryID INT IDENTITY(1,1) PRIMARY KEY,
+        CategoryName NVARCHAR(100) NOT NULL UNIQUE 
+    );
+END
 GO
 
 -- 4. Tạo bảng BOOKS (Kho sách)
--- Mỗi dòng trong bảng này là một cuốn sách vật lý có mã định danh riêng
-CREATE TABLE BOOKS (
-    BookID VARCHAR(50) PRIMARY KEY,        -- Mã sách dạng chuỗi (#0000001-TENSACH-0001)
-    Title NVARCHAR(200) NOT NULL,          -- Tên sách
-    Author NVARCHAR(100),                  -- Tác giả
-    CategoryID INT,                        -- Liên kết sang bảng CATEGORIES
-    ImportDate DATETIME DEFAULT GETDATE(), -- Ngày nhập sách
-    Price DECIMAL(18, 0),                  -- Giá tiền (Dùng để tính phạt đền bù)
-    BookImage VARBINARY(MAX),              -- Lưu ảnh bìa sách trực tiếp vào DB
-    Status NVARCHAR(50) DEFAULT N'Sẵn sàng', -- Trạng thái: Sẵn sàng, Đang mượn, Hỏng, Mất
-    
-    -- Tạo khóa ngoại liên kết với bảng Categories
-    FOREIGN KEY (CategoryID) REFERENCES CATEGORIES(CategoryID)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BOOKS]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE BOOKS (
+        BookID VARCHAR(50) PRIMARY KEY,        
+        Title NVARCHAR(200) NOT NULL,          
+        Author NVARCHAR(100),                  
+        CategoryID INT,                        
+        ImportDate DATETIME DEFAULT GETDATE(), 
+        Price DECIMAL(18, 0),                  
+        BookImage VARBINARY(MAX),              
+        Status NVARCHAR(50) DEFAULT N'Sẵn sàng', 
+        
+        FOREIGN KEY (CategoryID) REFERENCES CATEGORIES(CategoryID)
+    );
+END
 GO
 
 -- 5. Tạo bảng READERS (Độc giả)
-CREATE TABLE READERS (
-    ReaderID VARCHAR(50) PRIMARY KEY,      -- Mã độc giả dạng chuỗi (#0000001-12302025)
-    FullName NVARCHAR(100) NOT NULL,       -- Họ tên
-    DOB DATETIME,                          -- Ngày sinh (để tính tuổi)
-    Email VARCHAR(100),                    -- Email liên hệ
-    PhoneNumber VARCHAR(20),               -- Số điện thoại
-    CreatedDate DATETIME DEFAULT GETDATE(),-- Ngày tạo tài khoản
-    ReaderImage VARBINARY(MAX),            -- Ảnh thẻ độc giả
-    Password VARCHAR(100),                 -- Mật khẩu đăng nhập của độc giả
-    Status NVARCHAR(50) DEFAULT N'Active'  -- Trạng thái: Active (Hoạt động), Locked (Bị khóa)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[READERS]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE READERS (
+        ReaderID VARCHAR(50) PRIMARY KEY,      
+        FullName NVARCHAR(100) NOT NULL,       
+        DOB DATETIME,                          
+        Email VARCHAR(100),                    
+        PhoneNumber VARCHAR(20),               
+        CreatedDate DATETIME DEFAULT GETDATE(),
+        ReaderImage VARBINARY(MAX),            
+        Password VARCHAR(100),                 
+        Status NVARCHAR(50) DEFAULT N'Active'  
+    );
+END
 GO
 
 -- 6. Tạo bảng LOAN_RECORDS (Hồ sơ Mượn/Trả)
--- Bảng này quan trọng nhất, lưu lịch sử ai mượn sách gì
-CREATE TABLE LOAN_RECORDS (
-    RecordID INT IDENTITY(1,1) PRIMARY KEY, -- Mã giao dịch tự tăng
-    ReaderID VARCHAR(50) NOT NULL,          -- Ai mượn?
-    BookID VARCHAR(50) NOT NULL,            -- Mượn cuốn nào?
-    BorrowDate DATETIME DEFAULT GETDATE(),  -- Ngày mượn
-    DueDate DATETIME NOT NULL,              -- Hạn phải trả
-    ReturnDate DATETIME NULL,               -- Ngày trả thực tế (NULL = Chưa trả)
-    ReturnStatus NVARCHAR(100),             -- Tình trạng khi trả (Bình thường, Hư hỏng...)
-    FineAmount DECIMAL(18, 0) DEFAULT 0,    -- Số tiền phạt phát sinh
-    IsPaid BIT DEFAULT 0,                   -- Trạng thái nộp phạt (0: Chưa, 1: Rồi)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LOAN_RECORDS]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE LOAN_RECORDS (
+        RecordID INT IDENTITY(1,1) PRIMARY KEY, 
+        ReaderID VARCHAR(50) NOT NULL,          
+        BookID VARCHAR(50) NOT NULL,            
+        BorrowDate DATETIME DEFAULT GETDATE(),  
+        DueDate DATETIME NOT NULL,              
+        ReturnDate DATETIME NULL,               
+        ReturnStatus NVARCHAR(100),             
+        FineAmount DECIMAL(18, 0) DEFAULT 0,    
+        IsPaid BIT DEFAULT 0,                   
 
-    -- Khóa ngoại
-    FOREIGN KEY (ReaderID) REFERENCES READERS(ReaderID),
-    FOREIGN KEY (BookID) REFERENCES BOOKS(BookID)
-);
+        FOREIGN KEY (ReaderID) REFERENCES READERS(ReaderID),
+        FOREIGN KEY (BookID) REFERENCES BOOKS(BookID)
+    );
+END
+GO
+
+-- 7. [MỚI] Tạo bảng SYSTEM_CONFIG (Cấu hình hệ thống)
+-- Bảng này lưu cấu hình gửi mail để không phải hardcode trong code C#
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SYSTEM_CONFIG]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE SYSTEM_CONFIG (
+        ConfigID INT PRIMARY KEY IDENTITY(1,1),
+        EmailSender NVARCHAR(100) DEFAULT '',
+        EmailPassword NVARCHAR(100) DEFAULT '' -- Lưu App Password
+    );
+
+    -- Tạo sẵn 1 dòng dữ liệu mặc định để code C# update vào dòng này
+    INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword) 
+    VALUES ('', '');
+END
 GO
