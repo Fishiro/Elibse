@@ -86,6 +86,12 @@
     <Compile Include="Admin\CategoryManager.Designer.cs">
       <DependentUpon>CategoryManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ChangeAdminPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ChangeAdminPassword.Designer.cs">
+      <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\NotificationServiceEmail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\CategoryManager.resx">
       <DependentUpon>CategoryManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ChangeAdminPassword.resx">
+      <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\NotificationServiceEmail.resx">
       <DependentUpon>NotificationServiceEmail.cs</DependentUpon>

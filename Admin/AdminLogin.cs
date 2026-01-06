@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient; // 1. Đừng quên dòng này để dùng SQL
+using System.Data.SqlClient;
 
 namespace Elibse
 {

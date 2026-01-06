@@ -144,5 +144,32 @@ namespace Elibse
             Admin.NotificationServiceEmail configForm = new Admin.NotificationServiceEmail();
             configForm.ShowDialog();
         }
+
+        private void menuLogout_Click(object sender, EventArgs e)
+        {
+            // Hiển thị hộp thoại Yes/No chuẩn của Windows
+            DialogResult check = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (check == DialogResult.Yes)
+            {
+                this.Hide(); // Ẩn Dashboard hiện tại
+
+                fmLoginDialog loginDialog = new fmLoginDialog();
+                loginDialog.ShowDialog(); // Hiện lại form đăng nhập
+
+                this.Close();
+            }
+        }
+
+        private void menuChangePassword_Click(object sender, EventArgs e)
+        {
+            // 1. Khởi tạo form Đổi mật khẩu
+            // Lưu ý: Nếu báo lỗi đỏ, hãy chuột phải chọn Quick Actions -> using Elibse.Admin;
+            Elibse.Admin.ChangeAdminPassword fm = new Elibse.Admin.ChangeAdminPassword();
+
+            // 2. Hiển thị form dưới dạng Dialog (Cửa sổ con)
+            // Dùng ShowDialog() để bắt buộc người dùng xử lý xong form này mới được quay lại Dashboard
+            fm.ShowDialog();
+        }
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -73,6 +73,7 @@
             this.btnBorrow = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
+            this.giaHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -115,16 +116,16 @@
             // 
             // chartStats
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartStats.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartStats.Legends.Add(legend4);
             this.chartStats.Location = new System.Drawing.Point(12, 299);
             this.chartStats.Name = "chartStats";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartStats.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartStats.Series.Add(series4);
             this.chartStats.Size = new System.Drawing.Size(539, 260);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -305,12 +306,14 @@
             this.menuChangePassword.Name = "menuChangePassword";
             this.menuChangePassword.Size = new System.Drawing.Size(279, 34);
             this.menuChangePassword.Text = "Đổi mật khẩu Admin";
+            this.menuChangePassword.Click += new System.EventHandler(this.menuChangePassword_Click);
             // 
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
             this.menuLogout.Size = new System.Drawing.Size(279, 34);
             this.menuLogout.Text = "Đăng xuất";
+            this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // tínhNăngToolStripMenuItem
             // 
@@ -405,7 +408,8 @@
             this.menuManageReaders,
             this.addCategory,
             this.thêmNhiềuSáchToolStripMenuItem,
-            this.thanhLýSáchToolStripMenuItem});
+            this.thanhLýSáchToolStripMenuItem,
+            this.giaHạnTrảSáchToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(89, 32);
             this.quảnLýToolStripMenuItem.Text = "Quản lý";
@@ -475,6 +479,12 @@
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
+            // giaHạnTrảSáchToolStripMenuItem
+            // 
+            this.giaHạnTrảSáchToolStripMenuItem.Name = "giaHạnTrảSáchToolStripMenuItem";
+            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(363, 34);
+            this.giaHạnTrảSáchToolStripMenuItem.Text = "Gia hạn trả sách";
+            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -539,5 +549,6 @@
         private System.Windows.Forms.ToolStripMenuItem gửiMailCảnhBáoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnGửiMailThôngBáoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem giaHạnTrảSáchToolStripMenuItem;
     }
 }

@@ -26,9 +26,12 @@ namespace Elibse
         {
             // Tạo mới cửa sổ đăng nhập Admin
             AdminLogin adminForm = new AdminLogin();
+            this.Hide();
 
             // Hiện nó lên
             adminForm.ShowDialog();
+
+            this.Close();
         }
     }
 }
