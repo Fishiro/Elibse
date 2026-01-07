@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -40,12 +40,12 @@
             this.btnViewViolators = new System.Windows.Forms.Button();
             this.btnViewBorrowed = new System.Windows.Forms.Button();
             this.label = new System.Windows.Forms.Label();
+            this.lbl4 = new System.Windows.Forms.Label();
+            this.lbl3 = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
+            this.btnViewTotalBooks = new System.Windows.Forms.Button();
             this.lblTotalOverdue = new System.Windows.Forms.Label();
             this.lblTotalViolations = new System.Windows.Forms.Label();
-            this.lblTotalBorrowed = new System.Windows.Forms.Label();
-            this.btnViewTotalBooks = new System.Windows.Forms.Button();
-            this.lblOverdue = new System.Windows.Forms.Label();
-            this.lblViolations = new System.Windows.Forms.Label();
             this.lblBorrowedBooks = new System.Windows.Forms.Label();
             this.lblTotalBooks = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -69,11 +69,15 @@
             this.addCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.thêmNhiềuSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thanhLýSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.giaHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBorrow = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
-            this.giaHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tớiTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quáHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tựĐộngGửiEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vềTácGiảToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -116,16 +120,16 @@
             // 
             // chartStats
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartStats.Legends.Add(legend4);
+            chartArea7.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chartStats.Legends.Add(legend7);
             this.chartStats.Location = new System.Drawing.Point(12, 299);
             this.chartStats.Name = "chartStats";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartStats.Series.Add(series4);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chartStats.Series.Add(series7);
             this.chartStats.Size = new System.Drawing.Size(539, 260);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -136,12 +140,12 @@
             this.groupBox1.Controls.Add(this.btnViewViolators);
             this.groupBox1.Controls.Add(this.btnViewBorrowed);
             this.groupBox1.Controls.Add(this.label);
+            this.groupBox1.Controls.Add(this.lbl4);
+            this.groupBox1.Controls.Add(this.lbl3);
+            this.groupBox1.Controls.Add(this.lbl);
+            this.groupBox1.Controls.Add(this.btnViewTotalBooks);
             this.groupBox1.Controls.Add(this.lblTotalOverdue);
             this.groupBox1.Controls.Add(this.lblTotalViolations);
-            this.groupBox1.Controls.Add(this.lblTotalBorrowed);
-            this.groupBox1.Controls.Add(this.btnViewTotalBooks);
-            this.groupBox1.Controls.Add(this.lblOverdue);
-            this.groupBox1.Controls.Add(this.lblViolations);
             this.groupBox1.Controls.Add(this.lblBorrowedBooks);
             this.groupBox1.Controls.Add(this.lblTotalBooks);
             this.groupBox1.Location = new System.Drawing.Point(12, 47);
@@ -159,6 +163,7 @@
             this.btnViewOverdue.TabIndex = 2;
             this.btnViewOverdue.Text = "Xem";
             this.btnViewOverdue.UseVisualStyleBackColor = true;
+            this.btnViewOverdue.Click += new System.EventHandler(this.btnViewOverdue_Click);
             // 
             // btnViewViolators
             // 
@@ -168,6 +173,7 @@
             this.btnViewViolators.TabIndex = 2;
             this.btnViewViolators.Text = "Xem";
             this.btnViewViolators.UseVisualStyleBackColor = true;
+            this.btnViewViolators.Click += new System.EventHandler(this.btnViewViolators_Click);
             // 
             // btnViewBorrowed
             // 
@@ -177,6 +183,7 @@
             this.btnViewBorrowed.TabIndex = 2;
             this.btnViewBorrowed.Text = "Xem";
             this.btnViewBorrowed.UseVisualStyleBackColor = true;
+            this.btnViewBorrowed.Click += new System.EventHandler(this.btnViewBorrowed_Click);
             // 
             // label
             // 
@@ -189,38 +196,38 @@
             this.label.Text = "Tổng số sách";
             this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTotalOverdue
+            // lbl4
             // 
-            this.lblTotalOverdue.AutoSize = true;
-            this.lblTotalOverdue.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblTotalOverdue.Location = new System.Drawing.Point(698, 65);
-            this.lblTotalOverdue.Name = "lblTotalOverdue";
-            this.lblTotalOverdue.Size = new System.Drawing.Size(111, 20);
-            this.lblTotalOverdue.TabIndex = 0;
-            this.lblTotalOverdue.Text = "Mượn quá hạn";
-            this.lblTotalOverdue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl4.AutoSize = true;
+            this.lbl4.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbl4.Location = new System.Drawing.Point(698, 65);
+            this.lbl4.Name = "lbl4";
+            this.lbl4.Size = new System.Drawing.Size(111, 20);
+            this.lbl4.TabIndex = 0;
+            this.lbl4.Text = "Mượn quá hạn";
+            this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTotalViolations
+            // lbl3
             // 
-            this.lblTotalViolations.AutoSize = true;
-            this.lblTotalViolations.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblTotalViolations.Location = new System.Drawing.Point(508, 65);
-            this.lblTotalViolations.Name = "lblTotalViolations";
-            this.lblTotalViolations.Size = new System.Drawing.Size(121, 20);
-            this.lblTotalViolations.TabIndex = 0;
-            this.lblTotalViolations.Text = "Độc giả vi phạm";
-            this.lblTotalViolations.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl3.AutoSize = true;
+            this.lbl3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbl3.Location = new System.Drawing.Point(508, 65);
+            this.lbl3.Name = "lbl3";
+            this.lbl3.Size = new System.Drawing.Size(121, 20);
+            this.lbl3.TabIndex = 0;
+            this.lbl3.Text = "Độc giả vi phạm";
+            this.lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTotalBorrowed
+            // lbl
             // 
-            this.lblTotalBorrowed.AutoSize = true;
-            this.lblTotalBorrowed.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblTotalBorrowed.Location = new System.Drawing.Point(273, 65);
-            this.lblTotalBorrowed.Name = "lblTotalBorrowed";
-            this.lblTotalBorrowed.Size = new System.Drawing.Size(168, 20);
-            this.lblTotalBorrowed.TabIndex = 0;
-            this.lblTotalBorrowed.Text = "Tổng đang được mượn";
-            this.lblTotalBorrowed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl.AutoSize = true;
+            this.lbl.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lbl.Location = new System.Drawing.Point(273, 65);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(168, 20);
+            this.lbl.TabIndex = 0;
+            this.lbl.Text = "Tổng đang được mượn";
+            this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnViewTotalBooks
             // 
@@ -230,28 +237,29 @@
             this.btnViewTotalBooks.TabIndex = 2;
             this.btnViewTotalBooks.Text = "Xem";
             this.btnViewTotalBooks.UseVisualStyleBackColor = true;
+            this.btnViewTotalBooks.Click += new System.EventHandler(this.btnViewTotalBooks_Click);
             // 
-            // lblOverdue
+            // lblTotalOverdue
             // 
-            this.lblOverdue.AutoSize = true;
-            this.lblOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOverdue.Location = new System.Drawing.Point(738, 92);
-            this.lblOverdue.Name = "lblOverdue";
-            this.lblOverdue.Size = new System.Drawing.Size(31, 32);
-            this.lblOverdue.TabIndex = 1;
-            this.lblOverdue.Text = "0";
-            this.lblOverdue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotalOverdue.AutoSize = true;
+            this.lblTotalOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalOverdue.Location = new System.Drawing.Point(738, 92);
+            this.lblTotalOverdue.Name = "lblTotalOverdue";
+            this.lblTotalOverdue.Size = new System.Drawing.Size(31, 32);
+            this.lblTotalOverdue.TabIndex = 1;
+            this.lblTotalOverdue.Text = "0";
+            this.lblTotalOverdue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblViolations
+            // lblTotalViolations
             // 
-            this.lblViolations.AutoSize = true;
-            this.lblViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblViolations.Location = new System.Drawing.Point(553, 92);
-            this.lblViolations.Name = "lblViolations";
-            this.lblViolations.Size = new System.Drawing.Size(31, 32);
-            this.lblViolations.TabIndex = 1;
-            this.lblViolations.Text = "0";
-            this.lblViolations.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTotalViolations.AutoSize = true;
+            this.lblTotalViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalViolations.Location = new System.Drawing.Point(553, 92);
+            this.lblTotalViolations.Name = "lblTotalViolations";
+            this.lblTotalViolations.Size = new System.Drawing.Size(31, 32);
+            this.lblTotalViolations.TabIndex = 1;
+            this.lblTotalViolations.Text = "0";
+            this.lblTotalViolations.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBorrowedBooks
             // 
@@ -298,7 +306,7 @@
             this.menuChangePassword,
             this.menuLogout});
             this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
-            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 32);
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(102, 29);
             this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
             // 
             // menuChangePassword
@@ -322,7 +330,7 @@
             this.menuExportExcel,
             this.gửiMailCảnhBáoToolStripMenuItem});
             this.tínhNăngToolStripMenuItem.Name = "tínhNăngToolStripMenuItem";
-            this.tínhNăngToolStripMenuItem.Size = new System.Drawing.Size(106, 32);
+            this.tínhNăngToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
             this.tínhNăngToolStripMenuItem.Text = "Tính năng";
             // 
             // menuExportCSV
@@ -340,7 +348,9 @@
             // gửiMailCảnhBáoToolStripMenuItem
             // 
             this.gửiMailCảnhBáoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
+            this.testToolStripMenuItem,
+            this.tớiTàiKhoảnToolStripMenuItem,
+            this.quáHạnTrảSáchToolStripMenuItem});
             this.gửiMailCảnhBáoToolStripMenuItem.Name = "gửiMailCảnhBáoToolStripMenuItem";
             this.gửiMailCảnhBáoToolStripMenuItem.Size = new System.Drawing.Size(353, 34);
             this.gửiMailCảnhBáoToolStripMenuItem.Text = "Gửi Mail Cảnh Báo";
@@ -356,9 +366,10 @@
             // 
             this.giớiThiệuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuManual,
-            this.menuAboutUs});
+            this.menuAboutUs,
+            this.vềTácGiảToolStripMenuItem});
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(106, 32);
+            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
             this.giớiThiệuToolStripMenuItem.Text = "Giới Thiệu";
             // 
             // menuManual
@@ -370,17 +381,18 @@
             // menuAboutUs
             // 
             this.menuAboutUs.Name = "menuAboutUs";
-            this.menuAboutUs.Size = new System.Drawing.Size(342, 34);
-            this.menuAboutUs.Text = "Thông tin giới thiệu về Elibse";
+            this.menuAboutUs.Size = new System.Drawing.Size(270, 34);
+            this.menuAboutUs.Text = "Về Elibse";
             // 
             // phầnMềmToolStripMenuItem
             // 
             this.phầnMềmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFineSetting,
             this.càiĐặtGiaHạnToolStripMenuItem,
-            this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem});
+            this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem,
+            this.tựĐộngGửiEmailToolStripMenuItem});
             this.phầnMềmToolStripMenuItem.Name = "phầnMềmToolStripMenuItem";
-            this.phầnMềmToolStripMenuItem.Size = new System.Drawing.Size(95, 32);
+            this.phầnMềmToolStripMenuItem.Size = new System.Drawing.Size(95, 29);
             this.phầnMềmToolStripMenuItem.Text = "Thiết lập";
             // 
             // menuFineSetting
@@ -411,14 +423,14 @@
             this.thanhLýSáchToolStripMenuItem,
             this.giaHạnTrảSáchToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(89, 32);
+            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.quảnLýToolStripMenuItem.Text = "Quản lý";
             // 
             // menuManageReaders
             // 
             this.menuManageReaders.Name = "menuManageReaders";
             this.menuManageReaders.Size = new System.Drawing.Size(363, 34);
-            this.menuManageReaders.Text = "Đọc giả";
+            this.menuManageReaders.Text = "Độc giả";
             // 
             // addCategory
             // 
@@ -438,6 +450,12 @@
             this.thanhLýSáchToolStripMenuItem.Name = "thanhLýSáchToolStripMenuItem";
             this.thanhLýSáchToolStripMenuItem.Size = new System.Drawing.Size(363, 34);
             this.thanhLýSáchToolStripMenuItem.Text = "Thanh lý sách";
+            // 
+            // giaHạnTrảSáchToolStripMenuItem
+            // 
+            this.giaHạnTrảSáchToolStripMenuItem.Name = "giaHạnTrảSáchToolStripMenuItem";
+            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(363, 34);
+            this.giaHạnTrảSáchToolStripMenuItem.Text = "Gia hạn trả sách";
             // 
             // groupBox2
             // 
@@ -479,11 +497,29 @@
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
-            // giaHạnTrảSáchToolStripMenuItem
+            // tớiTàiKhoảnToolStripMenuItem
             // 
-            this.giaHạnTrảSáchToolStripMenuItem.Name = "giaHạnTrảSáchToolStripMenuItem";
-            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(363, 34);
-            this.giaHạnTrảSáchToolStripMenuItem.Text = "Gia hạn trả sách";
+            this.tớiTàiKhoảnToolStripMenuItem.Name = "tớiTàiKhoảnToolStripMenuItem";
+            this.tớiTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.tớiTàiKhoảnToolStripMenuItem.Text = "Tới tài khoản";
+            // 
+            // quáHạnTrảSáchToolStripMenuItem
+            // 
+            this.quáHạnTrảSáchToolStripMenuItem.Name = "quáHạnTrảSáchToolStripMenuItem";
+            this.quáHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quáHạnTrảSáchToolStripMenuItem.Text = "Quá hạn trả sách";
+            // 
+            // tựĐộngGửiEmailToolStripMenuItem
+            // 
+            this.tựĐộngGửiEmailToolStripMenuItem.Name = "tựĐộngGửiEmailToolStripMenuItem";
+            this.tựĐộngGửiEmailToolStripMenuItem.Size = new System.Drawing.Size(355, 34);
+            this.tựĐộngGửiEmailToolStripMenuItem.Text = "Tự động gửi Email";
+            // 
+            // vềTácGiảToolStripMenuItem
+            // 
+            this.vềTácGiảToolStripMenuItem.Name = "vềTácGiảToolStripMenuItem";
+            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.vềTácGiảToolStripMenuItem.Text = "Về tác giả";
             // 
             // AdminDashboard
             // 
@@ -508,7 +544,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lblTotalBorrowed;
+        private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label lblTotalBooks;
         private System.Windows.Forms.Button btnAddBook;
@@ -522,12 +558,12 @@
         private System.Windows.Forms.ToolStripMenuItem tínhNăngToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartStats;
         private System.Windows.Forms.Button btnViewViolators;
+        private System.Windows.Forms.Label lbl3;
         private System.Windows.Forms.Label lblTotalViolations;
-        private System.Windows.Forms.Label lblViolations;
         private System.Windows.Forms.Label lblBorrowedBooks;
         private System.Windows.Forms.Button btnViewOverdue;
+        private System.Windows.Forms.Label lbl4;
         private System.Windows.Forms.Label lblTotalOverdue;
-        private System.Windows.Forms.Label lblOverdue;
         private System.Windows.Forms.ToolStripMenuItem menuChangePassword;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
         private System.Windows.Forms.ToolStripMenuItem menuExportCSV;
@@ -550,5 +586,9 @@
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnGửiMailThôngBáoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem giaHạnTrảSáchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tớiTàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quáHạnTrảSáchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tựĐộngGửiEmailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vềTácGiảToolStripMenuItem;
     }
 }

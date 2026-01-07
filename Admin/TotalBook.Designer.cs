@@ -97,6 +97,7 @@
             // 
             // btnReload
             // 
+            this.btnReload.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnReload.Location = new System.Drawing.Point(452, 497);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(75, 35);
@@ -129,6 +130,7 @@
             // 
             // btnAddBook
             // 
+            this.btnAddBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddBook.Location = new System.Drawing.Point(728, 497);
             this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(122, 35);
@@ -139,6 +141,7 @@
             // 
             // btnDeleteBook
             // 
+            this.btnDeleteBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteBook.Location = new System.Drawing.Point(856, 497);
             this.btnDeleteBook.Name = "btnDeleteBook";
             this.btnDeleteBook.Size = new System.Drawing.Size(109, 35);
@@ -149,6 +152,7 @@
             // 
             // btnEditBook
             // 
+            this.btnEditBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditBook.Location = new System.Drawing.Point(600, 497);
             this.btnEditBook.Name = "btnEditBook";
             this.btnEditBook.Size = new System.Drawing.Size(122, 35);

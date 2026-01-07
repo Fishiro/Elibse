@@ -39,7 +39,7 @@ namespace Elibse
                     // b. Sách đang được mượn
                     string q2 = "SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReturnDate IS NULL";
                     SqlCommand cmd2 = new SqlCommand(q2, conn);
-                    lblTotalBorrowed.Text = cmd2.ExecuteScalar().ToString();
+                    lblBorrowedBooks.Text = cmd2.ExecuteScalar().ToString();
 
                     // c. Độc giả vi phạm
                     string q3 = "SELECT COUNT(*) FROM READERS WHERE Status = 'Locked'";
@@ -119,7 +119,7 @@ namespace Elibse
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Lấy email độc giả từ TextBox (ví dụ)
-            string emailNguoiNhan = "";
+            string emailNguoiNhan = "nguyenduquicm1@gmail.com";
 
             string tieuDe = "Thông báo quá hạn trả sách - Thư Viện Số";
 
@@ -170,6 +170,37 @@ namespace Elibse
             // 2. Hiển thị form dưới dạng Dialog (Cửa sổ con)
             // Dùng ShowDialog() để bắt buộc người dùng xử lý xong form này mới được quay lại Dashboard
             fm.ShowDialog();
+        }
+
+        private void btnViewTotalBooks_Click(object sender, EventArgs e)
+        {
+            // Tạo một đối tượng form TotalBook
+            Elibse.Admin.TotalBook frm = new Elibse.Admin.TotalBook();
+
+            // Hiển thị form lên
+            // ShowDialog() sẽ chặn không cho thao tác ở Dashboard cho đến khi tắt form con đi (an toàn hơn)
+            frm.ShowDialog();
+        }
+
+        private void btnViewBorrowed_Click(object sender, EventArgs e)
+        {
+            // Tạo một đối tượng form TotalBook
+            Elibse.BeingBorrowed frm = new Elibse.BeingBorrowed();
+            frm.ShowDialog();
+        }
+
+        private void btnViewViolators_Click(object sender, EventArgs e)
+        {
+            // Tạo một đối tượng form TotalBook
+            Elibse.Violator frm = new Elibse.Violator();
+            frm.ShowDialog();
+        }
+
+        private void btnViewOverdue_Click(object sender, EventArgs e)
+        {
+            // Tạo một đối tượng form TotalBook
+            Elibse.LateReturn frm = new Elibse.LateReturn();
+            frm.ShowDialog();
         }
     }
 }
