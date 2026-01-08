@@ -87,18 +87,30 @@ BEGIN
 END
 GO
 
--- 7. [MỚI] Tạo bảng SYSTEM_CONFIG (Cấu hình hệ thống)
--- Bảng này lưu cấu hình gửi mail để không phải hardcode trong code C#
+-- 7. Tạo bảng SYSTEM_CONFIG (Cấu hình hệ thống)
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SYSTEM_CONFIG]') AND type in (N'U'))
 BEGIN
     CREATE TABLE SYSTEM_CONFIG (
         ConfigID INT PRIMARY KEY IDENTITY(1,1),
         EmailSender NVARCHAR(100) DEFAULT '',
-        EmailPassword NVARCHAR(100) DEFAULT '' -- Lưu App Password
+        EmailPassword NVARCHAR(100) DEFAULT ''
     );
 
-    -- Tạo sẵn 1 dòng dữ liệu mặc định để code C# update vào dòng này
     INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword) 
     VALUES ('', '');
+END
+GO
+
+-- 8. [MỚI] Tạo bảng ADMIN_LOGS (Nhật ký hoạt động của Admin)
+-- Dùng để lưu lại lịch sử: Ai làm gì? Vào lúc nào?
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ADMIN_LOGS]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE ADMIN_LOGS (
+        LogID INT IDENTITY(1,1) PRIMARY KEY,
+        AdminUsername VARCHAR(50),            -- Ai thực hiện? (Lưu Username)
+        ActionType NVARCHAR(50),              -- Loại hành động (Ví dụ: "Thêm Sách", "Đăng Nhập")
+        ActionDetails NVARCHAR(MAX),          -- Chi tiết (Ví dụ: "Thêm sách Đắc Nhân Tâm...")
+        LogTime DATETIME DEFAULT GETDATE()    -- Thời gian thực hiện
+    );
 END
 GO
