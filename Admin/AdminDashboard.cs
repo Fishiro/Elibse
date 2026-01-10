@@ -180,6 +180,8 @@ namespace Elibse
             // Hiển thị form lên
             // ShowDialog() sẽ chặn không cho thao tác ở Dashboard cho đến khi tắt form con đi (an toàn hơn)
             frm.ShowDialog();
+
+            LoadDashboardStats();
         }
 
         private void btnViewBorrowed_Click(object sender, EventArgs e)
@@ -191,9 +193,12 @@ namespace Elibse
 
         private void btnViewViolators_Click(object sender, EventArgs e)
         {
-            // Tạo một đối tượng form TotalBook
+            
             Elibse.Violator frm = new Elibse.Violator();
             frm.ShowDialog();
+
+            //Tải lại số liệu trên Dashboard ngay sau khi đóng form
+            LoadDashboardStats();
         }
 
         private void btnViewOverdue_Click(object sender, EventArgs e)
