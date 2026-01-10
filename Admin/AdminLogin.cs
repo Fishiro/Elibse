@@ -38,29 +38,31 @@ namespace Elibse
                 {
                     conn.Open();
 
-                    // 4. Tạo câu lệnh SQL: Đếm xem có tài khoản nào trùng mật khẩu không
-                    // (Vì bạn chọn phương án đơn giản chỉ check pass)
-                    string query = "SELECT COUNT(*) FROM ADMINS WHERE Password = @pass";
+                    // SỬA ĐỔI: Thay vì đếm COUNT, ta lấy luôn cột Username để biết ai đang vào
+                    string query = "SELECT Username FROM ADMINS WHERE Password = @pass";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@pass", password); // Gán tham số an toàn
+                    cmd.Parameters.AddWithValue("@pass", password);
 
-                    // 5. Thực thi và lấy kết quả
-                    int count = (int)cmd.ExecuteScalar();
+                    // Dùng ExecuteScalar để lấy giá trị cột đầu tiên (Username)
+                    object result = cmd.ExecuteScalar();
 
-                    if (count > 0)
+                    if (result != null)
                     {
                         // --- ĐĂNG NHẬP THÀNH CÔNG ---
-                        MessageBox.Show("Đăng nhập thành công!", "Xin chào", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string currentAdmin = result.ToString();
 
-                        // Ẩn form đăng nhập đi
+                        // 1. Lưu tên Admin vào phiên làm việc (Session)
+                        Session.CurrentAdminUsername = currentAdmin;
+
+                        // 2. GHI LOG: Đăng nhập thành công
+                        Logger.Log("Đăng Nhập", "Đăng nhập vào hệ thống");
+
+                        MessageBox.Show("Xin chào " + currentAdmin + "!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         this.Hide();
-
-                        // Mở form Dashboard lên
                         AdminDashboard dashboard = new AdminDashboard();
-                        dashboard.ShowDialog(); // Dùng ShowDialog để khi tắt Dashboard, code sẽ chạy tiếp dòng dưới
-
-                        // Khi Dashboard tắt, đóng luôn form đăng nhập (để thoát chương trình sạch sẽ)
+                        dashboard.ShowDialog();
                         this.Close();
                     }
                     else

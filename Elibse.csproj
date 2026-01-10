@@ -106,6 +106,7 @@
       <DependentUpon>PaymentDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EmailService.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Reader\ReaderLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +163,7 @@
     <Compile Include="Admin\TotalReader.Designer.cs">
       <DependentUpon>TotalReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Session.cs" />
     <EmbeddedResource Include="Admin\AddBook.resx">
       <DependentUpon>AddBook.cs</DependentUpon>
     </EmbeddedResource>

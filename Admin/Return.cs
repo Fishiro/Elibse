@@ -184,6 +184,7 @@ namespace Elibse
                             cmdBook.ExecuteNonQuery();
 
                             MessageBox.Show("Trả sách thành công!");
+                            Logger.Log("Trả Sách", $"Độc giả {txtReaderID.Text} đã trả sách {txtBookTitle.Text} (ID: {txtBookID.Text}). Tình trạng: {loanNote}");
                             LoadReaderInfo(); // Load lại để cập nhật danh sách
                         }
                         else

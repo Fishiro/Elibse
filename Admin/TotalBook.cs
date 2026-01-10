@@ -149,6 +149,7 @@ namespace Elibse.Admin
                             SqlCommand del = new SqlCommand("DELETE FROM BOOKS WHERE BookID=@id", conn);
                             del.Parameters.AddWithValue("@id", id);
                             del.ExecuteNonQuery();
+                            Logger.Log("Xóa Sách", $"Đã xóa vĩnh viễn sách có ID: {id}");
                             MessageBox.Show("Đã xóa!");
                             LoadBookData(txtSearchBook.Text.Trim());
                         }

@@ -109,7 +109,13 @@ namespace Elibse.Admin
             decimal price = 0;
             if (!decimal.TryParse(txtPrice.Text, out price))
             {
-                MessageBox.Show("Giá tiền phải là số!", "Lỗi nhập liệu");
+                MessageBox.Show("Giá tiền phải là số (không chứa chữ cái)!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (price < 0)
+            {
+                MessageBox.Show("Giá tiền không được nhỏ hơn 0!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -167,6 +173,8 @@ namespace Elibse.Admin
 
                             cmd.ExecuteNonQuery();
                         }
+                        Logger.Log("Thêm Sách", $"Thêm mới {quantity} cuốn: {txtTitle.Text} (Tác giả: {txtAuthor.Text})");
+
                         MessageBox.Show($"Đã thêm thành công {quantity} quyển sách!");
                     }
                     // === TRƯỜNG HỢP 2: CẬP NHẬT (SỬA) ===
@@ -194,6 +202,7 @@ namespace Elibse.Admin
                         if (imageBytes != null) cmd.Parameters.AddWithValue("@img", imageBytes);
 
                         cmd.ExecuteNonQuery();
+                        Logger.Log("Sửa Sách", $"Cập nhật thông tin sách ID: {_bookIDToEdit} ({txtTitle.Text})");
                         MessageBox.Show("Cập nhật sách thành công!");
                     }
                 }
