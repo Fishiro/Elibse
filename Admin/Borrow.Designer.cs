@@ -111,6 +111,7 @@
             this.txtReaderID.Size = new System.Drawing.Size(198, 26);
             this.txtReaderID.TabIndex = 1;
             this.txtReaderID.Text = "#0000000-12302025";
+            this.txtReaderID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReaderID_KeyDown);
             // 
             // txtCreatedDate
             // 
@@ -263,6 +264,7 @@
             this.txtBookID.Size = new System.Drawing.Size(260, 26);
             this.txtBookID.TabIndex = 1;
             this.txtBookID.Text = "#0000000-TENSACH-0000";
+            this.txtBookID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookID_KeyDown);
             // 
             // btnViewReaders
             // 

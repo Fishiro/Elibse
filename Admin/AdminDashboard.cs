@@ -202,5 +202,29 @@ namespace Elibse
             Elibse.LateReturn frm = new Elibse.LateReturn();
             frm.ShowDialog();
         }
+
+        private void btnBorrow_Click(object sender, EventArgs e)
+        {
+            // 1. Khởi tạo form Mượn
+            Elibse.Borrow frm = new Elibse.Borrow();
+
+            // 2. Hiện form lên
+            frm.ShowDialog();
+
+            // 3. Sau khi tắt form mượn, tải lại số liệu Dashboard (để cập nhật số sách đang mượn tăng lên)
+            LoadDashboardStats();
+        }
+
+        // --- XỬ LÝ NÚT KÝ TRẢ ---
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            // 1. Khởi tạo form Trả (Form này nằm trong namespace Elibse.Admin)
+            Elibse.Return frm = new Elibse.Return();
+
+            frm.ShowDialog();
+
+            // 3. Cập nhật lại số liệu Dashboard
+            LoadDashboardStats();
+        }
     }
 }
