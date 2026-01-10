@@ -105,11 +105,10 @@ namespace Elibse.Admin
                 {
                     byte[] imgData = (byte[])row.Cells["ReaderImage"].Value;
                     // Chuyển từ byte[] ngược lại thành Image để hiện lên
-                    using (MemoryStream ms = new MemoryStream(imgData))
-                    {
-                        picReader.Image = Image.FromStream(ms);
-                        picReader.SizeMode = PictureBoxSizeMode.StretchImage;
-                    }
+
+                    MemoryStream ms = new MemoryStream(imgData); // Tạo dòng chảy
+                    picReader.Image = Image.FromStream(ms);      // Gán vào ảnh
+                    picReader.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else
                 {

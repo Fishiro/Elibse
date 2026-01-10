@@ -273,7 +273,7 @@ namespace Elibse
                             "- (Và sự hỗ trợ tinh thần từ Ngân)\n\n" +
                             "Lớp: Công nghệ thông tin\n" +
                             "Đồ án môn học: Lập trình Windows",
-                            "Tác giả", MessageBoxButtons.OK, MessageBoxIcon.Star);
+                            "Tác giả", MessageBoxButtons.OK);
         }
     }
 }

@@ -59,11 +59,10 @@ namespace Elibse
                         if (r["ReaderImage"] != DBNull.Value)
                         {
                             byte[] img = (byte[])r["ReaderImage"];
-                            using (MemoryStream ms = new MemoryStream(img))
-                            {
-                                picReaderAvatar.Image = Image.FromStream(ms);
-                                picReaderAvatar.SizeMode = PictureBoxSizeMode.StretchImage;
-                            }
+                            MemoryStream ms = new MemoryStream(img);
+                            picReaderAvatar.Image = Image.FromStream(ms);
+                            picReaderAvatar.SizeMode = PictureBoxSizeMode.StretchImage;
+                            
                         }
                         else picReaderAvatar.Image = null;
                     }
@@ -148,11 +147,9 @@ namespace Elibse
                         if (r["BookImage"] != DBNull.Value)
                         {
                             byte[] img = (byte[])r["BookImage"];
-                            using (MemoryStream ms = new MemoryStream(img))
-                            {
-                                picBookCover.Image = Image.FromStream(ms);
-                                picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
-                            }
+                            MemoryStream ms = new MemoryStream(img);
+                            picBookCover.Image = Image.FromStream(ms);
+                            picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
                         }
                         else picBookCover.Image = null;
                     }
