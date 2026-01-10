@@ -1,4 +1,4 @@
-﻿namespace Elibse
+﻿namespace Elibse.Admin
 {
     partial class TotalReader
     {
@@ -28,49 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dgvReaders = new System.Windows.Forms.DataGridView();
+            this.picReader = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.txtReaderID = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.btnEditReader = new System.Windows.Forms.Button();
+            this.btnDeleteReader = new System.Windows.Forms.Button();
+            this.btnAddReader = new System.Windows.Forms.Button();
+            this.txtSearchReader = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnReload = new System.Windows.Forms.Button();
+            this.btnResetPass = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnChangeImage = new System.Windows.Forms.Button();
+            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReaders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReader)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvReaders
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(460, 281);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvReaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReaders.Location = new System.Drawing.Point(12, 77);
+            this.dgvReaders.Name = "dgvReaders";
+            this.dgvReaders.RowHeadersWidth = 62;
+            this.dgvReaders.RowTemplate.Height = 28;
+            this.dgvReaders.Size = new System.Drawing.Size(446, 281);
+            this.dgvReaders.TabIndex = 0;
+            this.dgvReaders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReaders_CellClick);
             // 
-            // pictureBox1
+            // picReader
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(596, 77);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.picReader.Location = new System.Drawing.Point(92, 54);
+            this.picReader.Name = "picReader";
+            this.picReader.Size = new System.Drawing.Size(100, 100);
+            this.picReader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picReader.TabIndex = 1;
+            this.picReader.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(541, 200);
+            this.label1.Location = new System.Drawing.Point(58, 177);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 20);
             this.label1.TabIndex = 2;
@@ -79,150 +86,196 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(491, 232);
+            this.label2.Location = new System.Drawing.Point(8, 209);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Mã độc giả";
             // 
-            // textBox1
+            // txtFullName
             // 
-            this.textBox1.Location = new System.Drawing.Point(583, 197);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(193, 26);
-            this.textBox1.TabIndex = 3;
+            this.txtFullName.Location = new System.Drawing.Point(100, 174);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(180, 26);
+            this.txtFullName.TabIndex = 3;
             // 
-            // textBox2
+            // txtReaderID
             // 
-            this.textBox2.Location = new System.Drawing.Point(583, 229);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(193, 26);
-            this.textBox2.TabIndex = 3;
+            this.txtReaderID.Location = new System.Drawing.Point(100, 206);
+            this.txtReaderID.Name = "txtReaderID";
+            this.txtReaderID.ReadOnly = true;
+            this.txtReaderID.Size = new System.Drawing.Size(180, 26);
+            this.txtReaderID.TabIndex = 3;
             // 
-            // textBox3
+            // txtPhone
             // 
-            this.textBox3.Location = new System.Drawing.Point(583, 293);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(193, 26);
-            this.textBox3.TabIndex = 3;
+            this.txtPhone.Location = new System.Drawing.Point(100, 270);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(180, 26);
+            this.txtPhone.TabIndex = 3;
             // 
-            // button1
+            // btnEditReader
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(598, 376);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 34);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Sửa";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEditReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditReader.Location = new System.Drawing.Point(158, 353);
+            this.btnEditReader.Name = "btnEditReader";
+            this.btnEditReader.Size = new System.Drawing.Size(82, 34);
+            this.btnEditReader.TabIndex = 4;
+            this.btnEditReader.Text = "Sửa";
+            this.btnEditReader.UseVisualStyleBackColor = true;
+            this.btnEditReader.Click += new System.EventHandler(this.btnEditReader_Click);
             // 
-            // button2
+            // btnDeleteReader
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(686, 376);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 34);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Xóa";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDeleteReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteReader.Location = new System.Drawing.Point(246, 353);
+            this.btnDeleteReader.Name = "btnDeleteReader";
+            this.btnDeleteReader.Size = new System.Drawing.Size(82, 34);
+            this.btnDeleteReader.TabIndex = 4;
+            this.btnDeleteReader.Text = "Xóa";
+            this.btnDeleteReader.UseVisualStyleBackColor = true;
+            this.btnDeleteReader.Click += new System.EventHandler(this.btnDeleteReader_Click);
             // 
-            // button5
+            // btnAddReader
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(510, 375);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(82, 34);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Thêm";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnAddReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddReader.Location = new System.Drawing.Point(70, 352);
+            this.btnAddReader.Name = "btnAddReader";
+            this.btnAddReader.Size = new System.Drawing.Size(82, 34);
+            this.btnAddReader.TabIndex = 4;
+            this.btnAddReader.Text = "Thêm";
+            this.btnAddReader.UseVisualStyleBackColor = true;
+            this.btnAddReader.Click += new System.EventHandler(this.btnAddReader_Click);
             // 
-            // textBox4
+            // txtSearchReader
             // 
-            this.textBox4.Location = new System.Drawing.Point(12, 23);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(347, 26);
-            this.textBox4.TabIndex = 5;
+            this.txtSearchReader.Location = new System.Drawing.Point(12, 23);
+            this.txtSearchReader.Name = "txtSearchReader";
+            this.txtSearchReader.Size = new System.Drawing.Size(315, 26);
+            this.txtSearchReader.TabIndex = 5;
             // 
-            // button3
+            // btnSearch
             // 
-            this.button3.Location = new System.Drawing.Point(365, 18);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 36);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Tìm độc giả";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSearch.Location = new System.Drawing.Point(333, 18);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(125, 36);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Tìm độc giả";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnReload
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(120, 376);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 34);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Tải lại";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReload.Location = new System.Drawing.Point(103, 376);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(82, 34);
+            this.btnReload.TabIndex = 4;
+            this.btnReload.Text = "Tải lại";
+            this.btnReload.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnResetPass
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button6.Location = new System.Drawing.Point(237, 376);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(156, 34);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Reset mật khẩu";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnResetPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnResetPass.Location = new System.Drawing.Point(220, 376);
+            this.btnResetPass.Name = "btnResetPass";
+            this.btnResetPass.Size = new System.Drawing.Size(156, 34);
+            this.btnResetPass.TabIndex = 7;
+            this.btnResetPass.Text = "Reset mật khẩu";
+            this.btnResetPass.UseVisualStyleBackColor = true;
+            this.btnResetPass.Click += new System.EventHandler(this.btnResetPass_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(529, 264);
+            this.label4.Location = new System.Drawing.Point(46, 241);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 20);
             this.label4.TabIndex = 2;
             this.label4.Text = "Email";
             // 
-            // textBox5
+            // txtEmail
             // 
-            this.textBox5.Location = new System.Drawing.Point(583, 261);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(193, 26);
-            this.textBox5.TabIndex = 3;
+            this.txtEmail.Location = new System.Drawing.Point(100, 238);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(180, 26);
+            this.txtEmail.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(536, 296);
+            this.label3.Location = new System.Drawing.Point(53, 273);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "SĐT";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dtpDOB);
+            this.groupBox1.Controls.Add(this.btnChangeImage);
+            this.groupBox1.Controls.Add(this.picReader);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.btnAddReader);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.btnDeleteReader);
+            this.groupBox1.Controls.Add(this.txtFullName);
+            this.groupBox1.Controls.Add(this.btnEditReader);
+            this.groupBox1.Controls.Add(this.txtReaderID);
+            this.groupBox1.Controls.Add(this.txtPhone);
+            this.groupBox1.Controls.Add(this.txtEmail);
+            this.groupBox1.Location = new System.Drawing.Point(478, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(392, 396);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Chỉnh sửa độc giả";
+            // 
+            // btnChangeImage
+            // 
+            this.btnChangeImage.Location = new System.Drawing.Point(214, 88);
+            this.btnChangeImage.Name = "btnChangeImage";
+            this.btnChangeImage.Size = new System.Drawing.Size(101, 38);
+            this.btnChangeImage.TabIndex = 5;
+            this.btnChangeImage.Text = "Nhập ảnh";
+            this.btnChangeImage.UseVisualStyleBackColor = true;
+            this.btnChangeImage.Click += new System.EventHandler(this.btnChangeImage_Click);
+            // 
+            // dtpDOB
+            // 
+            this.dtpDOB.Location = new System.Drawing.Point(100, 302);
+            this.dtpDOB.Name = "dtpDOB";
+            this.dtpDOB.Size = new System.Drawing.Size(268, 26);
+            this.dtpDOB.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 302);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Ngày sinh";
+            // 
             // TotalReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 431);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(882, 431);
+            this.Controls.Add(this.btnResetPass);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearchReader);
+            this.Controls.Add(this.btnReload);
+            this.Controls.Add(this.dgvReaders);
+            this.Controls.Add(this.groupBox1);
             this.Name = "TotalReader";
             this.Text = "Elibse: Danh Sách Độc Giả";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReaders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picReader)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,22 +283,26 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridView dgvReaders;
+        private System.Windows.Forms.PictureBox picReader;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.TextBox txtReaderID;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Button btnEditReader;
+        private System.Windows.Forms.Button btnDeleteReader;
+        private System.Windows.Forms.Button btnAddReader;
+        private System.Windows.Forms.TextBox txtSearchReader;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnReload;
+        private System.Windows.Forms.Button btnResetPass;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnChangeImage;
+        private System.Windows.Forms.DateTimePicker dtpDOB;
+        private System.Windows.Forms.Label label5;
     }
 }

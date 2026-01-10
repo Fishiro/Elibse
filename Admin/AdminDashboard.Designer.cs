@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -120,16 +120,16 @@
             // 
             // chartStats
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartStats.Legends.Add(legend2);
+            chartArea6.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartStats.Legends.Add(legend6);
             this.chartStats.Location = new System.Drawing.Point(12, 299);
             this.chartStats.Name = "chartStats";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartStats.Series.Add(series2);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartStats.Series.Add(series6);
             this.chartStats.Size = new System.Drawing.Size(539, 260);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -296,7 +296,7 @@
             this.quảnLýToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(936, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(936, 33);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -381,26 +381,29 @@
             this.menuAboutUs,
             this.vềTácGiảToolStripMenuItem});
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(106, 32);
+            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
             this.giớiThiệuToolStripMenuItem.Text = "Giới Thiệu";
             // 
             // menuManual
             // 
             this.menuManual.Name = "menuManual";
-            this.menuManual.Size = new System.Drawing.Size(223, 34);
+            this.menuManual.Size = new System.Drawing.Size(270, 34);
             this.menuManual.Text = "Cách sử dụng";
+            this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuAboutUs
             // 
             this.menuAboutUs.Name = "menuAboutUs";
-            this.menuAboutUs.Size = new System.Drawing.Size(223, 34);
+            this.menuAboutUs.Size = new System.Drawing.Size(270, 34);
             this.menuAboutUs.Text = "Về Elibse";
+            this.menuAboutUs.Click += new System.EventHandler(this.menuAboutUs_Click);
             // 
             // vềTácGiảToolStripMenuItem
             // 
             this.vềTácGiảToolStripMenuItem.Name = "vềTácGiảToolStripMenuItem";
-            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
+            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.vềTácGiảToolStripMenuItem.Text = "Về tác giả";
+            this.vềTácGiảToolStripMenuItem.Click += new System.EventHandler(this.vềTácGiảToolStripMenuItem_Click);
             // 
             // phầnMềmToolStripMenuItem
             // 
@@ -447,7 +450,7 @@
             this.thanhLýSáchToolStripMenuItem,
             this.giaHạnTrảSáchToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(89, 32);
+            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.quảnLýToolStripMenuItem.Text = "Quản lý";
             // 
             // menuManageReaders
@@ -455,6 +458,7 @@
             this.menuManageReaders.Name = "menuManageReaders";
             this.menuManageReaders.Size = new System.Drawing.Size(363, 34);
             this.menuManageReaders.Text = "Độc giả";
+            this.menuManageReaders.Click += new System.EventHandler(this.menuManageReaders_Click);
             // 
             // addCategory
             // 

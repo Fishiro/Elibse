@@ -231,5 +231,49 @@ namespace Elibse
             // 3. Cập nhật lại số liệu Dashboard
             LoadDashboardStats();
         }
+
+        // --- 1. MENU QUẢN LÝ ĐỘC GIẢ (QUAN TRỌNG) ---
+        private void menuManageReaders_Click(object sender, EventArgs e)
+        {
+            // Mở form Quản lý độc giả (TotalReader)
+            // Lưu ý: Chúng ta sẽ cần kiểm tra xem form TotalReader đã code xong chưa ở bước sau
+            Elibse.Admin.TotalReader frm = new Elibse.Admin.TotalReader();
+            frm.ShowDialog();
+
+            // Tải lại thống kê Dashboard sau khi đóng form (vì có thể đã xóa độc giả)
+            LoadDashboardStats();
+        }
+
+        // --- 2. CÁC MENU GIỚI THIỆU (Làm nhanh để lấy điểm) ---
+
+        private void menuManual_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hướng dẫn sử dụng phần mềm Elibse:\n\n" +
+                            "1. Quản lý sách: Thêm, sửa, xóa, nhập kho.\n" +
+                            "2. Mượn/Trả: Nhập mã độc giả và mã sách để thực hiện.\n" +
+                            "3. Thống kê: Xem các chỉ số trên Dashboard.\n" +
+                            "4. Hệ thống: Cấu hình email, đổi mật khẩu.\n\n" +
+                            "Mọi thắc mắc vui lòng liên hệ Admin.",
+                            "Hướng dẫn sử dụng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void menuAboutUs_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Phần mềm Quản lý Thư viện (Elibse)\n" +
+                            "Phiên bản: 1.0.0 (Beta)\n" +
+                            "Ngày phát hành: 01/2026\n" +
+                            "Nền tảng: .NET Framework / SQL Server",
+                            "Về Elibse", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void vềTácGiảToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sinh viên thực hiện:\n" +
+                            "- Nguyễn Du Quí\n" +
+                            "- (Và sự hỗ trợ tinh thần từ Ngân)\n\n" +
+                            "Lớp: Công nghệ thông tin\n" +
+                            "Đồ án môn học: Lập trình Windows",
+                            "Tác giả", MessageBoxButtons.OK, MessageBoxIcon.Star);
+        }
     }
 }
