@@ -141,7 +141,7 @@ namespace Elibse
 
         private void tàiKhoảnGửiMailThôngBáoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Admin.NotificationServiceEmail configForm = new Admin.NotificationServiceEmail();
+            Admin.ConfigNotificationServiceEmail configForm = new Admin.ConfigNotificationServiceEmail();
             configForm.ShowDialog();
         }
 
@@ -274,6 +274,15 @@ namespace Elibse
                             "Lớp: Công nghệ thông tin\n" +
                             "Đồ án môn học: Lập trình Windows",
                             "Tác giả", MessageBoxButtons.OK);
+        }
+
+        private void tớiTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Khởi tạo Form Gửi Email
+            Elibse.Admin.SendEmailForm frm = new Elibse.Admin.SendEmailForm();
+
+            // Hiển thị form lên (ShowDialog để bắt buộc xử lý xong mới được quay lại dashboard)
+            frm.ShowDialog();
         }
     }
 }

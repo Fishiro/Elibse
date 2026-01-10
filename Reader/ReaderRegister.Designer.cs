@@ -149,7 +149,7 @@
             this.textBox5.Location = new System.Drawing.Point(549, 49);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(154, 26);
-            this.textBox5.TabIndex = 1;
+            this.textBox5.TabIndex = 3;
             // 
             // textBox7
             // 
@@ -176,7 +176,7 @@
             this.textBox8.Location = new System.Drawing.Point(188, 125);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(154, 26);
-            this.textBox8.TabIndex = 1;
+            this.textBox8.TabIndex = 2;
             // 
             // textBox4
             // 
@@ -199,7 +199,7 @@
             this.textBox3.Location = new System.Drawing.Point(189, 48);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(154, 26);
-            this.textBox3.TabIndex = 1;
+            this.textBox3.TabIndex = 0;
             // 
             // label9
             // 
@@ -253,7 +253,7 @@
             this.button2.Location = new System.Drawing.Point(680, 267);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(135, 53);
-            this.button2.TabIndex = 3;
+            this.button2.TabIndex = 5;
             this.button2.Text = "Tạo tài khoản";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -262,7 +262,7 @@
             this.button1.Location = new System.Drawing.Point(693, 377);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 39);
-            this.button1.TabIndex = 3;
+            this.button1.TabIndex = 6;
             this.button1.Text = "Đăng nhập";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -289,7 +289,7 @@
             this.button3.Location = new System.Drawing.Point(763, 138);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(87, 29);
-            this.button3.TabIndex = 3;
+            this.button3.TabIndex = 4;
             this.button3.Text = "Chọn ảnh";
             this.button3.UseVisualStyleBackColor = true;
             // 

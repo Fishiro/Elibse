@@ -1,6 +1,6 @@
 ﻿namespace Elibse.Admin
 {
-    partial class NotificationServiceEmail
+    partial class ConfigNotificationServiceEmail
     {
         /// <summary>
         /// Required designer variable.

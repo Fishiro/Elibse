@@ -5,9 +5,9 @@ using System.Windows.Forms;
 namespace Elibse.Admin
 {
     // Tên class ở đây PHẢI LÀ NotificationServiceEmail để khớp với file bạn đã tạo
-    public partial class NotificationServiceEmail : Form
+    public partial class ConfigNotificationServiceEmail : Form
     {
-        public NotificationServiceEmail()
+        public ConfigNotificationServiceEmail()
         {
             InitializeComponent();
         }

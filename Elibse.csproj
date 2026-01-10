@@ -92,11 +92,17 @@
     <Compile Include="Admin\ChangeAdminPassword.Designer.cs">
       <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\NotificationServiceEmail.cs">
+    <Compile Include="Admin\ConfigNotificationServiceEmail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\NotificationServiceEmail.Designer.cs">
-      <DependentUpon>NotificationServiceEmail.cs</DependentUpon>
+    <Compile Include="Admin\ConfigNotificationServiceEmail.Designer.cs">
+      <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SendEmailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\SendEmailForm.Designer.cs">
+      <DependentUpon>SendEmailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="Dialogs\PaymentDialog.cs">
@@ -185,8 +191,11 @@
     <EmbeddedResource Include="Admin\ChangeAdminPassword.resx">
       <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\NotificationServiceEmail.resx">
-      <DependentUpon>NotificationServiceEmail.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\ConfigNotificationServiceEmail.resx">
+      <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\SendEmailForm.resx">
+      <DependentUpon>SendEmailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PaymentDialog.resx">
       <DependentUpon>PaymentDialog.cs</DependentUpon>
