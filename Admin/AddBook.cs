@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO; // Thư viện xử lý file
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions; // Thư viện Regex
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace Elibse.Admin
 {
