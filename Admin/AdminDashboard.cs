@@ -132,7 +132,7 @@ namespace Elibse
                            "<div style='color: #999999; font-style: italic; font-size: 12px; font-family: Arial, sans-serif;'>" +
                            "Email này được gửi tự động từ Hệ thống Quản lý Thư viện.<br>" +
                            "Vui lòng không trả lời tin nhắn này.<br>" +
-                           "Developed by Quí | Inspired by Ngân" + // Dòng chi ân tinh tế ở đây
+                           "Developed by Quí" + // Dòng chi ân tinh tế ở đây
                            "</div>";
 
             // Gọi hàm gửi mail đã viết ở trên

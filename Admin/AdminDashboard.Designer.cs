@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tớiTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quáHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thôngBáoTrạngTháiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giớiThiệuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManual = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAboutUs = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +79,6 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnBorrow = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
-            this.thôngBáoTrạngTháiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -96,7 +96,7 @@
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(624, 380);
             this.panel3.TabIndex = 2;
@@ -104,7 +104,7 @@
             // btnHistory
             // 
             this.btnHistory.Location = new System.Drawing.Point(548, 249);
-            this.btnHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHistory.Margin = new System.Windows.Forms.Padding(2);
             this.btnHistory.Name = "btnHistory";
             this.btnHistory.Size = new System.Drawing.Size(53, 24);
             this.btnHistory.TabIndex = 9;
@@ -114,7 +114,7 @@
             // btnReload
             // 
             this.btnReload.Location = new System.Drawing.Point(548, 281);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(53, 24);
             this.btnReload.TabIndex = 4;
@@ -124,17 +124,17 @@
             // 
             // chartStats
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartStats.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartStats.Legends.Add(legend1);
             this.chartStats.Location = new System.Drawing.Point(8, 194);
-            this.chartStats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartStats.Margin = new System.Windows.Forms.Padding(2);
             this.chartStats.Name = "chartStats";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartStats.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartStats.Series.Add(series1);
             this.chartStats.Size = new System.Drawing.Size(359, 169);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -154,9 +154,9 @@
             this.groupBox1.Controls.Add(this.lblBorrowedBooks);
             this.groupBox1.Controls.Add(this.lblTotalBooks);
             this.groupBox1.Location = new System.Drawing.Point(8, 31);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(608, 149);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -165,7 +165,7 @@
             // btnViewOverdue
             // 
             this.btnViewOverdue.Location = new System.Drawing.Point(477, 86);
-            this.btnViewOverdue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewOverdue.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewOverdue.Name = "btnViewOverdue";
             this.btnViewOverdue.Size = new System.Drawing.Size(48, 23);
             this.btnViewOverdue.TabIndex = 2;
@@ -176,7 +176,7 @@
             // btnViewViolators
             // 
             this.btnViewViolators.Location = new System.Drawing.Point(354, 86);
-            this.btnViewViolators.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewViolators.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewViolators.Name = "btnViewViolators";
             this.btnViewViolators.Size = new System.Drawing.Size(48, 23);
             this.btnViewViolators.TabIndex = 2;
@@ -187,7 +187,7 @@
             // btnViewBorrowed
             // 
             this.btnViewBorrowed.Location = new System.Drawing.Point(212, 86);
-            this.btnViewBorrowed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewBorrowed.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewBorrowed.Name = "btnViewBorrowed";
             this.btnViewBorrowed.Size = new System.Drawing.Size(48, 23);
             this.btnViewBorrowed.TabIndex = 2;
@@ -246,7 +246,7 @@
             // btnViewTotalBooks
             // 
             this.btnViewTotalBooks.Location = new System.Drawing.Point(64, 86);
-            this.btnViewTotalBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewTotalBooks.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewTotalBooks.Name = "btnViewTotalBooks";
             this.btnViewTotalBooks.Size = new System.Drawing.Size(48, 23);
             this.btnViewTotalBooks.TabIndex = 2;
@@ -395,6 +395,12 @@
             this.quáHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.quáHạnTrảSáchToolStripMenuItem.Text = "Quá hạn trả sách";
             // 
+            // thôngBáoTrạngTháiToolStripMenuItem
+            // 
+            this.thôngBáoTrạngTháiToolStripMenuItem.Name = "thôngBáoTrạngTháiToolStripMenuItem";
+            this.thôngBáoTrạngTháiToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.thôngBáoTrạngTháiToolStripMenuItem.Text = "Thông báo trạng thái";
+            // 
             // giớiThiệuToolStripMenuItem
             // 
             this.giớiThiệuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -512,9 +518,9 @@
             this.groupBox2.Controls.Add(this.btnBorrow);
             this.groupBox2.Controls.Add(this.btnAddBook);
             this.groupBox2.Location = new System.Drawing.Point(388, 209);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(137, 142);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -523,7 +529,7 @@
             // btnReturn
             // 
             this.btnReturn.Location = new System.Drawing.Point(23, 60);
-            this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(91, 32);
             this.btnReturn.TabIndex = 2;
@@ -534,7 +540,7 @@
             // btnBorrow
             // 
             this.btnBorrow.Location = new System.Drawing.Point(23, 96);
-            this.btnBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.btnBorrow.Name = "btnBorrow";
             this.btnBorrow.Size = new System.Drawing.Size(91, 32);
             this.btnBorrow.TabIndex = 4;
@@ -545,19 +551,13 @@
             // btnAddBook
             // 
             this.btnAddBook.Location = new System.Drawing.Point(23, 24);
-            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(91, 32);
             this.btnAddBook.TabIndex = 2;
             this.btnAddBook.Text = "Thêm sách mới";
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
-            // 
-            // thôngBáoTrạngTháiToolStripMenuItem
-            // 
-            this.thôngBáoTrạngTháiToolStripMenuItem.Name = "thôngBáoTrạngTháiToolStripMenuItem";
-            this.thôngBáoTrạngTháiToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.thôngBáoTrạngTháiToolStripMenuItem.Text = "Thông báo trạng thái";
             // 
             // AdminDashboard
             // 
@@ -566,9 +566,10 @@
             this.ClientSize = new System.Drawing.Size(624, 380);
             this.Controls.Add(this.panel3);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminDashboard";
             this.Text = "Elibse: Admin dashboard";
+            this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStats)).EndInit();
