@@ -284,5 +284,11 @@ namespace Elibse
             // Hiển thị form lên (ShowDialog để bắt buộc xử lý xong mới được quay lại dashboard)
             frm.ShowDialog();
         }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            Elibse.AdminHistory frm = new Elibse.AdminHistory();
+            frm.ShowDialog();
+        }
     }
 }
