@@ -138,7 +138,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LO
 BEGIN
     CREATE TABLE LOAN_RECORDS (
         LoanID INT IDENTITY(1,1) PRIMARY KEY,
-        BookID VARCHAR(20),
+        BookID VARCHAR(50),
         ReaderID VARCHAR(20),
         LoanDate DATETIME DEFAULT GETDATE(), -- Ngày mượn
         DueDate DATETIME NOT NULL,           -- Hạn trả
