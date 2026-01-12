@@ -34,25 +34,27 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpCreatedDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
             this.btnUploadImg = new System.Windows.Forms.Button();
-            this.picAvatar = new System.Windows.Forms.PictureBox();
             this.txtAge = new System.Windows.Forms.TextBox();
+            this.picAvatar = new System.Windows.Forms.PictureBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtConfirmPass = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtReaderID = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
-            this.lbl = new System.Windows.Forms.Label();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtConfirmPass = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.dtpCreatedDate = new System.Windows.Forms.DateTimePicker();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -131,123 +133,22 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(8, 16);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(593, 178);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin đăng ký";
             // 
-            // btnUploadImg
+            // dtpCreatedDate
             // 
-            this.btnUploadImg.Location = new System.Drawing.Point(499, 127);
-            this.btnUploadImg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnUploadImg.Name = "btnUploadImg";
-            this.btnUploadImg.Size = new System.Drawing.Size(63, 28);
-            this.btnUploadImg.TabIndex = 4;
-            this.btnUploadImg.Text = "Chọn ảnh";
-            this.btnUploadImg.UseVisualStyleBackColor = true;
-            this.btnUploadImg.Click += new System.EventHandler(this.btnUploadImg_Click);
-            // 
-            // picAvatar
-            // 
-            this.picAvatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picAvatar.Location = new System.Drawing.Point(497, 53);
-            this.picAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.picAvatar.Name = "picAvatar";
-            this.picAvatar.Size = new System.Drawing.Size(67, 65);
-            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAvatar.TabIndex = 2;
-            this.picAvatar.TabStop = false;
-            // 
-            // txtAge
-            // 
-            this.txtAge.Location = new System.Drawing.Point(372, 120);
-            this.txtAge.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtAge.Name = "txtAge";
-            this.txtAge.ReadOnly = true;
-            this.txtAge.Size = new System.Drawing.Size(44, 20);
-            this.txtAge.TabIndex = 1;
-            this.txtAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(125, 103);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(104, 20);
-            this.txtPassword.TabIndex = 2;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(125, 57);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(104, 20);
-            this.txtEmail.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(71, 105);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Mật khẩu";
-            // 
-            // txtFullName
-            // 
-            this.txtFullName.Location = new System.Drawing.Point(126, 31);
-            this.txtFullName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(104, 20);
-            this.txtFullName.TabIndex = 0;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(342, 122);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(28, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Tuổi";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtReaderID);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(8, 208);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(217, 73);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Mã của bạn (tự động)";
-            // 
-            // txtReaderID
-            // 
-            this.txtReaderID.Location = new System.Drawing.Point(64, 32);
-            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtReaderID.Name = "txtReaderID";
-            this.txtReaderID.ReadOnly = true;
-            this.txtReaderID.Size = new System.Drawing.Size(107, 20);
-            this.txtReaderID.TabIndex = 0;
-            // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(377, 232);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(90, 34);
-            this.btnRegister.TabIndex = 5;
-            this.btnRegister.Text = "Tạo tài khoản";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.dtpCreatedDate.Enabled = false;
+            this.dtpCreatedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpCreatedDate.Location = new System.Drawing.Point(372, 95);
+            this.dtpCreatedDate.Name = "dtpCreatedDate";
+            this.dtpCreatedDate.Size = new System.Drawing.Size(87, 20);
+            this.dtpCreatedDate.TabIndex = 5;
             // 
             // dtpDOB
             // 
@@ -257,15 +158,73 @@
             this.dtpDOB.Size = new System.Drawing.Size(87, 20);
             this.dtpDOB.TabIndex = 5;
             // 
-            // lbl
+            // btnUploadImg
             // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(46, 82);
-            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(75, 13);
-            this.lbl.TabIndex = 0;
-            this.lbl.Text = "Số Điện Thoại";
+            this.btnUploadImg.Location = new System.Drawing.Point(499, 127);
+            this.btnUploadImg.Margin = new System.Windows.Forms.Padding(2);
+            this.btnUploadImg.Name = "btnUploadImg";
+            this.btnUploadImg.Size = new System.Drawing.Size(63, 28);
+            this.btnUploadImg.TabIndex = 4;
+            this.btnUploadImg.Text = "Chọn ảnh";
+            this.btnUploadImg.UseVisualStyleBackColor = true;
+            this.btnUploadImg.Click += new System.EventHandler(this.btnUploadImg_Click);
+            // 
+            // txtAge
+            // 
+            this.txtAge.Location = new System.Drawing.Point(372, 120);
+            this.txtAge.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAge.Name = "txtAge";
+            this.txtAge.ReadOnly = true;
+            this.txtAge.Size = new System.Drawing.Size(44, 20);
+            this.txtAge.TabIndex = 1;
+            this.txtAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // picAvatar
+            // 
+            this.picAvatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picAvatar.Location = new System.Drawing.Point(497, 53);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.Size = new System.Drawing.Size(67, 65);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAvatar.TabIndex = 2;
+            this.picAvatar.TabStop = false;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(126, 151);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(104, 20);
+            this.txtAddress.TabIndex = 2;
+            // 
+            // txtConfirmPass
+            // 
+            this.txtConfirmPass.Location = new System.Drawing.Point(126, 127);
+            this.txtConfirmPass.Margin = new System.Windows.Forms.Padding(2);
+            this.txtConfirmPass.Name = "txtConfirmPass";
+            this.txtConfirmPass.PasswordChar = '*';
+            this.txtConfirmPass.Size = new System.Drawing.Size(104, 20);
+            this.txtConfirmPass.TabIndex = 2;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(125, 103);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(104, 20);
+            this.txtPassword.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(81, 154);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Địa chỉ";
             // 
             // txtPhone
             // 
@@ -285,51 +244,118 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Xác nhận mật khẩu";
             // 
-            // txtConfirmPass
+            // txtEmail
             // 
-            this.txtConfirmPass.Location = new System.Drawing.Point(126, 127);
-            this.txtConfirmPass.Margin = new System.Windows.Forms.Padding(2);
-            this.txtConfirmPass.Name = "txtConfirmPass";
-            this.txtConfirmPass.PasswordChar = '*';
-            this.txtConfirmPass.Size = new System.Drawing.Size(104, 20);
-            this.txtConfirmPass.TabIndex = 2;
+            this.txtEmail.Location = new System.Drawing.Point(125, 57);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(104, 20);
+            this.txtEmail.TabIndex = 1;
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(81, 154);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Địa chỉ";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(71, 105);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(52, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Mật khẩu";
             // 
-            // txtAddress
+            // lbl
             // 
-            this.txtAddress.Location = new System.Drawing.Point(126, 151);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(104, 20);
-            this.txtAddress.TabIndex = 2;
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(46, 82);
+            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(75, 13);
+            this.lbl.TabIndex = 0;
+            this.lbl.Text = "Số Điện Thoại";
             // 
-            // dtpCreatedDate
+            // txtFullName
             // 
-            this.dtpCreatedDate.Enabled = false;
-            this.dtpCreatedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpCreatedDate.Location = new System.Drawing.Point(372, 95);
-            this.dtpCreatedDate.Name = "dtpCreatedDate";
-            this.dtpCreatedDate.Size = new System.Drawing.Size(87, 20);
-            this.dtpCreatedDate.TabIndex = 5;
+            this.txtFullName.Location = new System.Drawing.Point(126, 31);
+            this.txtFullName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(104, 20);
+            this.txtFullName.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(342, 122);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(28, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Tuổi";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtReaderID);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Location = new System.Drawing.Point(8, 208);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(217, 73);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Mã của bạn (tự động)";
+            // 
+            // txtReaderID
+            // 
+            this.txtReaderID.Location = new System.Drawing.Point(64, 32);
+            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2);
+            this.txtReaderID.Name = "txtReaderID";
+            this.txtReaderID.ReadOnly = true;
+            this.txtReaderID.Size = new System.Drawing.Size(107, 20);
+            this.txtReaderID.TabIndex = 0;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(288, 232);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(90, 34);
+            this.btnRegister.TabIndex = 5;
+            this.btnRegister.Text = "Tạo tài khoản";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(457, 232);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(90, 34);
+            this.btnLogin.TabIndex = 5;
+            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label8.Location = new System.Drawing.Point(450, 216);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Nếu đã có tài khoản";
             // 
             // ReaderRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 292);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.label8);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ReaderRegister";
             this.Text = "Elibse: Đăng Ký Tài Khoản Độc Giả";
             this.Load += new System.EventHandler(this.ReaderRegister_Load);
@@ -339,6 +365,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -369,5 +396,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpCreatedDate;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label label8;
     }
 }

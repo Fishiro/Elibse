@@ -171,5 +171,11 @@ namespace Elibse
         {
             this.Close();
         }
+
+        // Sự kiện cho nút "Đăng nhập ngay" (nếu đã có tài khoản)
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            this.Close(); // Đóng form Đăng ký hiện tại để quay lại Form Đăng nhập đang chờ phía sau
+        }
     }
 }

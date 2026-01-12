@@ -119,6 +119,12 @@
     </Compile>
     <Compile Include="EmailService.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Reader\ReaderDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reader\ReaderDashboard.Designer.cs">
+      <DependentUpon>ReaderDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reader\ReaderLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PaymentDialog.resx">
       <DependentUpon>PaymentDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reader\ReaderDashboard.resx">
+      <DependentUpon>ReaderDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reader\ReaderLogin.resx">
       <DependentUpon>ReaderLogin.cs</DependentUpon>

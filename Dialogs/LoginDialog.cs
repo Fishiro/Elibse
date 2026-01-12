@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using Elibse.Admin; // Để gọi được AdminLogin và fmFirstSetup
 
 namespace Elibse
 {
@@ -15,23 +10,75 @@ namespace Elibse
         public fmLoginDialog()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-        private void fmLoginDialog_Load(object sender, EventArgs e)
+        // --- 1. NÚT ĐỘC GIẢ (Giữ nguyên) ---
+        private void btnReaderChoice_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            ReaderLogin frmReader = new ReaderLogin();
+            frmReader.ShowDialog();
+            this.Show();
         }
 
+        // --- 2. NÚT ADMIN (Sửa lại logic kiểm tra tại đây) ---
         private void btnAdminChoice_Click(object sender, EventArgs e)
         {
-            // Tạo mới cửa sổ đăng nhập Admin
-            AdminLogin adminForm = new AdminLogin();
+            // Kiểm tra: Nếu chưa có mật khẩu thì bắt tạo trước
+            if (IsAdminPasswordEmpty())
+            {
+                // Mở form thiết lập lần đầu
+                fmFirstSetup setup = new fmFirstSetup();
+
+                // Nếu tạo xong OK thì mới cho qua form đăng nhập
+                if (setup.ShowDialog() == DialogResult.OK)
+                {
+                    OpenAdminLogin();
+                }
+                // Nếu họ tắt form setup đi (Cancel) thì không làm gì cả (ở lại đây)
+            }
+            else
+            {
+                // Nếu có mật khẩu rồi thì vào đăng nhập luôn
+                OpenAdminLogin();
+            }
+        }
+
+        // Hàm mở form đăng nhập Admin (cho gọn code)
+        private void OpenAdminLogin()
+        {
             this.Hide();
+            AdminLogin frmAdmin = new AdminLogin();
+            frmAdmin.ShowDialog();
+            this.Show();
+        }
 
-            // Hiện nó lên
-            adminForm.ShowDialog();
+        // --- 3. HÀM KIỂM TRA MẬT KHẨU (Mang từ Program.cs sang) ---
+        private bool IsAdminPasswordEmpty()
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseConnection.GetConnection())
+                {
+                    conn.Open();
+                    // Lấy mật khẩu của username 'admin'
+                    SqlCommand cmd = new SqlCommand("SELECT Password FROM ADMINS WHERE Username = 'admin'", conn);
+                    object result = cmd.ExecuteScalar();
 
-            this.Close();
+                    if (result != null)
+                    {
+                        // Trả về TRUE nếu mật khẩu là chuỗi rỗng
+                        return string.IsNullOrEmpty(result.ToString());
+                    }
+                }
+            }
+            catch
+            {
+                // Nếu lỗi kết nối, tạm thời coi như không rỗng để tránh kẹt
+                return false;
+            }
+            return false;
         }
     }
 }
