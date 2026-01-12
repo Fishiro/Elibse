@@ -44,9 +44,6 @@ namespace Elibse.Admin
             txtQuantity.Enabled = false;
             txtQuantity.Text = "1"; // Để tránh lỗi parse số lượng
 
-            // Ẩn panel preview mã cho đỡ rối (nếu muốn)
-            // pnlPreview.Visible = false; 
-
             LoadDataForEdit();
         }
 

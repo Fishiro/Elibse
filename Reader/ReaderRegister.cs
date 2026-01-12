@@ -67,8 +67,30 @@ namespace Elibse
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                // Hiển thị ảnh lên PictureBox để xem trước
-                picAvatar.Image = Image.FromFile(ofd.FileName);
+                try
+                {
+                    // 1. Kiểm tra dung lượng (Ví dụ giới hạn 5MB)
+                    long fileSize = new FileInfo(ofd.FileName).Length;
+                    if (fileSize > 5 * 1024 * 1024)
+                    {
+                        MessageBox.Show("Ảnh quá lớn! Vui lòng chọn ảnh dưới 5MB.");
+                        return;
+                    }
+
+                    // 2. Thử load ảnh an toàn
+                    using (var stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read))
+                    {
+                        picAvatar.Image = Image.FromStream(stream);
+                    }
+                }
+                catch (OutOfMemoryException)
+                {
+                    MessageBox.Show("File ảnh bị lỗi hoặc định dạng không hỗ trợ!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không thể tải ảnh: " + ex.Message);
+                }
             }
         }
 
@@ -90,6 +112,18 @@ namespace Elibse
         // =============================================================
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            if (dtpDOB.Value > DateTime.Now)
+            {
+                MessageBox.Show("Ngày sinh không được lớn hơn ngày hiện tại!", "Vô lý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (DateTime.Now.Year - dtpDOB.Value.Year > 100)
+            {
+                MessageBox.Show("Độc giả không thể lớn hơn 100 tuổi (theo quy định thư viện)!", "Cảnh báo");
+                return;
+            }
+
             // 1. Validation cơ bản (Kiểm tra rỗng)
             if (string.IsNullOrWhiteSpace(txtFullName.Text) ||
                 string.IsNullOrWhiteSpace(txtPhone.Text) ||

@@ -224,6 +224,18 @@ namespace Elibse.Admin
                         ClearInput();
                     }
                 }
+                catch (SqlException sqlEx)
+                {
+                    // Số 547 là mã lỗi của SQL Server khi vi phạm khóa ngoại (Foreign Key)
+                    if (sqlEx.Number == 547)
+                    {
+                        MessageBox.Show("Không thể xóa độc giả này vì họ đang có lịch sử mượn trả sách!\nHãy xóa dữ liệu mượn trả trước.", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi SQL: " + sqlEx.Message);
+                    }
+                }
                 catch (Exception ex) { MessageBox.Show("Lỗi ràng buộc dữ liệu: " + ex.Message); }
             }
         }
