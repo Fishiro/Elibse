@@ -20,8 +20,7 @@ namespace Elibse
 
             if (string.IsNullOrEmpty(serverInput))
             {
-                MessageBox.Show("Vui lòng nhập tên Server!");
-                return;
+                serverInput = @".\SQLEXPRESS";
             }
 
             // Kiểm tra kết nối thử
