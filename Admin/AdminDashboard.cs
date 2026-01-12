@@ -284,5 +284,72 @@ namespace Elibse
             Elibse.AdminHistory frm = new Elibse.AdminHistory();
             frm.ShowDialog();
         }
+
+        // --- NHẬP SÁCH TỪ FILE EXCEL ---
+        private void bằngXLSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            openFileDialog.Title = "Chọn file Excel danh sách sách";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                try
+                {
+                    // TODO: Ở đây bạn sẽ cần cài thư viện (như ExcelDataReader hoặc EPPlus) để đọc file thật
+                    // Hiện tại mình để thông báo demo để test luồng chạy
+                    MessageBox.Show($"Đã chọn file Excel: {filePath}\n(Chức năng đọc file sẽ được xử lý tiếp theo)", "Thông báo");
+
+                    // Ví dụ logic sau này:
+                    // int count = ImportHelper.ImportFromExcel(filePath);
+                    // MessageBox.Show($"Đã nhập thành công {count} cuốn sách!");
+                    // LoadDashboardStats(); // Cập nhật lại số liệu dashboard
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi đọc file Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // --- NHẬP SÁCH TỪ FILE CSV ---
+        private void bằngCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV Files|*.csv";
+            openFileDialog.Title = "Chọn file CSV danh sách sách";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                try
+                {
+                    // Đọc file CSV (đơn giản hơn Excel, có thể dùng StreamReader)
+                    string[] lines = System.IO.File.ReadAllLines(filePath);
+
+                    if (lines.Length > 0)
+                    {
+                        // Demo hiển thị số dòng đọc được
+                        MessageBox.Show($"Đã tìm thấy {lines.Length} dòng dữ liệu trong file CSV.\nĐang tiến hành nhập liệu...", "Thông báo");
+
+                        // Logic xử lý chi tiết từng dòng sẽ viết ở đây hoặc gọi hàm phụ trợ
+                        // ProcessCSVLines(lines);
+
+                        // LoadDashboardStats(); // Cập nhật lại dashboard sau khi nhập
+                    }
+                    else
+                    {
+                        MessageBox.Show("File CSV rỗng!", "Cảnh báo");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi đọc file CSV: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

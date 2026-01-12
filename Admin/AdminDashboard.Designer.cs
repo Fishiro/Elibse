@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -79,6 +79,8 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnBorrow = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
+            this.bằngXLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bằngCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -130,17 +132,17 @@
             this.chartStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartStats.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartStats.Legends.Add(legend2);
             this.chartStats.Location = new System.Drawing.Point(8, 194);
             this.chartStats.Margin = new System.Windows.Forms.Padding(2);
             this.chartStats.Name = "chartStats";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartStats.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartStats.Series.Add(series2);
             this.chartStats.Size = new System.Drawing.Size(359, 169);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -210,7 +212,7 @@
             this.label.Location = new System.Drawing.Point(53, 42);
             this.label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(104, 20);
+            this.label.Size = new System.Drawing.Size(72, 13);
             this.label.TabIndex = 0;
             this.label.Text = "Tổng số sách";
             this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -222,7 +224,7 @@
             this.lbl4.Location = new System.Drawing.Point(465, 42);
             this.lbl4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(111, 20);
+            this.lbl4.Size = new System.Drawing.Size(76, 13);
             this.lbl4.TabIndex = 0;
             this.lbl4.Text = "Mượn quá hạn";
             this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -234,7 +236,7 @@
             this.lbl3.Location = new System.Drawing.Point(339, 42);
             this.lbl3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(121, 20);
+            this.lbl3.Size = new System.Drawing.Size(84, 13);
             this.lbl3.TabIndex = 0;
             this.lbl3.Text = "Độc giả vi phạm";
             this.lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,7 +248,7 @@
             this.lbl.Location = new System.Drawing.Point(182, 42);
             this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(168, 20);
+            this.lbl.Size = new System.Drawing.Size(117, 13);
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Tổng đang được mượn";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -422,21 +424,21 @@
             // menuManual
             // 
             this.menuManual.Name = "menuManual";
-            this.menuManual.Size = new System.Drawing.Size(147, 22);
+            this.menuManual.Size = new System.Drawing.Size(180, 22);
             this.menuManual.Text = "Cách sử dụng";
             this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuAboutUs
             // 
             this.menuAboutUs.Name = "menuAboutUs";
-            this.menuAboutUs.Size = new System.Drawing.Size(147, 22);
+            this.menuAboutUs.Size = new System.Drawing.Size(180, 22);
             this.menuAboutUs.Text = "Về Elibse";
             this.menuAboutUs.Click += new System.EventHandler(this.menuAboutUs_Click);
             // 
             // vềTácGiảToolStripMenuItem
             // 
             this.vềTácGiảToolStripMenuItem.Name = "vềTácGiảToolStripMenuItem";
-            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vềTácGiảToolStripMenuItem.Text = "Về tác giả";
             this.vềTácGiảToolStripMenuItem.Click += new System.EventHandler(this.vềTácGiảToolStripMenuItem_Click);
             // 
@@ -491,33 +493,36 @@
             // menuManageReaders
             // 
             this.menuManageReaders.Name = "menuManageReaders";
-            this.menuManageReaders.Size = new System.Drawing.Size(243, 22);
+            this.menuManageReaders.Size = new System.Drawing.Size(180, 22);
             this.menuManageReaders.Text = "Độc giả";
             this.menuManageReaders.Click += new System.EventHandler(this.menuManageReaders_Click);
             // 
             // addCategory
             // 
             this.addCategory.Name = "addCategory";
-            this.addCategory.Size = new System.Drawing.Size(243, 22);
+            this.addCategory.Size = new System.Drawing.Size(180, 22);
             this.addCategory.Text = "Danh mục sách";
             this.addCategory.Click += new System.EventHandler(this.addCategory_Click);
             // 
             // thêmNhiềuSáchToolStripMenuItem
             // 
+            this.thêmNhiềuSáchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bằngXLSToolStripMenuItem,
+            this.bằngCSVToolStripMenuItem});
             this.thêmNhiềuSáchToolStripMenuItem.Name = "thêmNhiềuSáchToolStripMenuItem";
-            this.thêmNhiềuSáchToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.thêmNhiềuSáchToolStripMenuItem.Text = "Thêm nhiều sách bằng file Excel";
+            this.thêmNhiềuSáchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thêmNhiềuSáchToolStripMenuItem.Text = "Thêm nhiều sách";
             // 
             // thanhLýSáchToolStripMenuItem
             // 
             this.thanhLýSáchToolStripMenuItem.Name = "thanhLýSáchToolStripMenuItem";
-            this.thanhLýSáchToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.thanhLýSáchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.thanhLýSáchToolStripMenuItem.Text = "Thanh lý sách";
             // 
             // giaHạnTrảSáchToolStripMenuItem
             // 
             this.giaHạnTrảSáchToolStripMenuItem.Name = "giaHạnTrảSáchToolStripMenuItem";
-            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.giaHạnTrảSáchToolStripMenuItem.Text = "Gia hạn trả sách";
             // 
             // groupBox2
@@ -567,6 +572,20 @@
             this.btnAddBook.Text = "Thêm sách mới";
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
+            // 
+            // bằngXLSToolStripMenuItem
+            // 
+            this.bằngXLSToolStripMenuItem.Name = "bằngXLSToolStripMenuItem";
+            this.bằngXLSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bằngXLSToolStripMenuItem.Text = "Bằng XLSX";
+            this.bằngXLSToolStripMenuItem.Click += new System.EventHandler(this.bằngXLSToolStripMenuItem_Click);
+            // 
+            // bằngCSVToolStripMenuItem
+            // 
+            this.bằngCSVToolStripMenuItem.Name = "bằngCSVToolStripMenuItem";
+            this.bằngCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bằngCSVToolStripMenuItem.Text = "Bằng CSV";
+            this.bằngCSVToolStripMenuItem.Click += new System.EventHandler(this.bằngCSVToolStripMenuItem_Click);
             // 
             // AdminDashboard
             // 
@@ -641,5 +660,7 @@
         private System.Windows.Forms.ToolStripMenuItem tựĐộngGửiEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vềTácGiảToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngBáoTrạngTháiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bằngXLSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bằngCSVToolStripMenuItem;
     }
 }
