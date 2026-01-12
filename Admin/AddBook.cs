@@ -14,6 +14,7 @@ namespace Elibse.Admin
         // Biến lưu trạng thái: Nếu null => Thêm mới; Nếu có ID => Đang Sửa
         private string _bookIDToEdit = null;
         private string currentImagePath = "";
+        private byte[] _currentImageBytes = null;
 
         public AddBook()
         {
@@ -111,17 +112,7 @@ namespace Elibse.Admin
             }
 
             // Xử lý ảnh (Chuyển file ảnh sang byte[])
-            byte[] imageBytes = null;
-            if (!string.IsNullOrEmpty(currentImagePath))
-            {
-                using (FileStream fs = new FileStream(currentImagePath, FileMode.Open, FileAccess.Read))
-                {
-                    using (BinaryReader br = new BinaryReader(fs))
-                    {
-                        imageBytes = br.ReadBytes((int)fs.Length);
-                    }
-                }
-            }
+            byte[] imageBytes = _currentImageBytes;
 
             try
             {
@@ -206,16 +197,33 @@ namespace Elibse.Admin
         }
 
         // --- CÁC HÀM HỖ TRỢ ---
-
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                currentImagePath = ofd.FileName;
-                picBookCover.Image = Image.FromFile(currentImagePath);
-                picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
+                try
+                {
+                    currentImagePath = ofd.FileName;
+
+                    // 1. Đọc toàn bộ file ảnh thành mảng byte và lưu vào biến toàn cục
+                    _currentImageBytes = File.ReadAllBytes(currentImagePath);
+
+                    // 2. Tạo một MemoryStream từ mảng byte này để hiển thị lên PictureBox
+                    using (MemoryStream ms = new MemoryStream(_currentImageBytes))
+                    {
+                        // Copy sang một bitmap mới để tránh lỗi GDI+ khi stream đóng
+                        picBookCover.Image = new Bitmap(Image.FromStream(ms));
+                    }
+
+                    picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tải ảnh: " + ex.Message);
+                }
             }
         }
 
