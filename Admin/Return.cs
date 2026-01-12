@@ -233,7 +233,7 @@ namespace Elibse
                                          WHERE ReaderID = @rid AND BookID = @bid AND ReturnDate IS NULL";
 
                             SqlCommand cmdLoan = new SqlCommand(sqlUpdateLoan, conn);
-                            cmdLoan.Transaction = transaction; // <--- Quan trọng
+                            cmdLoan.Transaction = transaction;
                             cmdLoan.Parameters.AddWithValue("@rStatus", loanNote); // Biến loanNote lấy từ logic phía trên của bạn
                             cmdLoan.Parameters.AddWithValue("@rid", txtReaderID.Text);
                             cmdLoan.Parameters.AddWithValue("@bid", txtBookID.Text);

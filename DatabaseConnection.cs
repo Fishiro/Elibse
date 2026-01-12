@@ -4,23 +4,54 @@ namespace Elibse
 {
     public class DatabaseConnection
     {
-        // Chuỗi mặc định (để fallback nếu người dùng không nhập gì)
-        private static string _connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=ElibseDB;Integrated Security=True";
-
-        // Hàm cho phép thay đổi chuỗi kết nối từ bên ngoài
-        public static void SetConnectionString(string serverName)
+        private static string ConnectionString
         {
-            // Nếu người dùng nhập vào, ta sẽ lắp ghép chuỗi mới
-            // Data Source= {Tên Server} ; ...
-            if (!string.IsNullOrEmpty(serverName))
+            get
             {
-                _connectionString = string.Format(@"Data Source={0};Initial Catalog=ElibseDB;Integrated Security=True", serverName);
+                // 1. Lấy tên Server đã lưu trong cài đặt
+                string serverName = Properties.Settings.Default.ServerName;
+
+                // 2. Nếu chưa có gì (lần đầu chạy), dùng mặc định .\SQLEXPRESS
+                if (string.IsNullOrEmpty(serverName))
+                {
+                    serverName = @".\SQLEXPRESS";
+                }
+
+                // 3. Trả về chuỗi kết nối hoàn chỉnh
+                return string.Format(@"Data Source={0};Initial Catalog=ElibseDB;Integrated Security=True", serverName);
             }
         }
 
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection(_connectionString);
+            // Sử dụng Property ConnectionString vừa viết ở trên
+            return new SqlConnection(ConnectionString);
+        }
+
+        // Hàm này dùng để TEST kết nối từ form cấu hình
+        public static bool TestConnection(string serverName)
+        {
+            string tempConnStr = string.Format(@"Data Source={0};Initial Catalog=ElibseDB;Integrated Security=True", serverName);
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(tempConnStr))
+                {
+                    conn.Open();
+                    return true; // Kết nối thành công
+                }
+            }
+            catch
+            {
+                return false; // Thất bại
+            }
+        }
+
+        // Hàm LƯU cấu hình (Gọi khi người dùng bấm Lưu ở form Config)
+        public static void SaveConnectionString(string newServerName)
+        {
+            // Lưu vào Settings của Project
+            Properties.Settings.Default.ServerName = newServerName;
+            Properties.Settings.Default.Save(); // Lệnh này quan trọng để ghi xuống ổ cứng
         }
     }
 }

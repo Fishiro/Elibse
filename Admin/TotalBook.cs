@@ -184,5 +184,63 @@ namespace Elibse.Admin
 
         private void cboFilterCategory_SelectedIndexChanged(object sender, EventArgs e) => LoadBookData(txtSearchBook.Text.Trim());
         private void cboSortOrder_SelectedIndexChanged(object sender, EventArgs e) => LoadBookData(txtSearchBook.Text.Trim());
+
+        // Sự kiện Click cho nút "Thanh lý"
+        private void btnLiquidate_Click(object sender, EventArgs e)
+        {
+            if (dgvBooks.SelectedRows.Count > 0)
+            {
+                // 1. Lấy ID và Trạng thái hiện tại của sách đang chọn
+                string bookID = dgvBooks.SelectedRows[0].Cells["BookID"].Value.ToString();
+                string currentStatus = dgvBooks.SelectedRows[0].Cells["Status"].Value.ToString();
+
+                // 2. Kiểm tra điều kiện: Chỉ sách 'Available' hoặc 'Damaged' mới được thanh lý
+                // (Sách đang cho mượn 'Borrowed' thì không thể thanh lý ngay)
+                if (currentStatus == "Borrowed")
+                {
+                    MessageBox.Show("Sách này đang được mượn, không thể thanh lý! Vui lòng thu hồi sách trước.",
+                                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 3. Hỏi xác nhận người dùng
+                if (MessageBox.Show($"Bạn có chắc muốn thanh lý sách {bookID} không?\nSách sẽ chuyển sang trạng thái 'Liquidated' và không thể cho mượn nữa.",
+                                    "Xác nhận thanh lý", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (SqlConnection conn = DatabaseConnection.GetConnection())
+                        {
+                            conn.Open();
+                            // Câu lệnh update trạng thái sang 'Liquidated'
+                            string query = "UPDATE BOOKS SET Status = 'Liquidated' WHERE BookID = @id";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@id", bookID);
+
+                            int result = cmd.ExecuteNonQuery();
+
+                            if (result > 0)
+                            {
+                                // Ghi log (nếu muốn, dùng lớp Logger của bạn)
+                                Logger.Log("Thanh lý sách", $"Đã thanh lý sách ID: {bookID}");
+
+                                MessageBox.Show("Đã thanh lý sách thành công!", "Thông báo");
+
+                                // 4. Tải lại danh sách để cập nhật giao diện
+                                LoadBookData(txtSearchBook.Text.Trim());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi khi thanh lý: " + ex.Message, "Lỗi");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một cuốn sách để thanh lý!", "Thông báo");
+            }
+        }
     }
 }

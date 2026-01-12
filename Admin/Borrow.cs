@@ -132,6 +132,15 @@ namespace Elibse
                     {
                         string status = r["Status"].ToString();
 
+                        // Kiểm tra chặn sách đã thanh lý
+                        if (status == "Liquidated")
+                        {
+                            MessageBox.Show("Sách này đã được thanh lý khỏi thư viện! Không thể thực hiện mượn.",
+                                            "Ngừng giao dịch", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            ResetBookPanel(); // Xóa sạch các ô nhập liệu để tránh nhìn thấy dữ liệu rác
+                            return; // Dừng hàm ngay lập tức
+                        }
+
                         if (status != "Available")
                         {
                             MessageBox.Show($"Sách này hiện không khả dụng! (Trạng thái: {status})", "Không thể mượn", MessageBoxButtons.OK, MessageBoxIcon.Warning);

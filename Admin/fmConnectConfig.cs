@@ -15,28 +15,33 @@ namespace Elibse
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            string server = txtServerName.Text.Trim();
+            // Lấy tên server từ ô nhập (Thay txtServerName bằng tên thực tế của ô nhập trong form bạn)
+            string serverInput = txtServerName.Text.Trim();
 
-            // Cập nhật chuỗi kết nối (Nếu server rỗng, hàm bên kia tự dùng mặc định)
-            DatabaseConnection.SetConnectionString(server);
-
-            // Thử kết nối xem có được không
-            try
+            if (string.IsNullOrEmpty(serverInput))
             {
-                using (SqlConnection conn = DatabaseConnection.GetConnection())
-                {
-                    conn.Open(); // Nếu sai tên server, dòng này sẽ văng lỗi
-                }
-
-                // Nếu chạy xuống đây nghĩa là kết nối OK
-                MessageBox.Show("Kết nối thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.DialogResult = DialogResult.OK; // Báo cho Program biết là OK
-                this.Close();
+                MessageBox.Show("Vui lòng nhập tên Server!");
+                return;
             }
-            catch (Exception ex)
+
+            // Kiểm tra kết nối thử
+            if (DatabaseConnection.TestConnection(serverInput))
             {
-                MessageBox.Show("Không thể kết nối đến Server này!\nLỗi: " + ex.Message, "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // === DÒNG QUAN TRỌNG NHẤT ===
+                // Lưu tên server này lại vĩnh viễn
+                DatabaseConnection.SaveConnectionString(serverInput);
+                // =============================
+
+                MessageBox.Show("Kết nối thành công! Cấu hình đã được lưu.");
+
+                // Chuyển sang form Đăng nhập
+                this.Hide();
+                fmLoginDialog frm = new fmLoginDialog();
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Kết nối thất bại. Vui lòng kiểm tra lại tên Server!");
             }
         }
     }
