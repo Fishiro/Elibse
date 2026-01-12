@@ -153,7 +153,7 @@ namespace Elibse.Admin
                             string finalID = $"#{nextGlobal:D7}-{abbreviation}-{nextLocal:D4}";
 
                             string insertQ = @"INSERT INTO BOOKS (BookID, Title, Author, CategoryID, ImportDate, Price, BookImage, Status)
-                                               VALUES (@id, @title, @author, @catID, GETDATE(), @price, @img, N'Sẵn sàng')";
+                                               VALUES (@id, @title, @author, @catID, GETDATE(), @price, @img, N'Available')";
 
                             SqlCommand cmd = new SqlCommand(insertQ, conn);
                             cmd.Parameters.AddWithValue("@id", finalID);

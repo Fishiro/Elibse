@@ -16,7 +16,7 @@ namespace Elibse.Admin
         private void SendEmailForm_Load(object sender, EventArgs e)
         {
             LoadReadersWithEmail();
-            lblStatus.Text = "Sẵn sàng.";
+            lblStatus.Text = "Available";
             lblStatus.ForeColor = Color.Black;
         }
 
