@@ -351,5 +351,11 @@ namespace Elibse
                 }
             }
         }
+
+        private void giaHạnTrảSáchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExtendLoan frm = new ExtendLoan();
+            frm.ShowDialog();
+        }
     }
 }
