@@ -90,7 +90,7 @@ namespace Elibse
         // =============================================================
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            // 1. Validation cơ bản
+            // 1. Validation cơ bản (Kiểm tra rỗng)
             if (string.IsNullOrWhiteSpace(txtFullName.Text) ||
                 string.IsNullOrWhiteSpace(txtPhone.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text))
@@ -98,6 +98,15 @@ namespace Elibse
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin (*)");
                 return;
             }
+
+            // Kiểm tra độ dài Địa chỉ (Max 500 ký tự)
+            if (txtAddress.Text.Trim().Length > 500)
+            {
+                MessageBox.Show("Địa chỉ quá dài (tối đa 500 ký tự). Vui lòng rút gọn lại!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAddress.Focus(); // Đưa con trỏ về ô địa chỉ để sửa
+                return;
+            }
+
             if (txtPassword.Text != txtConfirmPass.Text)
             {
                 MessageBox.Show("Mật khẩu nhập lại không khớp!");
@@ -121,7 +130,7 @@ namespace Elibse
                         return;
                     }
 
-                    // INSERT (Đã thêm cột ReaderImage và tham số @img)
+                    // INSERT
                     string sql = @"INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, Password, Status, CreatedDate, ReaderImage) 
                                    VALUES (@id, @name, @dob, @phone, @email, @address, @pass, 'Active', GETDATE(), @img)";
 
