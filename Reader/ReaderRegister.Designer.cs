@@ -66,7 +66,7 @@
             this.label1.Location = new System.Drawing.Point(61, 36);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 20);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên độc giả";
             // 
@@ -76,7 +76,7 @@
             this.label2.Location = new System.Drawing.Point(89, 58);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 20);
+            this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Email";
             // 
@@ -86,7 +86,7 @@
             this.label3.Location = new System.Drawing.Point(263, 74);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 20);
+            this.label3.Size = new System.Drawing.Size(107, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Ngày tháng năm sinh";
             // 
@@ -96,7 +96,7 @@
             this.label4.Location = new System.Drawing.Point(255, 99);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 20);
+            this.label4.Size = new System.Drawing.Size(116, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Thời gian tạo tài khoản";
             // 
@@ -106,7 +106,7 @@
             this.label5.Location = new System.Drawing.Point(46, 35);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 20);
+            this.label5.Size = new System.Drawing.Size(14, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "#";
             // 
@@ -147,7 +147,7 @@
             this.dtpCreatedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpCreatedDate.Location = new System.Drawing.Point(372, 95);
             this.dtpCreatedDate.Name = "dtpCreatedDate";
-            this.dtpCreatedDate.Size = new System.Drawing.Size(87, 26);
+            this.dtpCreatedDate.Size = new System.Drawing.Size(87, 20);
             this.dtpCreatedDate.TabIndex = 5;
             // 
             // dtpDOB
@@ -155,7 +155,7 @@
             this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDOB.Location = new System.Drawing.Point(372, 72);
             this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(87, 26);
+            this.dtpDOB.Size = new System.Drawing.Size(87, 20);
             this.dtpDOB.TabIndex = 5;
             // 
             // btnUploadImg
@@ -175,7 +175,7 @@
             this.txtAge.Margin = new System.Windows.Forms.Padding(2);
             this.txtAge.Name = "txtAge";
             this.txtAge.ReadOnly = true;
-            this.txtAge.Size = new System.Drawing.Size(44, 26);
+            this.txtAge.Size = new System.Drawing.Size(44, 20);
             this.txtAge.TabIndex = 1;
             this.txtAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -195,7 +195,7 @@
             this.txtAddress.Location = new System.Drawing.Point(126, 151);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(104, 26);
+            this.txtAddress.Size = new System.Drawing.Size(104, 20);
             this.txtAddress.TabIndex = 2;
             this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
             // 
@@ -205,7 +205,7 @@
             this.txtConfirmPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.PasswordChar = '*';
-            this.txtConfirmPass.Size = new System.Drawing.Size(104, 26);
+            this.txtConfirmPass.Size = new System.Drawing.Size(104, 20);
             this.txtConfirmPass.TabIndex = 2;
             this.txtConfirmPass.TextChanged += new System.EventHandler(this.txtConfirmPass_TextChanged);
             // 
@@ -215,7 +215,7 @@
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(104, 26);
+            this.txtPassword.Size = new System.Drawing.Size(104, 20);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
@@ -225,7 +225,7 @@
             this.label7.Location = new System.Drawing.Point(81, 154);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 20);
+            this.label7.Size = new System.Drawing.Size(40, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Địa chỉ";
             // 
@@ -234,7 +234,7 @@
             this.txtPhone.Location = new System.Drawing.Point(125, 81);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(104, 26);
+            this.txtPhone.Size = new System.Drawing.Size(104, 20);
             this.txtPhone.TabIndex = 1;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
             // 
@@ -244,7 +244,7 @@
             this.label6.Location = new System.Drawing.Point(21, 130);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 20);
+            this.label6.Size = new System.Drawing.Size(100, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Xác nhận mật khẩu";
             // 
@@ -253,7 +253,7 @@
             this.txtEmail.Location = new System.Drawing.Point(125, 57);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(104, 26);
+            this.txtEmail.Size = new System.Drawing.Size(104, 20);
             this.txtEmail.TabIndex = 1;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -263,7 +263,7 @@
             this.label10.Location = new System.Drawing.Point(71, 105);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 20);
+            this.label10.Size = new System.Drawing.Size(52, 13);
             this.label10.TabIndex = 0;
             this.label10.Text = "Mật khẩu";
             // 
@@ -273,7 +273,7 @@
             this.lbl.Location = new System.Drawing.Point(46, 82);
             this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(109, 20);
+            this.lbl.Size = new System.Drawing.Size(75, 13);
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Số Điện Thoại";
             // 
@@ -282,7 +282,7 @@
             this.txtFullName.Location = new System.Drawing.Point(126, 31);
             this.txtFullName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(104, 26);
+            this.txtFullName.Size = new System.Drawing.Size(104, 20);
             this.txtFullName.TabIndex = 0;
             this.txtFullName.TextChanged += new System.EventHandler(this.txtFullName_TextChanged);
             // 
@@ -292,7 +292,7 @@
             this.label9.Location = new System.Drawing.Point(342, 122);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 20);
+            this.label9.Size = new System.Drawing.Size(28, 13);
             this.label9.TabIndex = 0;
             this.label9.Text = "Tuổi";
             // 
@@ -315,7 +315,7 @@
             this.txtReaderID.Margin = new System.Windows.Forms.Padding(2);
             this.txtReaderID.Name = "txtReaderID";
             this.txtReaderID.ReadOnly = true;
-            this.txtReaderID.Size = new System.Drawing.Size(107, 26);
+            this.txtReaderID.Size = new System.Drawing.Size(107, 20);
             this.txtReaderID.TabIndex = 0;
             // 
             // btnRegister
@@ -347,7 +347,7 @@
             this.label8.Location = new System.Drawing.Point(450, 216);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 20);
+            this.label8.Size = new System.Drawing.Size(105, 13);
             this.label8.TabIndex = 0;
             this.label8.Text = "Nếu đã có tài khoản";
             // 
@@ -361,8 +361,11 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label8);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "ReaderRegister";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Đăng Ký Tài Khoản Độc Giả";
             this.Load += new System.EventHandler(this.ReaderRegister_Load);
             this.groupBox1.ResumeLayout(false);

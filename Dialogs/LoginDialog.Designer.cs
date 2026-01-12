@@ -35,7 +35,7 @@
             // btnReaderChoice
             // 
             this.btnReaderChoice.Location = new System.Drawing.Point(37, 29);
-            this.btnReaderChoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReaderChoice.Margin = new System.Windows.Forms.Padding(2);
             this.btnReaderChoice.Name = "btnReaderChoice";
             this.btnReaderChoice.Size = new System.Drawing.Size(121, 50);
             this.btnReaderChoice.TabIndex = 0;
@@ -46,7 +46,7 @@
             // btnAdminChoice
             // 
             this.btnAdminChoice.Location = new System.Drawing.Point(199, 29);
-            this.btnAdminChoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdminChoice.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdminChoice.Name = "btnAdminChoice";
             this.btnAdminChoice.Size = new System.Drawing.Size(138, 50);
             this.btnAdminChoice.TabIndex = 0;
@@ -61,7 +61,9 @@
             this.ClientSize = new System.Drawing.Size(372, 110);
             this.Controls.Add(this.btnAdminChoice);
             this.Controls.Add(this.btnReaderChoice);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "fmLoginDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Chọn đăng nhập";

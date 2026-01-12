@@ -56,9 +56,11 @@
             // 
             // dgvReaders
             // 
+            this.dgvReaders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvReaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReaders.Location = new System.Drawing.Point(8, 50);
-            this.dgvReaders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvReaders.Margin = new System.Windows.Forms.Padding(2);
             this.dgvReaders.Name = "dgvReaders";
             this.dgvReaders.RowHeadersWidth = 62;
             this.dgvReaders.RowTemplate.Height = 28;
@@ -70,7 +72,7 @@
             // 
             this.picReader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picReader.Location = new System.Drawing.Point(61, 35);
-            this.picReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picReader.Margin = new System.Windows.Forms.Padding(2);
             this.picReader.Name = "picReader";
             this.picReader.Size = new System.Drawing.Size(67, 65);
             this.picReader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -100,7 +102,7 @@
             // txtFullName
             // 
             this.txtFullName.Location = new System.Drawing.Point(67, 113);
-            this.txtFullName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFullName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(121, 20);
             this.txtFullName.TabIndex = 3;
@@ -108,7 +110,7 @@
             // txtReaderID
             // 
             this.txtReaderID.Location = new System.Drawing.Point(67, 134);
-            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2);
             this.txtReaderID.Name = "txtReaderID";
             this.txtReaderID.ReadOnly = true;
             this.txtReaderID.Size = new System.Drawing.Size(121, 20);
@@ -117,7 +119,7 @@
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(67, 176);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(121, 20);
             this.txtPhone.TabIndex = 3;
@@ -126,7 +128,7 @@
             // 
             this.btnEditReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditReader.Location = new System.Drawing.Point(105, 229);
-            this.btnEditReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEditReader.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditReader.Name = "btnEditReader";
             this.btnEditReader.Size = new System.Drawing.Size(55, 22);
             this.btnEditReader.TabIndex = 4;
@@ -138,7 +140,7 @@
             // 
             this.btnDeleteReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteReader.Location = new System.Drawing.Point(164, 229);
-            this.btnDeleteReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteReader.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteReader.Name = "btnDeleteReader";
             this.btnDeleteReader.Size = new System.Drawing.Size(55, 22);
             this.btnDeleteReader.TabIndex = 4;
@@ -150,7 +152,7 @@
             // 
             this.btnAddReader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddReader.Location = new System.Drawing.Point(47, 229);
-            this.btnAddReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddReader.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddReader.Name = "btnAddReader";
             this.btnAddReader.Size = new System.Drawing.Size(55, 22);
             this.btnAddReader.TabIndex = 4;
@@ -161,7 +163,7 @@
             // txtSearchReader
             // 
             this.txtSearchReader.Location = new System.Drawing.Point(8, 15);
-            this.txtSearchReader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearchReader.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearchReader.Name = "txtSearchReader";
             this.txtSearchReader.Size = new System.Drawing.Size(211, 20);
             this.txtSearchReader.TabIndex = 5;
@@ -169,7 +171,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(222, 12);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(83, 23);
             this.btnSearch.TabIndex = 6;
@@ -180,7 +182,7 @@
             // 
             this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReload.Location = new System.Drawing.Point(69, 244);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(55, 22);
             this.btnReload.TabIndex = 4;
@@ -191,7 +193,7 @@
             // 
             this.btnResetPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnResetPass.Location = new System.Drawing.Point(147, 244);
-            this.btnResetPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnResetPass.Margin = new System.Windows.Forms.Padding(2);
             this.btnResetPass.Name = "btnResetPass";
             this.btnResetPass.Size = new System.Drawing.Size(104, 22);
             this.btnResetPass.TabIndex = 7;
@@ -212,7 +214,7 @@
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(67, 155);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(121, 20);
             this.txtEmail.TabIndex = 3;
@@ -229,6 +231,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.groupBox1.Controls.Add(this.dtpDOB);
             this.groupBox1.Controls.Add(this.btnChangeImage);
             this.groupBox1.Controls.Add(this.picReader);
@@ -245,9 +248,9 @@
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Location = new System.Drawing.Point(319, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(261, 257);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
@@ -256,7 +259,7 @@
             // dtpDOB
             // 
             this.dtpDOB.Location = new System.Drawing.Point(67, 196);
-            this.dtpDOB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpDOB.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(180, 20);
             this.dtpDOB.TabIndex = 6;
@@ -264,7 +267,7 @@
             // btnChangeImage
             // 
             this.btnChangeImage.Location = new System.Drawing.Point(143, 57);
-            this.btnChangeImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangeImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeImage.Name = "btnChangeImage";
             this.btnChangeImage.Size = new System.Drawing.Size(67, 25);
             this.btnChangeImage.TabIndex = 5;
@@ -293,8 +296,9 @@
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.dgvReaders);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TotalReader";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Danh Sách Độc Giả";
             ((System.ComponentModel.ISupportInitialize)(this.dgvReaders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picReader)).EndInit();
