@@ -292,7 +292,11 @@ namespace Elibse.Admin
 
         private long GetNextGlobalNumber(SqlConnection conn)
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM BOOKS", conn);
+            string sql = "SELECT ISNULL(MAX(CAST(SUBSTRING(BookID, 2, 7) AS INT)), 0) FROM BOOKS";
+
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            // Lấy số lớn nhất tìm được cộng thêm 1 để ra số mới
             return (int)cmd.ExecuteScalar() + 1;
         }
 
