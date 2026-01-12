@@ -26,10 +26,8 @@ namespace Elibse
             // Kiểm tra kết nối thử
             if (DatabaseConnection.TestConnection(serverInput))
             {
-                // === DÒNG QUAN TRỌNG NHẤT ===
                 // Lưu tên server này lại vĩnh viễn
                 DatabaseConnection.SaveConnectionString(serverInput);
-                // =============================
 
                 MessageBox.Show("Kết nối thành công! Cấu hình đã được lưu.");
 
