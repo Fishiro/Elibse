@@ -79,6 +79,34 @@ namespace Elibse
             }
         }
 
+        private decimal GetBookPrice(string bookId)
+        {
+            decimal price = 0;
+            try
+            {
+                using (SqlConnection conn = DatabaseConnection.GetConnection())
+                {
+                    conn.Open();
+                    // Giả định cột giá sách trong bảng BOOKS tên là 'Price'
+                    // Nếu trong CSDL của bạn tên khác (ví dụ 'Cost', 'GiaTien'...), hãy sửa lại nhé!
+                    string sql = "SELECT Price FROM BOOKS WHERE BookID = @bid";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@bid", bookId);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        price = Convert.ToDecimal(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể lấy giá sách: " + ex.Message);
+            }
+            return price;
+        }
+
         // --- 2. HÀM XÓA TRẮNG FORM ---
         private void ResetForm()
         {
@@ -137,7 +165,6 @@ namespace Elibse
             catch { }
         }
 
-        // --- SỰ KIỆN KÝ TRẢ (Đã sửa lại SQL chuẩn theo bảng LOAN_RECORDS) ---
         private void btnConfirmReturn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtReaderID.Text) || string.IsNullOrEmpty(txtBookID.Text))
@@ -146,13 +173,49 @@ namespace Elibse
                 return;
             }
 
-            // Logic xác định trạng thái
-            string newBookStatus = "Available"; // Trạng thái cập nhật vào bảng BOOKS
-            string loanNote = "Bình thường";    // Trạng thái cập nhật vào bảng LOAN_RECORDS (ReturnStatus)
+            // 1. Xác định trạng thái và mức phạt
+            string newBookStatus = "Available";
+            string loanNote = "Bình thường";
+            decimal fineAmount = 0;
+            bool isViolation = false;
 
-            if (rbDamaged.Checked) { newBookStatus = "Damaged"; loanNote = "Hư hỏng"; }
-            if (rbLost.Checked) { newBookStatus = "Lost"; loanNote = "Mất"; }
+            if (rbDamaged.Checked)
+            {
+                newBookStatus = "Damaged";
+                loanNote = "Hư hỏng";
+                isViolation = true;
+                // Ví dụ: Hư hỏng đền 50% giá trị sách
+                fineAmount = GetBookPrice(txtBookID.Text) * 0.5m;
+            }
+            else if (rbLost.Checked)
+            {
+                newBookStatus = "Lost";
+                loanNote = "Mất";
+                isViolation = true;
+                // Ví dụ: Mất đền 100% giá trị sách
+                fineAmount = GetBookPrice(txtBookID.Text);
+            }
 
+            // 2. Nếu có vi phạm -> Yêu cầu thanh toán trước
+            if (isViolation && fineAmount > 0)
+            {
+                // Gọi form PaymentDialog mà chúng ta vừa tạo ở Bước 1
+                PaymentDialog paymentForm = new PaymentDialog(fineAmount);
+
+                if (paymentForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Nếu thanh toán OK -> Ghi chú thêm vào log (tuỳ chọn)
+                    loanNote += $" (Đã đền bù: {paymentForm.AmountPaid.ToString("N0")} VNĐ)";
+                }
+                else
+                {
+                    // Nếu huỷ thanh toán -> Dừng quy trình trả sách
+                    MessageBox.Show("Bạn đã huỷ thanh toán. Quy trình trả sách bị huỷ.", "Thông báo");
+                    return;
+                }
+            }
+
+            // 3. Thực hiện cập nhật vào CSDL (Code cũ giữ nguyên logic)
             if (MessageBox.Show($"Xác nhận trả sách '{txtBookTitle.Text}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
@@ -161,14 +224,13 @@ namespace Elibse
                     {
                         conn.Open();
 
-                        // Bước A: Cập nhật LOAN_RECORDS
-                        // SỬA ĐỔI: Không update cột Status (vì không có), mà update ReturnStatus
+                        // A. Cập nhật LOAN_RECORDS
                         string sqlUpdateLoan = @"UPDATE LOAN_RECORDS 
-                                                 SET ReturnDate = GETDATE(), ReturnStatus = @rStatus
-                                                 WHERE ReaderID = @rid AND BookID = @bid AND ReturnDate IS NULL";
+                                         SET ReturnDate = GETDATE(), ReturnStatus = @rStatus
+                                         WHERE ReaderID = @rid AND BookID = @bid AND ReturnDate IS NULL";
 
                         SqlCommand cmdLoan = new SqlCommand(sqlUpdateLoan, conn);
-                        cmdLoan.Parameters.AddWithValue("@rStatus", loanNote); // Ghi chú: Bình thường/Hư hỏng...
+                        cmdLoan.Parameters.AddWithValue("@rStatus", loanNote);
                         cmdLoan.Parameters.AddWithValue("@rid", txtReaderID.Text);
                         cmdLoan.Parameters.AddWithValue("@bid", txtBookID.Text);
 
@@ -176,7 +238,7 @@ namespace Elibse
 
                         if (rowsAffected > 0)
                         {
-                            // Bước B: Cập nhật bảng BOOKS (Để sách hiển thị đúng trạng thái trong kho)
+                            // B. Cập nhật trạng thái trong bảng BOOKS
                             string sqlUpdateBook = "UPDATE BOOKS SET Status = @stt WHERE BookID = @bid";
                             SqlCommand cmdBook = new SqlCommand(sqlUpdateBook, conn);
                             cmdBook.Parameters.AddWithValue("@stt", newBookStatus);
@@ -184,8 +246,8 @@ namespace Elibse
                             cmdBook.ExecuteNonQuery();
 
                             MessageBox.Show("Trả sách thành công!");
-                            Logger.Log("Trả Sách", $"Độc giả {txtReaderID.Text} đã trả sách {txtBookTitle.Text} (ID: {txtBookID.Text}). Tình trạng: {loanNote}");
-                            LoadReaderInfo(); // Load lại để cập nhật danh sách
+                            Logger.Log("Trả Sách", $"Độc giả {txtReaderID.Text} trả sách {txtBookTitle.Text}. Ghi chú: {loanNote}");
+                            LoadReaderInfo();
                         }
                         else
                         {
