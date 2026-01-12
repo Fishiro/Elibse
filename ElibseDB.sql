@@ -74,12 +74,11 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BOOKS]') AND type in (N'U'))
 BEGIN
     CREATE TABLE BOOKS (
-        BookID VARCHAR(20) PRIMARY KEY, -- Mã sách định dạng chuỗi (#000001-CNTT-001)
+        BookID VARCHAR(50) PRIMARY KEY, -- Mã sách định dạng chuỗi (#000001-CNTT-001)
         Title NVARCHAR(200) NOT NULL,
         Author NVARCHAR(100),
         CategoryID INT,
         Price DECIMAL(18, 0),
-        Quantity INT DEFAULT 0, -- Số lượng tổng (thường là 1 vì quản lý theo đầu sách)
         ImportDate DATETIME DEFAULT GETDATE(),
         Status NVARCHAR(50) DEFAULT 'Available', -- Available / Borrowed / Lost / Damaged
         BookImage VARBINARY(MAX), -- Lưu ảnh bìa

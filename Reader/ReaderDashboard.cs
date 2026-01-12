@@ -52,9 +52,9 @@ namespace Elibse.Reader
                 {
                     conn.Open();
                     string query = @"SELECT BookID AS [Mã Sách], Title AS [Tên Sách], 
-                                            Author AS [Tác Giả], Category AS [Thể Loại], Quantity AS [Còn Lại]
-                                     FROM BOOKS 
-                                     WHERE Quantity > 0 AND Status = 'Available'";
+                         Author AS [Tác Giả], Category AS [Thể Loại]
+                         FROM BOOKS 
+                         WHERE Status = 'Available'";
 
                     if (!string.IsNullOrEmpty(keyword))
                     {
@@ -115,7 +115,7 @@ namespace Elibse.Reader
                     try
                     {
                         // Trừ số lượng sách
-                        cmd.CommandText = "UPDATE BOOKS SET Quantity = Quantity - 1 WHERE BookID = @BookID";
+                        cmd.CommandText = "UPDATE BOOKS SET Status = 'Borrowed' WHERE BookID = @BookID";
                         cmd.Parameters.AddWithValue("@BookID", bookId);
                         cmd.ExecuteNonQuery();
 
@@ -205,7 +205,7 @@ namespace Elibse.Reader
                             cmd.ExecuteNonQuery();
 
                             // Cộng lại số lượng sách vào kho
-                            cmd.CommandText = "UPDATE BOOKS SET Quantity = Quantity + 1 WHERE BookID = @bid";
+                            cmd.CommandText = "UPDATE BOOKS SET Status = 'Available' WHERE BookID = @bid";
                             cmd.Parameters.AddWithValue("@bid", bookId);
                             cmd.ExecuteNonQuery();
 
