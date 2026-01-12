@@ -98,6 +98,12 @@
     <Compile Include="Admin\ConfigNotificationServiceEmail.Designer.cs">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\fmConnectConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\fmConnectConfig.Designer.cs">
+      <DependentUpon>fmConnectConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\fmFirstSetup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,7 @@
     <Compile Include="Admin\TotalReader.Designer.cs">
       <DependentUpon>TotalReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="SecurityHelper.cs" />
     <Compile Include="Session.cs" />
     <EmbeddedResource Include="Admin\AddBook.resx">
       <DependentUpon>AddBook.cs</DependentUpon>
@@ -205,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\ConfigNotificationServiceEmail.resx">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\fmConnectConfig.resx">
+      <DependentUpon>fmConnectConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\fmFirstSetup.resx">
       <DependentUpon>fmFirstSetup.cs</DependentUpon>

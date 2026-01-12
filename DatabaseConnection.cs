@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace Elibse
 {
     public class DatabaseConnection
     {
-        
+        // Chuỗi mặc định (để fallback nếu người dùng không nhập gì)
+        private static string _connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=ElibseDB;Integrated Security=True";
 
-        private static string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=ElibseDB;Integrated Security=True";
+        // Hàm cho phép thay đổi chuỗi kết nối từ bên ngoài
+        public static void SetConnectionString(string serverName)
+        {
+            // Nếu người dùng nhập vào, ta sẽ lắp ghép chuỗi mới
+            // Data Source= {Tên Server} ; ...
+            if (!string.IsNullOrEmpty(serverName))
+            {
+                _connectionString = string.Format(@"Data Source={0};Initial Catalog=ElibseDB;Integrated Security=True", serverName);
+            }
+        }
 
-        // Hàm lấy đối tượng kết nối (dùng chung cho cả dự án)
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection(strCon);
+            return new SqlConnection(_connectionString);
         }
     }
 }

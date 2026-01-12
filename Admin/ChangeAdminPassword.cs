@@ -35,37 +35,46 @@ namespace Elibse.Admin
             // 2. Xử lý Database
             try
             {
-                // Giả sử class DatabaseConnection của bạn có hàm GetConnection() trả về SqlConnection:
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
 
-                    // Bước A: Kiểm tra mật khẩu cũ
-                    string checkSql = "SELECT COUNT(*) FROM ADMINS WHERE AdminID = @ID AND Password = @OldPass";
-                    SqlCommand checkCmd = new SqlCommand(checkSql, conn);
+                    // 1. Lấy mật khẩu HIỆN TẠI trong Database của Admin đang đăng nhập
+                    string query = "SELECT Password FROM ADMINS WHERE Username = @user";
+                    SqlCommand cmd = new SqlCommand(query, conn);
 
-                    // TODO: Sau này nhớ thay số 1 bằng biến Session (VD: Program.CurrentAdminID)
-                    checkCmd.Parameters.AddWithValue("@ID", 1);
-                    checkCmd.Parameters.AddWithValue("@OldPass", txtOldPass.Text);
+                    // Lấy username từ Session (người đang đăng nhập)
+                    cmd.Parameters.AddWithValue("@user", Session.CurrentAdminUsername);
 
-                    int count = (int)checkCmd.ExecuteScalar();
+                    string currentDbPass = cmd.ExecuteScalar()?.ToString();
 
-                    if (count == 0)
+                    // 2. XỬ LÝ MÃ HÓA ====================================================
+                    // Lấy mật khẩu cũ người dùng nhập vào
+                    string oldPassInput = txtOldPass.Text;
+
+                    // Băm nó ra thành MD5 để giống định dạng trong Database
+                    string oldPassHash = SecurityHelper.HashPassword(oldPassInput);
+                    // ====================================================================
+
+                    // 3. So sánh: Phải so sánh 2 chuỗi ĐÃ MÃ HÓA với nhau
+                    if (currentDbPass != oldPassHash)
                     {
-                        MessageBox.Show("Mật khẩu cũ không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Mật khẩu cũ không đúng! Vui lòng kiểm tra lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtOldPass.Focus();
                         return;
                     }
 
-                    // Bước B: Cập nhật mật khẩu mới
-                    string updateSql = "UPDATE ADMINS SET Password = @NewPass WHERE AdminID = @ID";
-                    SqlCommand updateCmd = new SqlCommand(updateSql, conn);
+                    // 4. Nếu đúng thì mới mã hóa mật khẩu MỚI để lưu lại
+                    string newPassHash = SecurityHelper.HashPassword(txtNewPass.Text);
 
-                    updateCmd.Parameters.AddWithValue("@NewPass", txtNewPass.Text);
-                    updateCmd.Parameters.AddWithValue("@ID", 1);
+                    string updateQuery = "UPDATE ADMINS SET Password = @newPass WHERE Username = @user";
+                    SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                    updateCmd.Parameters.AddWithValue("@newPass", newPassHash);
+                    updateCmd.Parameters.AddWithValue("@user", Session.CurrentAdminUsername);
 
                     updateCmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Đổi mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Đổi mật khẩu thành công!");
                     this.Close();
                 }
             }

@@ -31,6 +31,8 @@ namespace Elibse
                 return;
             }
 
+            string passwordCheck = SecurityHelper.HashPassword(password);
+
             try
             {
                 // 3. Kết nối CSDL
@@ -42,7 +44,7 @@ namespace Elibse
                     string query = "SELECT Username FROM ADMINS WHERE Password = @pass";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@pass", password);
+                    cmd.Parameters.AddWithValue("@pass", passwordCheck);
 
                     // Dùng ExecuteScalar để lấy giá trị cột đầu tiên (Username)
                     object result = cmd.ExecuteScalar();

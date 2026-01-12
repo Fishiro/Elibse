@@ -132,9 +132,7 @@ namespace Elibse
                     {
                         string status = r["Status"].ToString();
 
-                        // Kiểm tra sách có sẵn sàng không (Dựa trên Status mặc định trong SQL là N'Sẵn sàng')
-                        // Lưu ý: Chuỗi so sánh phải khớp chính xác với trong Database của bạn
-                        if (status != "Sẵn sàng" && status != "Available")
+                        if (status != "Available")
                         {
                             MessageBox.Show($"Sách này hiện không khả dụng! (Trạng thái: {status})", "Không thể mượn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             ResetBookPanel();
@@ -215,7 +213,7 @@ namespace Elibse
 
                         // A. Thêm vào bảng LOAN_RECORDS
                         // Mặc định hạn trả (DueDate) là 7 ngày sau
-                        string sqlInsert = @"INSERT INTO LOAN_RECORDS (ReaderID, BookID, BorrowDate, DueDate, IsPaid)
+                        string sqlInsert = @"INSERT INTO LOAN_RECORDS (ReaderID, BookID, LoanDate, DueDate, IsPaid)
                                              VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
 
                         SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);

@@ -18,7 +18,7 @@ namespace Elibse
         public fmFirstSetup()
         {
             // Thiết lập thông số cho Form
-            this.Text = "Khởi tạo hệ thống lần đầu";
+            this.Text = "Elibse: Khởi Tạo Mật Khẩu Hệ Thống Lần Đầu";
             this.Size = new Size(400, 300);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -103,6 +103,8 @@ namespace Elibse
                 return;
             }
 
+            string passHash = SecurityHelper.HashPassword(pass);
+
             try
             {
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
@@ -111,7 +113,7 @@ namespace Elibse
                     // Cập nhật pass cho admin (Username mặc định là 'admin')
                     string query = "UPDATE ADMINS SET Password = @p WHERE Username = 'admin'";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@p", pass);
+                    cmd.Parameters.AddWithValue("@p", passHash);
 
                     int rows = cmd.ExecuteNonQuery();
 

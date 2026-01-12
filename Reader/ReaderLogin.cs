@@ -26,6 +26,8 @@ namespace Elibse
                 return;
             }
 
+            string passwordCheck = SecurityHelper.HashPassword(password);
+
             try
             {
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
@@ -39,7 +41,7 @@ namespace Elibse
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@u", username);
-                    cmd.Parameters.AddWithValue("@p", password);
+                    cmd.Parameters.AddWithValue("@p", passwordCheck);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

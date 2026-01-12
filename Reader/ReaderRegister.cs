@@ -141,7 +141,9 @@ namespace Elibse
                         // Nếu có nhập thì lưu bình thường
                         cmd.Parameters.AddWithValue("@address", txtAddress.Text.Trim());
                     }
-                    cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
+
+                    string hashedPassword = SecurityHelper.HashPassword(txtPassword.Text);
+                    cmd.Parameters.AddWithValue("@pass", hashedPassword);
 
                     // --- XỬ LÝ ẢNH ---
                     if (picAvatar.Image != null)
