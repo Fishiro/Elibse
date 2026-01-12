@@ -147,17 +147,11 @@ namespace Elibse
 
         private void menuLogout_Click(object sender, EventArgs e)
         {
-            // Hiển thị hộp thoại Yes/No chuẩn của Windows
             DialogResult check = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (check == DialogResult.Yes)
             {
-                this.Hide(); // Ẩn Dashboard hiện tại
-
-                fmLoginDialog loginDialog = new fmLoginDialog();
-                loginDialog.ShowDialog(); // Hiện lại form đăng nhập
-
-                this.Close();
+                this.Close(); // Chỉ cần đóng Dashboard lại, code bên AdminLogin sẽ chạy tiếp dòng this.Show()
             }
         }
 

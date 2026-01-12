@@ -60,10 +60,14 @@ namespace Elibse
 
                         MessageBox.Show("Xin chào " + currentAdmin + "!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        this.Hide();
+                        this.Hide(); // Ẩn form đăng nhập đi
+
                         AdminDashboard dashboard = new AdminDashboard();
-                        dashboard.ShowDialog();
-                        this.Close();
+                        dashboard.ShowDialog(); // Chương trình sẽ dừng ở đây cho đến khi Dashboard đóng lại
+
+                        // Khi Dashboard đóng lại (do đăng xuất hoặc tắt), dòng này mới chạy:
+                        this.Show(); // Hiện lại form đăng nhập để người khác vào
+                        txtPassword.Clear(); // Xóa mật khẩu cũ đi cho an toàn
                     }
                     else
                     {

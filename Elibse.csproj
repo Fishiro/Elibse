@@ -98,6 +98,12 @@
     <Compile Include="Admin\ConfigNotificationServiceEmail.Designer.cs">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\fmFirstSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\fmFirstSetup.Designer.cs">
+      <DependentUpon>fmFirstSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\SendEmailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\ConfigNotificationServiceEmail.resx">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\fmFirstSetup.resx">
+      <DependentUpon>fmFirstSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\SendEmailForm.resx">
       <DependentUpon>SendEmailForm.cs</DependentUpon>

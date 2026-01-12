@@ -1,6 +1,6 @@
 ﻿-- =============================================
 -- DATABASE: ELIBSE (Phiên bản Final v2 - Fix Lỗi Address)
--- Updated by: Quí & QA Lead
+-- Updated by: Quí
 -- =============================================
 
 -- 1. TẠO DATABASE
@@ -25,7 +25,7 @@ BEGIN
         Password VARCHAR(100) NOT NULL,
         FullName NVARCHAR(100)
     );
-    INSERT INTO ADMINS (Username, Password, FullName) VALUES ('admin', 'admin', N'Quản trị viên');
+    INSERT INTO ADMINS (Username, Password, FullName) VALUES ('admin', '', N'Quản trị viên');
 END
 GO
 

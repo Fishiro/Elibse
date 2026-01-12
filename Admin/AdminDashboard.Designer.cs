@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -125,17 +125,17 @@
             // 
             // chartStats
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartStats.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartStats.Legends.Add(legend1);
             this.chartStats.Location = new System.Drawing.Point(8, 194);
             this.chartStats.Margin = new System.Windows.Forms.Padding(2);
             this.chartStats.Name = "chartStats";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartStats.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartStats.Series.Add(series1);
             this.chartStats.Size = new System.Drawing.Size(359, 169);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
@@ -203,7 +203,7 @@
             this.label.Location = new System.Drawing.Point(53, 42);
             this.label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(72, 13);
+            this.label.Size = new System.Drawing.Size(104, 20);
             this.label.TabIndex = 0;
             this.label.Text = "Tổng số sách";
             this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,7 +215,7 @@
             this.lbl4.Location = new System.Drawing.Point(465, 42);
             this.lbl4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(76, 13);
+            this.lbl4.Size = new System.Drawing.Size(111, 20);
             this.lbl4.TabIndex = 0;
             this.lbl4.Text = "Mượn quá hạn";
             this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,7 +227,7 @@
             this.lbl3.Location = new System.Drawing.Point(339, 42);
             this.lbl3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(84, 13);
+            this.lbl3.Size = new System.Drawing.Size(121, 20);
             this.lbl3.TabIndex = 0;
             this.lbl3.Text = "Độc giả vi phạm";
             this.lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,7 +239,7 @@
             this.lbl.Location = new System.Drawing.Point(182, 42);
             this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(117, 13);
+            this.lbl.Size = new System.Drawing.Size(168, 20);
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Tổng đang được mượn";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -569,6 +569,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminDashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Admin dashboard";
             this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.panel3.ResumeLayout(false);
