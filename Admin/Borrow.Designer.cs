@@ -61,9 +61,10 @@
             // 
             // btnConfirmBorrow
             // 
-            this.btnConfirmBorrow.Location = new System.Drawing.Point(867, 316);
+            this.btnConfirmBorrow.Location = new System.Drawing.Point(578, 205);
+            this.btnConfirmBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConfirmBorrow.Name = "btnConfirmBorrow";
-            this.btnConfirmBorrow.Size = new System.Drawing.Size(158, 53);
+            this.btnConfirmBorrow.Size = new System.Drawing.Size(105, 34);
             this.btnConfirmBorrow.TabIndex = 0;
             this.btnConfirmBorrow.Text = "Ký mượn";
             this.btnConfirmBorrow.UseVisualStyleBackColor = true;
@@ -71,16 +72,18 @@
             // 
             // txtReaderName
             // 
-            this.txtReaderName.Location = new System.Drawing.Point(160, 218);
+            this.txtReaderName.Location = new System.Drawing.Point(107, 142);
+            this.txtReaderName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtReaderName.Name = "txtReaderName";
-            this.txtReaderName.Size = new System.Drawing.Size(198, 26);
+            this.txtReaderName.Size = new System.Drawing.Size(133, 26);
             this.txtReaderName.TabIndex = 1;
             this.txtReaderName.Text = "Nguyen Ngoc Ngan";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 179);
+            this.label1.Location = new System.Drawing.Point(45, 116);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 20);
             this.label1.TabIndex = 2;
@@ -89,7 +92,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 221);
+            this.label2.Location = new System.Drawing.Point(42, 144);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 20);
             this.label2.TabIndex = 2;
@@ -98,7 +102,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 263);
+            this.label3.Location = new System.Drawing.Point(9, 171);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 20);
             this.label3.TabIndex = 2;
@@ -106,19 +111,21 @@
             // 
             // txtReaderID
             // 
-            this.txtReaderID.Location = new System.Drawing.Point(160, 176);
+            this.txtReaderID.Location = new System.Drawing.Point(107, 114);
+            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtReaderID.Name = "txtReaderID";
-            this.txtReaderID.Size = new System.Drawing.Size(198, 26);
+            this.txtReaderID.Size = new System.Drawing.Size(133, 26);
             this.txtReaderID.TabIndex = 1;
             this.txtReaderID.Text = "#0000000-12302025";
             this.txtReaderID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReaderID_KeyDown);
             // 
             // txtCreatedDate
             // 
-            this.txtCreatedDate.Location = new System.Drawing.Point(160, 260);
+            this.txtCreatedDate.Location = new System.Drawing.Point(107, 169);
+            this.txtCreatedDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCreatedDate.Name = "txtCreatedDate";
             this.txtCreatedDate.ReadOnly = true;
-            this.txtCreatedDate.Size = new System.Drawing.Size(148, 26);
+            this.txtCreatedDate.Size = new System.Drawing.Size(100, 26);
             this.txtCreatedDate.TabIndex = 1;
             this.txtCreatedDate.Text = "20/03/2004";
             // 
@@ -135,9 +142,11 @@
             this.groupBox1.Controls.Add(this.txtViolationStatus);
             this.groupBox1.Controls.Add(this.txtCreatedDate);
             this.groupBox1.Controls.Add(this.txtReaderID);
-            this.groupBox1.Location = new System.Drawing.Point(29, 27);
+            this.groupBox1.Location = new System.Drawing.Point(19, 18);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(390, 404);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(260, 263);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin độc giả";
@@ -145,16 +154,18 @@
             // picReaderAvatar
             // 
             this.picReaderAvatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picReaderAvatar.Location = new System.Drawing.Point(147, 42);
+            this.picReaderAvatar.Location = new System.Drawing.Point(98, 27);
+            this.picReaderAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picReaderAvatar.Name = "picReaderAvatar";
-            this.picReaderAvatar.Size = new System.Drawing.Size(100, 100);
+            this.picReaderAvatar.Size = new System.Drawing.Size(67, 66);
             this.picReaderAvatar.TabIndex = 3;
             this.picReaderAvatar.TabStop = false;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(43, 347);
+            this.label8.Location = new System.Drawing.Point(29, 226);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(111, 20);
             this.label8.TabIndex = 2;
@@ -163,7 +174,8 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(78, 305);
+            this.label7.Location = new System.Drawing.Point(52, 198);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 20);
             this.label7.TabIndex = 2;
@@ -171,20 +183,22 @@
             // 
             // txtBorrowCount
             // 
-            this.txtBorrowCount.Location = new System.Drawing.Point(160, 344);
+            this.txtBorrowCount.Location = new System.Drawing.Point(107, 224);
+            this.txtBorrowCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBorrowCount.Name = "txtBorrowCount";
             this.txtBorrowCount.ReadOnly = true;
-            this.txtBorrowCount.Size = new System.Drawing.Size(75, 26);
+            this.txtBorrowCount.Size = new System.Drawing.Size(51, 26);
             this.txtBorrowCount.TabIndex = 1;
             this.txtBorrowCount.Text = "?/6";
             this.txtBorrowCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtViolationStatus
             // 
-            this.txtViolationStatus.Location = new System.Drawing.Point(160, 302);
+            this.txtViolationStatus.Location = new System.Drawing.Point(107, 196);
+            this.txtViolationStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtViolationStatus.Name = "txtViolationStatus";
             this.txtViolationStatus.ReadOnly = true;
-            this.txtViolationStatus.Size = new System.Drawing.Size(75, 26);
+            this.txtViolationStatus.Size = new System.Drawing.Size(51, 26);
             this.txtViolationStatus.TabIndex = 1;
             this.txtViolationStatus.Text = "Không";
             this.txtViolationStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -198,9 +212,11 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtAuthor);
             this.groupBox2.Controls.Add(this.txtBookID);
-            this.groupBox2.Location = new System.Drawing.Point(458, 27);
+            this.groupBox2.Location = new System.Drawing.Point(305, 18);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(624, 200);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(416, 130);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sách mượn";
@@ -208,16 +224,18 @@
             // picBookCover
             // 
             this.picBookCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBookCover.Location = new System.Drawing.Point(443, 24);
+            this.picBookCover.Location = new System.Drawing.Point(295, 16);
+            this.picBookCover.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picBookCover.Name = "picBookCover";
-            this.picBookCover.Size = new System.Drawing.Size(124, 158);
+            this.picBookCover.Size = new System.Drawing.Size(83, 103);
             this.picBookCover.TabIndex = 3;
             this.picBookCover.TabStop = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 146);
+            this.label4.Location = new System.Drawing.Point(25, 95);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 20);
             this.label4.TabIndex = 2;
@@ -226,7 +244,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 98);
+            this.label5.Location = new System.Drawing.Point(34, 64);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 20);
             this.label5.TabIndex = 2;
@@ -234,16 +253,18 @@
             // 
             // txtBookTitle
             // 
-            this.txtBookTitle.Location = new System.Drawing.Point(131, 95);
+            this.txtBookTitle.Location = new System.Drawing.Point(87, 62);
+            this.txtBookTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBookTitle.Name = "txtBookTitle";
             this.txtBookTitle.ReadOnly = true;
-            this.txtBookTitle.Size = new System.Drawing.Size(260, 26);
+            this.txtBookTitle.Size = new System.Drawing.Size(175, 26);
             this.txtBookTitle.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(56, 50);
+            this.label6.Location = new System.Drawing.Point(37, 32);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 2;
@@ -251,35 +272,39 @@
             // 
             // txtAuthor
             // 
-            this.txtAuthor.Location = new System.Drawing.Point(131, 143);
+            this.txtAuthor.Location = new System.Drawing.Point(87, 93);
+            this.txtAuthor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.ReadOnly = true;
-            this.txtAuthor.Size = new System.Drawing.Size(260, 26);
+            this.txtAuthor.Size = new System.Drawing.Size(175, 26);
             this.txtAuthor.TabIndex = 1;
             // 
             // txtBookID
             // 
-            this.txtBookID.Location = new System.Drawing.Point(131, 47);
+            this.txtBookID.Location = new System.Drawing.Point(87, 31);
+            this.txtBookID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBookID.Name = "txtBookID";
-            this.txtBookID.Size = new System.Drawing.Size(260, 26);
+            this.txtBookID.Size = new System.Drawing.Size(175, 26);
             this.txtBookID.TabIndex = 1;
             this.txtBookID.Text = "#0000000-TENSACH-0000";
             this.txtBookID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookID_KeyDown);
             // 
             // btnViewReaders
             // 
-            this.btnViewReaders.Location = new System.Drawing.Point(94, 100);
+            this.btnViewReaders.Location = new System.Drawing.Point(63, 65);
+            this.btnViewReaders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewReaders.Name = "btnViewReaders";
-            this.btnViewReaders.Size = new System.Drawing.Size(158, 44);
+            this.btnViewReaders.Size = new System.Drawing.Size(105, 29);
             this.btnViewReaders.TabIndex = 4;
             this.btnViewReaders.Text = "Danh sách độc giả";
             this.btnViewReaders.UseVisualStyleBackColor = true;
             // 
             // btnViewBooks
             // 
-            this.btnViewBooks.Location = new System.Drawing.Point(94, 46);
+            this.btnViewBooks.Location = new System.Drawing.Point(63, 30);
+            this.btnViewBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewBooks.Name = "btnViewBooks";
-            this.btnViewBooks.Size = new System.Drawing.Size(158, 44);
+            this.btnViewBooks.Size = new System.Drawing.Size(105, 29);
             this.btnViewBooks.TabIndex = 4;
             this.btnViewBooks.Text = "Xem kho sách";
             this.btnViewBooks.UseVisualStyleBackColor = true;
@@ -288,23 +313,29 @@
             // 
             this.groupBox3.Controls.Add(this.btnViewBooks);
             this.groupBox3.Controls.Add(this.btnViewReaders);
-            this.groupBox3.Location = new System.Drawing.Point(458, 248);
+            this.groupBox3.Location = new System.Drawing.Point(305, 161);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(328, 183);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(219, 119);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Xem nhanh";
             // 
             // Borrow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1108, 474);
+            this.ClientSize = new System.Drawing.Size(739, 308);
             this.Controls.Add(this.btnConfirmBorrow);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
             this.Name = "Borrow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Độc Giả Ký Mượn ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

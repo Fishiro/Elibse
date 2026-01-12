@@ -39,7 +39,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(152, 48);
+            this.label1.Location = new System.Drawing.Point(101, 31);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 0;
@@ -47,15 +48,17 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(206, 45);
+            this.txtEmail.Location = new System.Drawing.Point(137, 29);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(253, 26);
+            this.txtEmail.Size = new System.Drawing.Size(170, 26);
             this.txtEmail.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 98);
+            this.label2.Location = new System.Drawing.Point(36, 64);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(146, 20);
             this.label2.TabIndex = 0;
@@ -63,16 +66,18 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(206, 95);
+            this.txtPassword.Location = new System.Drawing.Point(137, 62);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(253, 26);
+            this.txtPassword.Size = new System.Drawing.Size(170, 26);
             this.txtPassword.TabIndex = 1;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(322, 159);
+            this.btnSave.Location = new System.Drawing.Point(215, 103);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(102, 34);
+            this.btnSave.Size = new System.Drawing.Size(68, 22);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Xác nhận";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -80,26 +85,31 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(95, 159);
+            this.btnClose.Location = new System.Drawing.Point(63, 103);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(102, 34);
+            this.btnClose.Size = new System.Drawing.Size(68, 22);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Hủy";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // NotificationServiceEmail
+            // ConfigNotificationServiceEmail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 216);
+            this.ClientSize = new System.Drawing.Size(350, 140);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label1);
-            this.Name = "NotificationServiceEmail";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.Name = "ConfigNotificationServiceEmail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Nhập Email Để Gửi Thông Báo";
             this.Load += new System.EventHandler(this.NotificationServiceEmail_Load);
             this.ResumeLayout(false);

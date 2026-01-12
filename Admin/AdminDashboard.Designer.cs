@@ -103,6 +103,7 @@
             // 
             // btnHistory
             // 
+            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHistory.Location = new System.Drawing.Point(548, 249);
             this.btnHistory.Margin = new System.Windows.Forms.Padding(2);
             this.btnHistory.Name = "btnHistory";
@@ -114,6 +115,7 @@
             // 
             // btnReload
             // 
+            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReload.Location = new System.Drawing.Point(548, 281);
             this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
@@ -125,6 +127,9 @@
             // 
             // chartStats
             // 
+            this.chartStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chartStats.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
@@ -142,6 +147,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnViewOverdue);
             this.groupBox1.Controls.Add(this.btnViewViolators);
             this.groupBox1.Controls.Add(this.btnViewBorrowed);
@@ -515,6 +522,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnReturn);
             this.groupBox2.Controls.Add(this.btnBorrow);
             this.groupBox2.Controls.Add(this.btnAddBook);

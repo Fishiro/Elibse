@@ -41,7 +41,7 @@
             // txtOldPass
             // 
             this.txtOldPass.Location = new System.Drawing.Point(161, 21);
-            this.txtOldPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOldPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtOldPass.Name = "txtOldPass";
             this.txtOldPass.Size = new System.Drawing.Size(114, 26);
             this.txtOldPass.TabIndex = 0;
@@ -60,7 +60,7 @@
             // txtNewPass
             // 
             this.txtNewPass.Location = new System.Drawing.Point(161, 49);
-            this.txtNewPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNewPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtNewPass.Name = "txtNewPass";
             this.txtNewPass.Size = new System.Drawing.Size(114, 26);
             this.txtNewPass.TabIndex = 1;
@@ -79,7 +79,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(207, 118);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 3;
@@ -90,7 +90,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(73, 118);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -101,7 +101,7 @@
             // txtConfirmPass
             // 
             this.txtConfirmPass.Location = new System.Drawing.Point(161, 79);
-            this.txtConfirmPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtConfirmPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.Size = new System.Drawing.Size(114, 26);
             this.txtConfirmPass.TabIndex = 2;
@@ -130,8 +130,11 @@
             this.Controls.Add(this.txtConfirmPass);
             this.Controls.Add(this.txtNewPass);
             this.Controls.Add(this.txtOldPass);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "ChangeAdminPassword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Thay Đổi Mật Khẩu Admin";
             this.ResumeLayout(false);
             this.PerformLayout();

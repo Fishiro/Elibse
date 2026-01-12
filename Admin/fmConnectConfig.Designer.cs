@@ -38,7 +38,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(63, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(252, 13);
+            this.label1.Size = new System.Drawing.Size(370, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nhập tên SQL Server (Để trống để dùng mặc định):";
             // 
@@ -46,7 +46,7 @@
             // 
             this.txtServerName.Location = new System.Drawing.Point(12, 54);
             this.txtServerName.Name = "txtServerName";
-            this.txtServerName.Size = new System.Drawing.Size(354, 20);
+            this.txtServerName.Size = new System.Drawing.Size(354, 26);
             this.txtServerName.TabIndex = 1;
             // 
             // btnConnect
@@ -67,7 +67,10 @@
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.txtServerName);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fmConnectConfig";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Tên Chuỗi Kết Nối SQL";
             this.ResumeLayout(false);
             this.PerformLayout();
