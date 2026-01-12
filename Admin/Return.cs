@@ -223,35 +223,56 @@ namespace Elibse
                     using (SqlConnection conn = DatabaseConnection.GetConnection())
                     {
                         conn.Open();
+                        SqlTransaction transaction = conn.BeginTransaction(); // 1. Mở Transaction
 
-                        // A. Cập nhật LOAN_RECORDS
-                        string sqlUpdateLoan = @"UPDATE LOAN_RECORDS 
+                        try
+                        {
+                            // A. Cập nhật LOAN_RECORDS (Ghi ngày trả)
+                            string sqlUpdateLoan = @"UPDATE LOAN_RECORDS 
                                          SET ReturnDate = GETDATE(), ReturnStatus = @rStatus
                                          WHERE ReaderID = @rid AND BookID = @bid AND ReturnDate IS NULL";
 
-                        SqlCommand cmdLoan = new SqlCommand(sqlUpdateLoan, conn);
-                        cmdLoan.Parameters.AddWithValue("@rStatus", loanNote);
-                        cmdLoan.Parameters.AddWithValue("@rid", txtReaderID.Text);
-                        cmdLoan.Parameters.AddWithValue("@bid", txtBookID.Text);
+                            SqlCommand cmdLoan = new SqlCommand(sqlUpdateLoan, conn);
+                            cmdLoan.Transaction = transaction; // <--- Quan trọng
+                            cmdLoan.Parameters.AddWithValue("@rStatus", loanNote); // Biến loanNote lấy từ logic phía trên của bạn
+                            cmdLoan.Parameters.AddWithValue("@rid", txtReaderID.Text);
+                            cmdLoan.Parameters.AddWithValue("@bid", txtBookID.Text);
 
-                        int rowsAffected = cmdLoan.ExecuteNonQuery();
+                            int rowsAffected = cmdLoan.ExecuteNonQuery();
 
-                        if (rowsAffected > 0)
-                        {
-                            // B. Cập nhật trạng thái trong bảng BOOKS
-                            string sqlUpdateBook = "UPDATE BOOKS SET Status = @stt WHERE BookID = @bid";
-                            SqlCommand cmdBook = new SqlCommand(sqlUpdateBook, conn);
-                            cmdBook.Parameters.AddWithValue("@stt", newBookStatus);
-                            cmdBook.Parameters.AddWithValue("@bid", txtBookID.Text);
-                            cmdBook.ExecuteNonQuery();
+                            // Kiểm tra xem có dòng nào được update không?
+                            if (rowsAffected > 0)
+                            {
+                                // B. Cập nhật trạng thái sách (Available/Lost/Damaged)
+                                string sqlUpdateBook = "UPDATE BOOKS SET Status = @stt WHERE BookID = @bid";
+                                SqlCommand cmdBook = new SqlCommand(sqlUpdateBook, conn);
+                                cmdBook.Transaction = transaction; // <--- Quan trọng
+                                cmdBook.Parameters.AddWithValue("@stt", newBookStatus); // Biến newBookStatus lấy từ logic trên
+                                cmdBook.Parameters.AddWithValue("@bid", txtBookID.Text);
+                                cmdBook.ExecuteNonQuery();
 
-                            MessageBox.Show("Trả sách thành công!");
-                            Logger.Log("Trả Sách", $"Độc giả {txtReaderID.Text} trả sách {txtBookTitle.Text}. Ghi chú: {loanNote}");
-                            LoadReaderInfo();
+                                // 2. COMMIT: Lưu thay đổi
+                                transaction.Commit();
+
+                                MessageBox.Show("Trả sách thành công!");
+                                Logger.Log("Trả Sách", $"Độc giả {txtReaderID.Text} trả sách {txtBookTitle.Text}. Ghi chú: {loanNote}");
+
+                                // Reset giao diện
+                                LoadReaderInfo();
+                                ResetForm(); // Cần đảm bảo bạn có hàm này hoặc reset các ô nhập thủ công
+                            }
+                            else
+                            {
+                                // Không tìm thấy hồ sơ mượn -> Rollback cho chắc (dù chưa sửa gì)
+                                transaction.Rollback();
+                                MessageBox.Show("Lỗi: Không tìm thấy hồ sơ mượn hợp lệ (Có thể sách đã được trả trước đó).");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Lỗi: Không tìm thấy hồ sơ mượn hợp lệ.");
+                            // 3. ROLLBACK: Hoàn tác nếu lỗi
+                            transaction.Rollback();
+                            MessageBox.Show("Lỗi hệ thống (Đã hoàn tác): " + ex.Message);
                         }
                     }
                 }

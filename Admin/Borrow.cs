@@ -211,34 +211,48 @@ namespace Elibse
                     {
                         conn.Open();
 
-                        // A. Thêm vào bảng LOAN_RECORDS
-                        // Mặc định hạn trả (DueDate) là 7 ngày sau
-                        string sqlInsert = @"INSERT INTO LOAN_RECORDS (ReaderID, BookID, LoanDate, DueDate, IsPaid)
-                                             VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
+                        // 1. BẮT ĐẦU GIAO DỊCH
+                        SqlTransaction transaction = conn.BeginTransaction();
 
-                        SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);
-                        cmdInsert.Parameters.AddWithValue("@rid", txtReaderID.Text);
-                        cmdInsert.Parameters.AddWithValue("@bid", txtBookID.Text);
-                        cmdInsert.ExecuteNonQuery();
+                        try
+                        {
+                            // A. Thêm vào bảng LOAN_RECORDS
+                            string sqlInsert = @"INSERT INTO LOAN_RECORDS (ReaderID, BookID, LoanDate, DueDate, IsPaid)
+                                     VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
 
-                        // B. Cập nhật trạng thái sách trong bảng BOOKS -> 'Đang mượn'
-                        string sqlUpdate = "UPDATE BOOKS SET Status = N'Đang mượn' WHERE BookID = @bid";
-                        SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn);
-                        cmdUpdate.Parameters.AddWithValue("@bid", txtBookID.Text);
-                        cmdUpdate.ExecuteNonQuery();
+                            SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);
+                            cmdInsert.Transaction = transaction; // <--- Gán Transaction vào lệnh này
+                            cmdInsert.Parameters.AddWithValue("@rid", txtReaderID.Text);
+                            cmdInsert.Parameters.AddWithValue("@bid", txtBookID.Text);
+                            cmdInsert.ExecuteNonQuery();
 
-                        // C. Ghi Nhật ký (Audit Log)
-                        Logger.Log("Mượn Sách", $"Độc giả {txtReaderID.Text} mượn sách {txtBookTitle.Text} ({txtBookID.Text})");
+                            // B. Cập nhật trạng thái sách trong bảng BOOKS
+                            string sqlUpdate = "UPDATE BOOKS SET Status = N'Đang mượn' WHERE BookID = @bid";
+                            SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn);
+                            cmdUpdate.Transaction = transaction; // <--- Gán Transaction vào lệnh này
+                            cmdUpdate.Parameters.AddWithValue("@bid", txtBookID.Text);
+                            cmdUpdate.ExecuteNonQuery();
 
-                        MessageBox.Show("Mượn sách thành công! Hạn trả: " + DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"));
+                            // 2. NẾU KHÔNG CÓ LỖI -> LƯU TẤT CẢ (COMMIT)
+                            transaction.Commit();
 
-                        // Reset form để làm phiếu mới
-                        ResetBookPanel();
-                        txtBookID.Clear();
-                        txtBookID.Focus();
+                            // C. Ghi Log (Log không ảnh hưởng dữ liệu chính nên để ngoài cũng được, hoặc cho vào trong tuỳ bạn)
+                            Logger.Log("Mượn Sách", $"Độc giả {txtReaderID.Text} mượn sách {txtBookTitle.Text} ({txtBookID.Text})");
 
-                        // Tải lại thông tin độc giả để cập nhật số lượng (ví dụ: 1/6 -> 2/6)
-                        LoadReaderInfo();
+                            MessageBox.Show("Mượn sách thành công! Hạn trả: " + DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"));
+
+                            // Reset giao diện
+                            ResetBookPanel();
+                            txtBookID.Clear();
+                            txtBookID.Focus();
+                            LoadReaderInfo();
+                        }
+                        catch (Exception ex)
+                        {
+                            // 3. NẾU CÓ BẤT KỲ LỖI GÌ -> HOÀN TÁC MỌI THỨ (ROLLBACK)
+                            transaction.Rollback();
+                            MessageBox.Show("Giao dịch thất bại! Hệ thống đã hoàn tác dữ liệu.\nLỗi: " + ex.Message, "Lỗi Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 catch (Exception ex)
