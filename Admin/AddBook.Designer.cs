@@ -51,6 +51,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnImportExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBookCover)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -179,17 +181,17 @@
             // 
             this.picBookCover.BackColor = System.Drawing.Color.LightGray;
             this.picBookCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBookCover.Location = new System.Drawing.Point(374, 26);
+            this.picBookCover.Location = new System.Drawing.Point(293, 30);
             this.picBookCover.Margin = new System.Windows.Forms.Padding(2);
             this.picBookCover.Name = "picBookCover";
-            this.picBookCover.Size = new System.Drawing.Size(137, 168);
+            this.picBookCover.Size = new System.Drawing.Size(77, 96);
             this.picBookCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBookCover.TabIndex = 2;
             this.picBookCover.TabStop = false;
             // 
             // btnUploadImage
             // 
-            this.btnUploadImage.Location = new System.Drawing.Point(388, 206);
+            this.btnUploadImage.Location = new System.Drawing.Point(277, 137);
             this.btnUploadImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnUploadImage.Name = "btnUploadImage";
             this.btnUploadImage.Size = new System.Drawing.Size(109, 22);
@@ -210,7 +212,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPreviewAbbr);
-            this.groupBox1.Location = new System.Drawing.Point(28, 239);
+            this.groupBox1.Location = new System.Drawing.Point(11, 205);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -224,18 +226,20 @@
             this.groupBox2.Controls.Add(this.cboCategory);
             this.groupBox2.Controls.Add(this.txtTitle);
             this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.btnUploadImage);
             this.groupBox2.Controls.Add(this.txtPrice);
+            this.groupBox2.Controls.Add(this.picBookCover);
             this.groupBox2.Controls.Add(this.txtAuthor);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtQuantity);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(28, 45);
+            this.groupBox2.Location = new System.Drawing.Point(11, 11);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(277, 174);
+            this.groupBox2.Size = new System.Drawing.Size(402, 174);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sách được thêm";
@@ -281,23 +285,42 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(446, 261);
+            this.btnSave.Location = new System.Drawing.Point(492, 76);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(91, 29);
+            this.btnSave.Size = new System.Drawing.Size(95, 40);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Xác nhận";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(443, 205);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(192, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Hoặc nếu muốn thêm nhiều sách từ file";
+            // 
+            // btnImportExcel
+            // 
+            this.btnImportExcel.Location = new System.Drawing.Point(468, 221);
+            this.btnImportExcel.Name = "btnImportExcel";
+            this.btnImportExcel.Size = new System.Drawing.Size(142, 29);
+            this.btnImportExcel.TabIndex = 8;
+            this.btnImportExcel.Text = "Thêm từ Excel hoặc CSV";
+            this.btnImportExcel.UseVisualStyleBackColor = true;
+            this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
+            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 321);
+            this.ClientSize = new System.Drawing.Size(657, 283);
+            this.Controls.Add(this.btnImportExcel);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnUploadImage);
-            this.Controls.Add(this.picBookCover);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -314,6 +337,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -341,5 +365,7 @@
         private System.Windows.Forms.ComboBox cboCategory;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnImportExcel;
     }
 }

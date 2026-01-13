@@ -73,9 +73,6 @@
             this.quảnLýToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManageReaders = new System.Windows.Forms.ToolStripMenuItem();
             this.addCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.thêmNhiềuSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bằngXLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bằngCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giaHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -483,7 +480,6 @@
             this.quảnLýToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuManageReaders,
             this.addCategory,
-            this.thêmNhiềuSáchToolStripMenuItem,
             this.giaHạnTrảSáchToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
@@ -502,29 +498,6 @@
             this.addCategory.Size = new System.Drawing.Size(180, 22);
             this.addCategory.Text = "Danh mục sách";
             this.addCategory.Click += new System.EventHandler(this.addCategory_Click);
-            // 
-            // thêmNhiềuSáchToolStripMenuItem
-            // 
-            this.thêmNhiềuSáchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bằngXLSToolStripMenuItem,
-            this.bằngCSVToolStripMenuItem});
-            this.thêmNhiềuSáchToolStripMenuItem.Name = "thêmNhiềuSáchToolStripMenuItem";
-            this.thêmNhiềuSáchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.thêmNhiềuSáchToolStripMenuItem.Text = "Thêm nhiều sách";
-            // 
-            // bằngXLSToolStripMenuItem
-            // 
-            this.bằngXLSToolStripMenuItem.Name = "bằngXLSToolStripMenuItem";
-            this.bằngXLSToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.bằngXLSToolStripMenuItem.Text = "Bằng XLSX";
-            this.bằngXLSToolStripMenuItem.Click += new System.EventHandler(this.bằngXLSToolStripMenuItem_Click);
-            // 
-            // bằngCSVToolStripMenuItem
-            // 
-            this.bằngCSVToolStripMenuItem.Name = "bằngCSVToolStripMenuItem";
-            this.bằngCSVToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.bằngCSVToolStripMenuItem.Text = "Bằng CSV";
-            this.bằngCSVToolStripMenuItem.Click += new System.EventHandler(this.bằngCSVToolStripMenuItem_Click);
             // 
             // giaHạnTrảSáchToolStripMenuItem
             // 
@@ -643,7 +616,6 @@
         private System.Windows.Forms.ToolStripMenuItem quảnLýToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuManageReaders;
         private System.Windows.Forms.ToolStripMenuItem addCategory;
-        private System.Windows.Forms.ToolStripMenuItem thêmNhiềuSáchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem càiĐặtGiaHạnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gửiMailCảnhBáoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
@@ -654,7 +626,5 @@
         private System.Windows.Forms.ToolStripMenuItem tựĐộngGửiEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vềTácGiảToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngBáoTrạngTháiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bằngXLSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bằngCSVToolStripMenuItem;
     }
 }
