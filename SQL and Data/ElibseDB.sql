@@ -1,6 +1,7 @@
 ﻿-- =============================================
--- DATABASE: ELIBSE (FULL VERSION - UPDATED PENALTY CONFIG)
+-- DATABASE: ELIBSE (FINAL FULL VERSION)
 -- Date: 13/01/2026
+-- Updated: Added MaxExtendDays to SYSTEM_CONFIG
 -- =============================================
 
 -- 1. KHỞI TẠO DATABASE
@@ -119,29 +120,32 @@ END
 GO
 
 -- =============================================
--- 7. BẢNG SYSTEM_CONFIG (Cấu hình hệ thống - ĐÃ CẬP NHẬT)
+-- 7. BẢNG SYSTEM_CONFIG (Cấu hình hệ thống - ĐÃ CẬP NHẬT FULL)
 -- =============================================
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SYSTEM_CONFIG]') AND type in (N'U'))
 BEGIN
     CREATE TABLE SYSTEM_CONFIG (
         ConfigID INT IDENTITY(1,1) PRIMARY KEY,
         
-        -- Cấu hình Email
+        -- A. Cấu hình Email
         EmailSender NVARCHAR(100) DEFAULT '',
         EmailPassword NVARCHAR(100) DEFAULT '',
 
-        -- Cấu hình Phạt (MỚI)
+        -- B. Cấu hình Phạt
         BaseFineFee DECIMAL(18, 0) DEFAULT 5000,   -- Phí phạt cơ bản
         FineCycleDays INT DEFAULT 1,               -- Chu kỳ tính (ngày)
         GracePeriodDays INT DEFAULT 0,             -- Số ngày ân hạn
-        FineIncrement DECIMAL(18, 0) DEFAULT 0     -- Số tiền tăng thêm mỗi chu kỳ (lũy tiến)
+        FineIncrement DECIMAL(18, 0) DEFAULT 0,    -- Số tiền tăng thêm mỗi chu kỳ (lũy tiến)
+
+        -- C. Cấu hình Gia hạn (MỚI)
+        MaxExtendDays INT DEFAULT 7                -- Số ngày tối đa cho phép gia hạn
     );
 
     -- Tạo dòng cấu hình mặc định (Chỉ chạy 1 lần khi tạo bảng)
-    INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword, BaseFineFee, FineCycleDays, GracePeriodDays, FineIncrement) 
-    VALUES ('', '', 5000, 1, 0, 0);
+    INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword, BaseFineFee, FineCycleDays, GracePeriodDays, FineIncrement, MaxExtendDays) 
+    VALUES ('', '', 5000, 1, 0, 0, 7);
 
-    PRINT '>> Table SYSTEM_CONFIG created with Penalty Configs.';
+    PRINT '>> Table SYSTEM_CONFIG created with Penalty & Extend Configs.';
 END
 GO
 
