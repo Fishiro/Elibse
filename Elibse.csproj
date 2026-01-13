@@ -39,6 +39,10 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="ExcelDataReader, Version=3.8.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>packages\ExcelDataReader.3.8.0\lib\net462\ExcelDataReader.dll</HintPath>
     </Reference>
@@ -153,6 +157,11 @@
     </Compile>
     <Compile Include="Dialogs\PaymentDialog.Designer.cs">
       <DependentUpon>PaymentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ElibseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElibseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="EmailService.cs" />
     <Compile Include="Logger.cs" />
@@ -305,6 +314,17 @@
       <DependentUpon>TotalReader.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
+    <None Include="ElibseDataSet.xsc">
+      <DependentUpon>ElibseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ElibseDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ElibseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ElibseDataSet.xss">
+      <DependentUpon>ElibseDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
