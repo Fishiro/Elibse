@@ -95,7 +95,7 @@
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(624, 380);
             this.panel3.TabIndex = 2;
@@ -104,7 +104,7 @@
             // 
             this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHistory.Location = new System.Drawing.Point(548, 249);
-            this.btnHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHistory.Margin = new System.Windows.Forms.Padding(2);
             this.btnHistory.Name = "btnHistory";
             this.btnHistory.Size = new System.Drawing.Size(53, 24);
             this.btnHistory.TabIndex = 9;
@@ -116,7 +116,7 @@
             // 
             this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReload.Location = new System.Drawing.Point(548, 281);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(53, 24);
             this.btnReload.TabIndex = 4;
@@ -134,7 +134,7 @@
             legend1.Name = "Legend1";
             this.chartStats.Legends.Add(legend1);
             this.chartStats.Location = new System.Drawing.Point(8, 194);
-            this.chartStats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartStats.Margin = new System.Windows.Forms.Padding(2);
             this.chartStats.Name = "chartStats";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -161,9 +161,9 @@
             this.groupBox1.Controls.Add(this.lblBorrowedBooks);
             this.groupBox1.Controls.Add(this.lblTotalBooks);
             this.groupBox1.Location = new System.Drawing.Point(8, 31);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(608, 149);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -172,7 +172,7 @@
             // btnViewOverdue
             // 
             this.btnViewOverdue.Location = new System.Drawing.Point(477, 86);
-            this.btnViewOverdue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewOverdue.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewOverdue.Name = "btnViewOverdue";
             this.btnViewOverdue.Size = new System.Drawing.Size(48, 23);
             this.btnViewOverdue.TabIndex = 2;
@@ -183,7 +183,7 @@
             // btnViewViolators
             // 
             this.btnViewViolators.Location = new System.Drawing.Point(354, 86);
-            this.btnViewViolators.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewViolators.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewViolators.Name = "btnViewViolators";
             this.btnViewViolators.Size = new System.Drawing.Size(48, 23);
             this.btnViewViolators.TabIndex = 2;
@@ -194,7 +194,7 @@
             // btnViewBorrowed
             // 
             this.btnViewBorrowed.Location = new System.Drawing.Point(212, 86);
-            this.btnViewBorrowed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewBorrowed.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewBorrowed.Name = "btnViewBorrowed";
             this.btnViewBorrowed.Size = new System.Drawing.Size(48, 23);
             this.btnViewBorrowed.TabIndex = 2;
@@ -253,7 +253,7 @@
             // btnViewTotalBooks
             // 
             this.btnViewTotalBooks.Location = new System.Drawing.Point(64, 86);
-            this.btnViewTotalBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewTotalBooks.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewTotalBooks.Name = "btnViewTotalBooks";
             this.btnViewTotalBooks.Size = new System.Drawing.Size(48, 23);
             this.btnViewTotalBooks.TabIndex = 2;
@@ -421,21 +421,21 @@
             // menuManual
             // 
             this.menuManual.Name = "menuManual";
-            this.menuManual.Size = new System.Drawing.Size(180, 22);
+            this.menuManual.Size = new System.Drawing.Size(147, 22);
             this.menuManual.Text = "Cách sử dụng";
             this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuAboutUs
             // 
             this.menuAboutUs.Name = "menuAboutUs";
-            this.menuAboutUs.Size = new System.Drawing.Size(180, 22);
+            this.menuAboutUs.Size = new System.Drawing.Size(147, 22);
             this.menuAboutUs.Text = "Về Elibse";
             this.menuAboutUs.Click += new System.EventHandler(this.menuAboutUs_Click);
             // 
             // vềTácGiảToolStripMenuItem
             // 
             this.vềTácGiảToolStripMenuItem.Name = "vềTácGiảToolStripMenuItem";
-            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.vềTácGiảToolStripMenuItem.Text = "Về tác giả";
             this.vềTácGiảToolStripMenuItem.Click += new System.EventHandler(this.vềTácGiảToolStripMenuItem_Click);
             // 
@@ -455,6 +455,7 @@
             this.menuFineSetting.Name = "menuFineSetting";
             this.menuFineSetting.Size = new System.Drawing.Size(235, 22);
             this.menuFineSetting.Text = "Cài đặt phạt";
+            this.menuFineSetting.Click += new System.EventHandler(this.menuFineSetting_Click);
             // 
             // càiĐặtGiaHạnToolStripMenuItem
             // 
@@ -488,21 +489,21 @@
             // menuManageReaders
             // 
             this.menuManageReaders.Name = "menuManageReaders";
-            this.menuManageReaders.Size = new System.Drawing.Size(180, 22);
+            this.menuManageReaders.Size = new System.Drawing.Size(158, 22);
             this.menuManageReaders.Text = "Độc giả";
             this.menuManageReaders.Click += new System.EventHandler(this.menuManageReaders_Click);
             // 
             // addCategory
             // 
             this.addCategory.Name = "addCategory";
-            this.addCategory.Size = new System.Drawing.Size(180, 22);
+            this.addCategory.Size = new System.Drawing.Size(158, 22);
             this.addCategory.Text = "Danh mục sách";
             this.addCategory.Click += new System.EventHandler(this.addCategory_Click);
             // 
             // giaHạnTrảSáchToolStripMenuItem
             // 
             this.giaHạnTrảSáchToolStripMenuItem.Name = "giaHạnTrảSáchToolStripMenuItem";
-            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.giaHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.giaHạnTrảSáchToolStripMenuItem.Text = "Gia hạn trả sách";
             this.giaHạnTrảSáchToolStripMenuItem.Click += new System.EventHandler(this.giaHạnTrảSáchToolStripMenuItem_Click);
             // 
@@ -513,9 +514,9 @@
             this.groupBox2.Controls.Add(this.btnBorrow);
             this.groupBox2.Controls.Add(this.btnAddBook);
             this.groupBox2.Location = new System.Drawing.Point(388, 209);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(137, 142);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -524,7 +525,7 @@
             // btnReturn
             // 
             this.btnReturn.Location = new System.Drawing.Point(23, 60);
-            this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(91, 32);
             this.btnReturn.TabIndex = 2;
@@ -535,7 +536,7 @@
             // btnBorrow
             // 
             this.btnBorrow.Location = new System.Drawing.Point(23, 96);
-            this.btnBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.btnBorrow.Name = "btnBorrow";
             this.btnBorrow.Size = new System.Drawing.Size(91, 32);
             this.btnBorrow.TabIndex = 4;
@@ -546,7 +547,7 @@
             // btnAddBook
             // 
             this.btnAddBook.Location = new System.Drawing.Point(23, 24);
-            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(91, 32);
             this.btnAddBook.TabIndex = 2;
@@ -562,7 +563,7 @@
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Admin dashboard";

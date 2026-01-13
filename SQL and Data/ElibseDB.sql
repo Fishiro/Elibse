@@ -1,10 +1,9 @@
 ﻿-- =============================================
--- DATABASE: ELIBSE (FINAL VERSION - INTEGRATED)
--- Date: 12/01/2026
+-- DATABASE: ELIBSE (FULL VERSION - UPDATED PENALTY CONFIG)
+-- Date: 13/01/2026
 -- =============================================
 
 -- 1. KHỞI TẠO DATABASE
--- Kiểm tra xem DB đã có chưa, chưa có thì tạo mới
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'ElibseDB')
 BEGIN
     CREATE DATABASE ElibseDB;
@@ -23,19 +22,16 @@ BEGIN
     CREATE TABLE ADMINS (
         AdminID INT IDENTITY(1,1) PRIMARY KEY,
         Username VARCHAR(50) NOT NULL UNIQUE,
-        Password VARCHAR(100) NOT NULL, -- Mật khẩu (lưu plain text hoặc hash tùy logic)
+        Password VARCHAR(100) NOT NULL,
         FullName NVARCHAR(100)
     );
-    PRINT '>> Table ADMINS created.';
 END
 GO
 
--- [DATA INIT] Tạo tài khoản Admin mặc định nếu chưa có
+-- [DATA INIT] Admin mặc định
 IF NOT EXISTS (SELECT * FROM ADMINS WHERE Username = 'admin')
 BEGIN
-    -- Mật khẩu rỗng '' để kích hoạt tính năng "Thiết lập mật khẩu lần đầu" trong App
     INSERT INTO ADMINS (Username, Password, FullName) VALUES ('admin', '', N'Quản trị viên');
-    PRINT '>> Default Admin created (Password is empty).';
 END
 GO
 
@@ -48,23 +44,16 @@ BEGIN
         CategoryID INT IDENTITY(1,1) PRIMARY KEY,
         CategoryName NVARCHAR(100) NOT NULL UNIQUE
     );
-    PRINT '>> Table CATEGORIES created.';
 END
 GO
 
--- [DATA INIT] Tự động thêm danh mục phổ biến nếu bảng đang trống
+-- [DATA INIT] Danh mục mặc định
 IF NOT EXISTS (SELECT TOP 1 1 FROM CATEGORIES)
 BEGIN
     INSERT INTO CATEGORIES (CategoryName) VALUES 
-    (N'Công nghệ thông tin'),
-    (N'Kinh tế - Tài chính'),
-    (N'Văn học - Tiểu thuyết'),
-    (N'Truyện tranh - Manga'),
-    (N'Kỹ năng sống'),
-    (N'Sách giáo khoa'),
-    (N'Ngoại ngữ'),
-    (N'Khoa học - Kỹ thuật');
-    PRINT '>> Default categories inserted.';
+    (N'Công nghệ thông tin'), (N'Kinh tế - Tài chính'), (N'Văn học - Tiểu thuyết'),
+    (N'Truyện tranh - Manga'), (N'Kỹ năng sống'), (N'Sách giáo khoa'),
+    (N'Ngoại ngữ'), (N'Khoa học - Kỹ thuật');
 END
 GO
 
@@ -74,26 +63,17 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BOOKS]') AND type in (N'U'))
 BEGIN
     CREATE TABLE BOOKS (
-        BookID VARCHAR(50) PRIMARY KEY, -- Mã sách định dạng chuỗi (#000001-CNTT-001)
+        BookID VARCHAR(50) PRIMARY KEY,
         Title NVARCHAR(200) NOT NULL,
         Author NVARCHAR(100),
         CategoryID INT,
         Price DECIMAL(18, 0),
         ImportDate DATETIME DEFAULT GETDATE(),
-        Status NVARCHAR(50) DEFAULT 'Available', -- Available / Borrowed / Lost / Damaged
-        BookImage VARBINARY(MAX), -- Lưu ảnh bìa
+        Status NVARCHAR(50) DEFAULT 'Available',
+        BookImage VARBINARY(MAX),
         Description NVARCHAR(MAX),
         FOREIGN KEY (CategoryID) REFERENCES CATEGORIES(CategoryID)
     );
-    PRINT '>> Table BOOKS created.';
-END
-ELSE
-BEGIN
-    -- Cập nhật cấu trúc nếu thiếu cột (Dành cho phiên bản cũ nâng cấp lên)
-    IF COL_LENGTH('BOOKS', 'BookImage') IS NULL 
-        ALTER TABLE BOOKS ADD BookImage VARBINARY(MAX);
-    IF COL_LENGTH('BOOKS', 'Description') IS NULL 
-        ALTER TABLE BOOKS ADD Description NVARCHAR(MAX);
 END
 GO
 
@@ -108,26 +88,12 @@ BEGIN
         DOB DATETIME,
         PhoneNumber VARCHAR(20),
         Email VARCHAR(100),
-        Address NVARCHAR(500), -- Địa chỉ 500 ký tự
+        Address NVARCHAR(500),
         CreatedDate DATETIME DEFAULT GETDATE(),
-        Status NVARCHAR(50) DEFAULT 'Active', -- Active / Locked
+        Status NVARCHAR(50) DEFAULT 'Active',
         ReaderImage VARBINARY(MAX),
-        Password VARCHAR(100) DEFAULT '123456' -- Mật khẩu mặc định cho độc giả
+        Password VARCHAR(100) DEFAULT '123456'
     );
-    PRINT '>> Table READERS created.';
-END
-ELSE
-BEGIN
-    -- Fix lỗi logic Address: Nếu chưa có thì thêm, nếu có rồi mà ngắn quá thì nới rộng
-    IF COL_LENGTH('READERS', 'Address') IS NULL
-        ALTER TABLE READERS ADD Address NVARCHAR(500);
-    ELSE
-        ALTER TABLE READERS ALTER COLUMN Address NVARCHAR(500);
-
-    -- Bổ sung các cột mới nếu thiếu
-    IF COL_LENGTH('READERS', 'ReaderImage') IS NULL ALTER TABLE READERS ADD ReaderImage VARBINARY(MAX);
-    IF COL_LENGTH('READERS', 'Password') IS NULL ALTER TABLE READERS ADD Password VARCHAR(100) DEFAULT '123456';
-    IF COL_LENGTH('READERS', 'CreatedDate') IS NULL ALTER TABLE READERS ADD CreatedDate DATETIME DEFAULT GETDATE();
 END
 GO
 
@@ -140,32 +106,42 @@ BEGIN
         LoanID INT IDENTITY(1,1) PRIMARY KEY,
         BookID VARCHAR(50),
         ReaderID VARCHAR(20),
-        LoanDate DATETIME DEFAULT GETDATE(), -- Ngày mượn
-        DueDate DATETIME NOT NULL,           -- Hạn trả
-        ReturnDate DATETIME NULL,            -- Ngày trả thực tế (NULL là chưa trả)
-        ReturnStatus NVARCHAR(100),          -- Tình trạng khi trả (Bình thường/Hư hỏng)
-        FineAmount DECIMAL(18, 0) DEFAULT 0, -- Tiền phạt
-        IsPaid BIT DEFAULT 0,                -- Đã đóng phạt chưa
+        LoanDate DATETIME DEFAULT GETDATE(),
+        DueDate DATETIME NOT NULL,
+        ReturnDate DATETIME NULL,
+        ReturnStatus NVARCHAR(100),
+        FineAmount DECIMAL(18, 0) DEFAULT 0,
+        IsPaid BIT DEFAULT 0,
         FOREIGN KEY (BookID) REFERENCES BOOKS(BookID),
         FOREIGN KEY (ReaderID) REFERENCES READERS(ReaderID)
     );
-    PRINT '>> Table LOAN_RECORDS created.';
 END
 GO
 
 -- =============================================
--- 7. BẢNG SYSTEM_CONFIG (Cấu hình Email)
+-- 7. BẢNG SYSTEM_CONFIG (Cấu hình hệ thống - ĐÃ CẬP NHẬT)
 -- =============================================
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SYSTEM_CONFIG]') AND type in (N'U'))
 BEGIN
     CREATE TABLE SYSTEM_CONFIG (
         ConfigID INT IDENTITY(1,1) PRIMARY KEY,
+        
+        -- Cấu hình Email
         EmailSender NVARCHAR(100) DEFAULT '',
-        EmailPassword NVARCHAR(100) DEFAULT ''
+        EmailPassword NVARCHAR(100) DEFAULT '',
+
+        -- Cấu hình Phạt (MỚI)
+        BaseFineFee DECIMAL(18, 0) DEFAULT 5000,   -- Phí phạt cơ bản
+        FineCycleDays INT DEFAULT 1,               -- Chu kỳ tính (ngày)
+        GracePeriodDays INT DEFAULT 0,             -- Số ngày ân hạn
+        FineIncrement DECIMAL(18, 0) DEFAULT 0     -- Số tiền tăng thêm mỗi chu kỳ (lũy tiến)
     );
-    -- Tạo dòng cấu hình mặc định
-    INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword) VALUES ('', '');
-    PRINT '>> Table SYSTEM_CONFIG created.';
+
+    -- Tạo dòng cấu hình mặc định (Chỉ chạy 1 lần khi tạo bảng)
+    INSERT INTO SYSTEM_CONFIG (EmailSender, EmailPassword, BaseFineFee, FineCycleDays, GracePeriodDays, FineIncrement) 
+    VALUES ('', '', 5000, 1, 0, 0);
+
+    PRINT '>> Table SYSTEM_CONFIG created with Penalty Configs.';
 END
 GO
 
@@ -177,20 +153,13 @@ BEGIN
     CREATE TABLE ADMIN_LOGS (
         LogID INT IDENTITY(1,1) PRIMARY KEY,
         AdminUsername VARCHAR(50),
-        ActionType NVARCHAR(50),      -- Ví dụ: Đăng nhập, Thêm sách, Xóa độc giả
-        ActionDetails NVARCHAR(MAX),  -- Chi tiết hành động
+        ActionType NVARCHAR(50),
+        ActionDetails NVARCHAR(MAX),
         LogTime DATETIME DEFAULT GETDATE()
     );
-    PRINT '>> Table ADMIN_LOGS created.';
-END
-ELSE
-BEGIN
-    -- Đổi tên cột ActionDate thành LogTime nếu lỡ đặt sai trong phiên bản cũ
-    IF COL_LENGTH('ADMIN_LOGS', 'ActionDate') IS NOT NULL
-        EXEC sp_rename 'ADMIN_LOGS.ActionDate', 'LogTime', 'COLUMN';
 END
 GO
 
 PRINT '=============================================';
-PRINT '>> DATABASE ELIBSE READY TO USE! <<';
+PRINT '>> DATABASE ELIBSE (FULL) READY TO USE! <<';
 PRINT '=============================================';

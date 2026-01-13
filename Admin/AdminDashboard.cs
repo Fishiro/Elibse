@@ -293,5 +293,11 @@ namespace Elibse
             ExtendLoan frm = new ExtendLoan();
             frm.ShowDialog();
         }
+
+        private void menuFineSetting_Click(object sender, EventArgs e)
+        {
+            Admin.ConfigPenalty fm = new Admin.ConfigPenalty();
+            fm.ShowDialog();
+        }
     }
 }
