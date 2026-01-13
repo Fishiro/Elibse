@@ -178,6 +178,7 @@
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Tìm độc giả";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnReload
             // 

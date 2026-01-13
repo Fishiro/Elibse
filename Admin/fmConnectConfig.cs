@@ -15,26 +15,23 @@ namespace Elibse
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            // Lấy tên server từ ô nhập (Thay txtServerName bằng tên thực tế của ô nhập trong form bạn)
             string serverInput = txtServerName.Text.Trim();
 
             if (string.IsNullOrEmpty(serverInput))
             {
                 serverInput = @".\SQLEXPRESS";
+                MessageBox.Show($"Sử dụng server mặc định: {serverInput}", "Thông báo");
             }
 
-            // Kiểm tra kết nối thử
             if (DatabaseConnection.TestConnection(serverInput))
             {
-                // Lưu tên server này lại vĩnh viễn
                 DatabaseConnection.SaveConnectionString(serverInput);
-
                 MessageBox.Show("Kết nối thành công! Cấu hình đã được lưu.");
 
-                // Chuyển sang form Đăng nhập
                 this.Hide();
                 fmLoginDialog frm = new fmLoginDialog();
                 frm.ShowDialog();
+                this.Close();
             }
             else
             {

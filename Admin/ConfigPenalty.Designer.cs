@@ -167,7 +167,8 @@
             this.MaximizeBox = false;
             this.Name = "ConfigPenalty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Elibse: Cài Đặt Gia Hạn";
+            this.Text = "Elibse: Cài Đặt Phạt";
+            this.Load += new System.EventHandler(this.ConfigPenalty_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numBaseFee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCycle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGrace)).EndInit();

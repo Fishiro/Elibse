@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
@@ -15,30 +16,89 @@ namespace Elibse
 
         private void ReaderRegister_Load(object sender, EventArgs e)
         {
-            GenerateReaderID();
-            dtpDOB.Value = DateTime.Now.AddYears(-18);
+            // Cài đặt ngày sinh mặc định (18 tuổi)
+            dtpDOB.Value = DateTime.Today.AddYears(-18);
             CalculateAge();
-            // Mặc định ảnh trống
+
             picAvatar.Image = null;
+            txtAge.ReadOnly = true;
+            txtReaderID.ReadOnly = true;
+
+            // Gán mã tạm để giao diện không bị trống (User không cần quan tâm mã này)
+            txtReaderID.Text = "(Tự động sinh)";
         }
 
-        private void GenerateReaderID()
+        private void GenerateAutoId()
         {
-            // 1. Lấy thời gian chi tiết đến từng GIÂY
-            // Định dạng: yyMMddHHmmss (Ví dụ: 250107103059)
-            // Tổng cộng 12 ký tự số -> Đảm bảo tính duy nhất cực cao
-            string timeCode = DateTime.Now.ToString("yyMMddHHmmss");
-
-            string phoneCode = "000";
-            // Lấy 3 số cuối SĐT (nếu có)
-            if (txtPhone.Text.Length >= 3)
+            try
             {
-                phoneCode = txtPhone.Text.Substring(txtPhone.Text.Length - 3);
-            }
+                using (SqlConnection conn = DatabaseConnection.GetConnection())
+                {
+                    conn.Open();
+                    // Lấy mã lớn nhất hiện tại (Sắp xếp theo độ dài rồi đến giá trị để tránh lỗi DG9 > DG10)
+                    string sql = "SELECT TOP 1 ReaderID FROM READERS ORDER BY LEN(ReaderID) DESC, ReaderID DESC";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    object result = cmd.ExecuteScalar();
 
-            // Mã cuối cùng: RD + 3 số ĐT + 12 số thời gian = 17 ký tự
-            // Vẫn nằm trong giới hạn VARCHAR(20) của Database
-            txtReaderID.Text = "RD" + phoneCode + timeCode;
+                    if (result != null)
+                    {
+                        string lastId = result.ToString(); // Ví dụ: RD00005
+                        // Cắt bỏ tiền tố "RD" (2 ký tự đầu)
+                        string numberPart = lastId.Substring(2);
+                        int nextNumber = int.Parse(numberPart) + 1;
+
+                        // Format lại thành chuỗi 5 số (RD00006)
+                        txtReaderID.Text = "RD" + nextNumber.ToString("D5");
+                    }
+                    else
+                    {
+                        // Chưa có dữ liệu -> Mã đầu tiên
+                        txtReaderID.Text = "RD00001";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Fallback nếu mất kết nối DB: Dùng tạm mã thời gian để không crash app
+                txtReaderID.Text = "RD" + DateTime.Now.ToString("yyMMddHHmm");
+            }
+        }
+
+        // 2. Hàm sinh mã trả về chuỗi ID (Thay vì gán trực tiếp vào TextBox)
+        private string GenerateNextReaderID(SqlConnection conn, SqlTransaction transaction)
+        {
+            // Lưu ý: Phải dùng chung Connection và Transaction đang mở để đảm bảo tính nhất quán
+            string sql = "SELECT TOP 1 ReaderID FROM READERS WITH (UPDLOCK) ORDER BY LEN(ReaderID) DESC, ReaderID DESC";
+            // WITH (UPDLOCK): Khóa tạm thời dòng này để không ai đọc được cho đến khi transaction xong -> Tránh trùng tuyệt đối
+
+            SqlCommand cmd = new SqlCommand(sql, conn, transaction);
+            object result = cmd.ExecuteScalar();
+
+            if (result != null)
+            {
+                string lastId = result.ToString(); // Ví dụ: RD00005
+                string numberPart = lastId.Substring(2);
+                if (int.TryParse(numberPart, out int nextNumber))
+                {
+                    return "RD" + (nextNumber + 1).ToString("D5");
+                }
+            }
+            return "RD00001"; // Nếu chưa có ai hoặc lỗi format
+        }
+
+        private void CalculateAge()
+        {
+            DateTime birthDate = dtpDOB.Value.Date; // Chỉ lấy ngày, bỏ giờ
+            DateTime today = DateTime.Today;        // Lấy ngày hiện tại, bỏ giờ
+
+            int age = today.Year - birthDate.Year;
+
+            // Nếu chưa đến sinh nhật trong năm nay thì trừ 1 tuổi
+            if (birthDate.Date > today.AddYears(-age))
+                age--;
+
+            if (age < 0) age = 0;
+            txtAge.Text = age.ToString();
         }
 
         private void dtpDOB_ValueChanged(object sender, EventArgs e)
@@ -46,30 +106,17 @@ namespace Elibse
             CalculateAge();
         }
 
-        private void CalculateAge()
-        {
-            DateTime birthDate = dtpDOB.Value;
-            DateTime now = DateTime.Now;
-            int age = now.Year - birthDate.Year;
-            if (now.Month < birthDate.Month || (now.Month == birthDate.Month && now.Day < birthDate.Day)) age--;
-            if (age < 0) age = 0;
-            txtAge.Text = age.ToString();
-        }
-
-        // =============================================================
-        // [MỚI 1] SỰ KIỆN NÚT CHỌN ẢNH (btnUploadImg)
-        // =============================================================
         private void btnUploadImg_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Chọn ảnh chân dung";
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"; // Chỉ cho chọn ảnh
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    // 1. Kiểm tra dung lượng (Ví dụ giới hạn 5MB)
+                    // Kiểm tra dung lượng < 5MB
                     long fileSize = new FileInfo(ofd.FileName).Length;
                     if (fileSize > 5 * 1024 * 1024)
                     {
@@ -77,138 +124,163 @@ namespace Elibse
                         return;
                     }
 
-                    // 2. Thử load ảnh an toàn
+                    // [FIX LỖI GDI+]
+                    // Dùng FileStream để mở file, sau đó clone sang Bitmap mới
                     using (var stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read))
                     {
-                        picAvatar.Image = Image.FromStream(stream);
+                        using (var tempImage = Image.FromStream(stream))
+                        {
+                            // Tạo một bản sao mới của ảnh vào bộ nhớ
+                            // Bản sao này không còn dính dáng gì đến file gốc hay stream cũ
+                            picAvatar.Image = new Bitmap(tempImage);
+                        }
                     }
-                }
-                catch (OutOfMemoryException)
-                {
-                    MessageBox.Show("File ảnh bị lỗi hoặc định dạng không hỗ trợ!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Không thể tải ảnh: " + ex.Message);
+                    MessageBox.Show("Lỗi tải ảnh: " + ex.Message);
                 }
             }
         }
 
-        // =============================================================
-        // [MỚI 2] HÀM PHỤ TRỢ: CHUYỂN ẢNH SANG NHỊ PHÂN (BYTE[])
-        // =============================================================
         private byte[] ImageToByteArray(Image img)
         {
+            if (img == null) return null;
+
             using (MemoryStream ms = new MemoryStream())
             {
-                // Lưu ảnh vào dòng nhớ tạm với định dạng gốc
-                img.Save(ms, img.RawFormat);
+                // Nên dùng format cố định thay vì RawFormat
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 return ms.ToArray();
             }
         }
 
-        // =============================================================
-        // [CẬP NHẬT] NÚT ĐĂNG KÝ (Đã thêm xử lý lưu ảnh)
-        // =============================================================
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            // --- Validation ---
             if (dtpDOB.Value > DateTime.Now)
             {
-                MessageBox.Show("Ngày sinh không được lớn hơn ngày hiện tại!", "Vô lý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ngày sinh không hợp lệ!");
                 return;
             }
 
-            if (DateTime.Now.Year - dtpDOB.Value.Year > 100)
-            {
-                MessageBox.Show("Độc giả không thể lớn hơn 100 tuổi (theo quy định thư viện)!", "Cảnh báo");
-                return;
-            }
-
-            // 1. Validation cơ bản (Kiểm tra rỗng)
             if (string.IsNullOrWhiteSpace(txtFullName.Text) ||
                 string.IsNullOrWhiteSpace(txtPhone.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin (*)");
+                MessageBox.Show("Vui lòng nhập đủ thông tin (*)");
                 return;
             }
 
-            // Kiểm tra độ dài Địa chỉ (Max 500 ký tự)
-            if (txtAddress.Text.Trim().Length > 500)
+            if (txtFullName.Text.Trim().Length > 100)
             {
-                MessageBox.Show("Địa chỉ quá dài (tối đa 500 ký tự). Vui lòng rút gọn lại!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAddress.Focus(); // Đưa con trỏ về ô địa chỉ để sửa
+                MessageBox.Show("Tên không được quá 100 ký tự!");
+                return;
+            }
+
+            if (txtEmail.Text.Trim().Length > 100)
+            {
+                MessageBox.Show("Email không được quá 100 ký tự!");
+                return;
+            }
+
+            if (txtPhone.Text.Trim().Length > 20)
+            {
+                MessageBox.Show("Số điện thoại không được quá 20 ký tự!");
+                return;
+            }
+
+            if (!txtEmail.Text.Contains("@"))
+            {
+                MessageBox.Show("Email không hợp lệ!");
+                return;
+            }
+
+            if (txtPassword.Text.Length < 6)
+            {
+                MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự!");
                 return;
             }
 
             if (txtPassword.Text != txtConfirmPass.Text)
             {
-                MessageBox.Show("Mật khẩu nhập lại không khớp!");
+                MessageBox.Show("Mật khẩu không khớp!");
                 return;
             }
 
-            // 2. Lưu vào CSDL
             try
             {
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
+                    SqlTransaction transaction = conn.BeginTransaction(); // Bắt đầu giao dịch
 
-                    // Check trùng
-                    SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM READERS WHERE Email = @email OR PhoneNumber = @phone", conn);
-                    checkCmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@phone", txtPhone.Text.Trim());
-                    if ((int)checkCmd.ExecuteScalar() > 0)
+                    try
                     {
-                        MessageBox.Show("Email hoặc SĐT đã tồn tại!");
-                        return;
+                        // Bước 1: Kiểm tra trùng Email/SĐT
+                        SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM READERS WHERE Email = @email OR PhoneNumber = @phone", conn, transaction);
+                        checkCmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@phone", txtPhone.Text.Trim());
+
+                        if ((int)checkCmd.ExecuteScalar() > 0)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Email hoặc SĐT đã tồn tại!");
+                            return;
+                        }
+
+                        // Bước 2: SINH MÃ MỚI NHẤT NGAY TẠI ĐÂY
+                        string newID = GenerateNextReaderID(conn, transaction);
+
+                        // Cập nhật lên giao diện để user thấy mã của mình sau khi tạo xong
+                        txtReaderID.Text = newID;
+
+                        // Bước 3: Insert dữ liệu với mã vừa sinh
+                        string sql = @"INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, Password, Status, CreatedDate, ReaderImage) 
+                               VALUES (@id, @name, @dob, @phone, @email, @address, @pass, 'Active', GETDATE(), @img)";
+
+                        SqlCommand cmd = new SqlCommand(sql, conn, transaction);
+
+                        cmd.Parameters.AddWithValue("@id", newID); // Dùng biến newID
+                        cmd.Parameters.AddWithValue("@name", txtFullName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@dob", dtpDOB.Value);
+                        cmd.Parameters.AddWithValue("@phone", txtPhone.Text.Trim());
+                        cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@address", string.IsNullOrWhiteSpace(txtAddress.Text) ? (object)DBNull.Value : txtAddress.Text.Trim());
+                        cmd.Parameters.AddWithValue("@pass", SecurityHelper.HashPassword(txtPassword.Text));
+
+                        if (picAvatar.Image != null)
+                        {
+                            SqlParameter imgParam = new SqlParameter("@img", SqlDbType.VarBinary);
+                            imgParam.Value = ImageToByteArray(picAvatar.Image);
+                            cmd.Parameters.Add(imgParam);
+                        }
+                        else
+                        {
+                            SqlParameter imgParam = new SqlParameter("@img", SqlDbType.VarBinary);
+                            imgParam.Value = DBNull.Value;
+                            cmd.Parameters.Add(imgParam);
+                        }
+
+                        cmd.ExecuteNonQuery();
+
+                        // Bước 4: Chốt giao dịch
+                        transaction.Commit();
+
+                        MessageBox.Show("Đăng ký thành công! Mã độc giả của bạn là: " + newID);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
-
-                    // INSERT
-                    string sql = @"INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, Password, Status, CreatedDate, ReaderImage) 
-                                   VALUES (@id, @name, @dob, @phone, @email, @address, @pass, 'Active', GETDATE(), @img)";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@id", txtReaderID.Text);
-                    cmd.Parameters.AddWithValue("@name", txtFullName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@dob", dtpDOB.Value);
-                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text.Trim());
-                    cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    if (string.IsNullOrWhiteSpace(txtAddress.Text))
+                    catch
                     {
-                        // Nếu không nhập gì thì lưu giá trị NULL vào SQL
-                        cmd.Parameters.AddWithValue("@address", DBNull.Value);
+                        transaction.Rollback(); // Gặp lỗi thì hoàn tác hết
+                        throw;
                     }
-                    else
-                    {
-                        // Nếu có nhập thì lưu bình thường
-                        cmd.Parameters.AddWithValue("@address", txtAddress.Text.Trim());
-                    }
-
-                    string hashedPassword = SecurityHelper.HashPassword(txtPassword.Text);
-                    cmd.Parameters.AddWithValue("@pass", hashedPassword);
-
-                    // --- XỬ LÝ ẢNH ---
-                    if (picAvatar.Image != null)
-                    {
-                        // Nếu có ảnh -> Chuyển sang byte[] để lưu
-                        cmd.Parameters.AddWithValue("@img", ImageToByteArray(picAvatar.Image));
-                    }
-                    else
-                    {
-                        // Nếu không chọn ảnh -> Lưu NULL (hoặc DBNull.Value)
-                        cmd.Parameters.AddWithValue("@img", DBNull.Value);
-                    }
-                    // -----------------
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Đăng ký thành công!");
-                    this.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
 
@@ -217,40 +289,21 @@ namespace Elibse
             this.Close();
         }
 
-        // Sự kiện cho nút "Đăng nhập ngay" (nếu đã có tài khoản)
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            this.Close(); // Đóng form Đăng ký hiện tại để quay lại Form Đăng nhập đang chờ phía sau
+            this.Close();
         }
 
-        private void txtFullName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        // Bỏ sự kiện sinh mã ở TextChanged để tránh mã nhảy lung tung
         private void txtPhone_TextChanged(object sender, EventArgs e)
         {
-            GenerateReaderID();
+            // Không làm gì cả, mã ID đã cố định từ lúc load form
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtConfirmPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAddress_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void txtFullName_TextChanged(object sender, EventArgs e) { }
+        private void txtEmail_TextChanged(object sender, EventArgs e) { }
+        private void txtPassword_TextChanged(object sender, EventArgs e) { }
+        private void txtConfirmPass_TextChanged(object sender, EventArgs e) { }
+        private void txtAddress_TextChanged(object sender, EventArgs e) { }
     }
 }

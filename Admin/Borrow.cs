@@ -230,15 +230,15 @@ namespace Elibse
                                      VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
 
                             SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);
-                            cmdInsert.Transaction = transaction; // <--- Gán Transaction vào lệnh này
+                            cmdInsert.Transaction = transaction;
                             cmdInsert.Parameters.AddWithValue("@rid", txtReaderID.Text);
                             cmdInsert.Parameters.AddWithValue("@bid", txtBookID.Text);
                             cmdInsert.ExecuteNonQuery();
 
                             // B. Cập nhật trạng thái sách trong bảng BOOKS
-                            string sqlUpdate = "UPDATE BOOKS SET Status = N'Đang mượn' WHERE BookID = @bid";
+                            string sqlUpdate = "UPDATE BOOKS SET Status = N'Borrowed' WHERE BookID = @bid";
                             SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn);
-                            cmdUpdate.Transaction = transaction; // <--- Gán Transaction vào lệnh này
+                            cmdUpdate.Transaction = transaction;
                             cmdUpdate.Parameters.AddWithValue("@bid", txtBookID.Text);
                             cmdUpdate.ExecuteNonQuery();
 

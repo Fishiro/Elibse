@@ -89,7 +89,8 @@
             this.MaximizeBox = false;
             this.Name = "ConfigExtend";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Elibse: Cấu HÌnh Ngày Gia Hạn";
+            this.Text = "Elibse: Cấu Hình Ngày Gia Hạn";
+            this.Load += new System.EventHandler(this.ConfigExtend_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numMaxDays)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

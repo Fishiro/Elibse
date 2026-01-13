@@ -73,6 +73,14 @@ namespace Elibse
             }
         }
 
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
+
         private void btnRegister_Click(object sender, EventArgs e)
         {
             ReaderRegister frmReg = new ReaderRegister();

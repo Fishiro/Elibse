@@ -22,7 +22,7 @@ namespace Elibse.Reader
         public ReaderDashboard()
         {
             InitializeComponent();
-            this.currentReaderID = "R001"; // ID giả lập để test nếu chạy thẳng form này
+            this.currentReaderID = "RD00001";
         }
 
         // --- SỰ KIỆN KHI FORM LOAD ---
@@ -31,9 +31,7 @@ namespace Elibse.Reader
             // Cấu hình giao diện bảng cho đẹp
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMyBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Nếu có dgvHistory ở Tab 3 thì uncomment dòng dưới
-            // dgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Tải dữ liệu cho cả 3 tab
             LoadAvailableBooks();
@@ -51,14 +49,19 @@ namespace Elibse.Reader
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
-                    string query = @"SELECT BookID AS [Mã Sách], Title AS [Tên Sách], 
-                         Author AS [Tác Giả], Category AS [Thể Loại]
-                         FROM BOOKS 
-                         WHERE Status = 'Available'";
+                    string query = @"
+                SELECT 
+                    B.BookID AS [Mã Sách], 
+                    B.Title AS [Tên Sách], 
+                    B.Author AS [Tác Giả], 
+                    C.CategoryName AS [Thể Loại]
+                FROM BOOKS B
+                LEFT JOIN CATEGORIES C ON B.CategoryID = C.CategoryID
+                WHERE B.Status = 'Available'";
 
                     if (!string.IsNullOrEmpty(keyword))
                     {
-                        query += " AND (Title LIKE @kw OR Author LIKE @kw)";
+                        query += " AND (B.Title LIKE @kw OR B.Author LIKE @kw)";
                     }
 
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
@@ -70,7 +73,10 @@ namespace Elibse.Reader
                     dgvBooks.DataSource = dt;
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tải sách: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải sách: " + ex.Message);
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -83,6 +89,12 @@ namespace Elibse.Reader
             if (dgvBooks.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Vui lòng chọn một cuốn sách để mượn!");
+                return;
+            }
+
+            if (dgvBooks.SelectedRows[0].Cells["Mã Sách"].Value == null)
+            {
+                MessageBox.Show("Dữ liệu sách không hợp lệ!");
                 return;
             }
 
@@ -182,6 +194,13 @@ namespace Elibse.Reader
                 return;
             }
 
+            if (dgvMyBooks.SelectedRows[0].Cells["LoanID"].Value == null ||
+                dgvMyBooks.SelectedRows[0].Cells["Mã Sách"].Value == null)
+            {
+                MessageBox.Show("Dữ liệu không hợp lệ!");
+                return;
+            }
+
             // Lấy LoanID (đã ẩn) và BookID từ dòng được chọn
             int loanId = Convert.ToInt32(dgvMyBooks.SelectedRows[0].Cells["LoanID"].Value);
             string bookId = dgvMyBooks.SelectedRows[0].Cells["Mã Sách"].Value.ToString();
@@ -249,36 +268,33 @@ namespace Elibse.Reader
 
                     if (reader.Read())
                     {
-                        // Tìm Label theo tên bạn đã đặt (nhớ kiểm tra đúng tên trong Designer)
-                        Control[] welcome = this.Controls.Find("lblWelcome", true);
-                        if (welcome.Length > 0) welcome[0].Text = "Xin chào, " + reader["FullName"].ToString();
-
-                        Control[] info = this.Controls.Find("lblUserInfo", true);
-                        if (info.Length > 0) info[0].Text = reader["Email"].ToString();
+                        lblWelcome.Text = "Xin chào, " + reader["FullName"].ToString();
+                        lblUserInfo.Text = "Email: " + reader["Email"].ToString();
                     }
                     reader.Close();
 
-                    // 2. Load Lịch sử (Những sách đã trả) - Nếu bạn có dgvHistory
-                    Control[] historyGrid = this.Controls.Find("dgvHistory", true);
-                    if (historyGrid.Length > 0)
-                    {
-                        DataGridView dgvHist = (DataGridView)historyGrid[0];
-                        string histQuery = @"SELECT B.Title AS [Sách], L.LoanDate AS [Ngày Mượn], 
-                                                    L.ReturnDate AS [Ngày Trả]
-                                             FROM LOAN_RECORDS L
-                                             JOIN BOOKS B ON L.BookID = B.BookID
-                                             WHERE L.ReaderID = @rid AND L.ReturnDate IS NOT NULL
-                                             ORDER BY L.ReturnDate DESC";
+                    // 2. Load Lịch sử
+                    string histQuery = @"SELECT B.Title AS [Sách], 
+                                       L.LoanDate AS [Ngày Mượn], 
+                                       L.ReturnDate AS [Ngày Trả]
+                                FROM LOAN_RECORDS L
+                                JOIN BOOKS B ON L.BookID = B.BookID
+                                WHERE L.ReaderID = @rid AND L.ReturnDate IS NOT NULL
+                                ORDER BY L.ReturnDate DESC";
 
-                        SqlDataAdapter da = new SqlDataAdapter(histQuery, conn);
-                        da.SelectCommand.Parameters.AddWithValue("@rid", currentReaderID);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvHist.DataSource = dt;
-                    }
+                    SqlDataAdapter da = new SqlDataAdapter(histQuery, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@rid", currentReaderID);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvHistory.DataSource = dt;
+
+                    dgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
             }
-            catch { /* Có thể bỏ qua lỗi hiển thị lịch sử nếu chưa cần gấp */ }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải thông tin: " + ex.Message);
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using Elibse.Admin; // Để nhận diện được form AddBook trong thư mục Admin
+﻿using Elibse.Admin;
 using ExcelDataReader;
 using System;
 using System.Data;
@@ -298,6 +298,22 @@ namespace Elibse
         {
             Admin.ConfigPenalty fm = new Admin.ConfigPenalty();
             fm.ShowDialog();
+        }
+
+        private void xuấtBáoCáoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Tạo form báo cáo
+            fmReportBook reportForm = new fmReportBook();
+
+            // Hiển thị form dưới dạng Dialog (Cửa sổ con, bắt buộc tắt nó mới được thao tác cái khác)
+            // Cách này giúp người dùng tập trung xem báo cáo
+            reportForm.ShowDialog();
+        }
+
+        private void càiĐặtGiaHạnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigExtend frm = new ConfigExtend();
+            frm.ShowDialog();
         }
     }
 }

@@ -54,13 +54,12 @@
             this.menuChangePassword = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.tínhNăngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuExportCSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.gửiMailCảnhBáoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tớiTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quáHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngBáoTrạngTháiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xuấtBáoCáoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giớiThiệuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManual = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAboutUs = new System.Windows.Forms.ToolStripMenuItem();
@@ -352,24 +351,11 @@
             // tínhNăngToolStripMenuItem
             // 
             this.tínhNăngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuExportCSV,
-            this.menuExportExcel,
-            this.gửiMailCảnhBáoToolStripMenuItem});
+            this.gửiMailCảnhBáoToolStripMenuItem,
+            this.xuấtBáoCáoToolStripMenuItem});
             this.tínhNăngToolStripMenuItem.Name = "tínhNăngToolStripMenuItem";
             this.tínhNăngToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
             this.tínhNăngToolStripMenuItem.Text = "Tính năng";
-            // 
-            // menuExportCSV
-            // 
-            this.menuExportCSV.Name = "menuExportCSV";
-            this.menuExportCSV.Size = new System.Drawing.Size(230, 22);
-            this.menuExportCSV.Text = "Xuất toàn bộ CSDL sang CSV";
-            // 
-            // menuExportExcel
-            // 
-            this.menuExportExcel.Name = "menuExportExcel";
-            this.menuExportExcel.Size = new System.Drawing.Size(230, 22);
-            this.menuExportExcel.Text = "Xuất toàn bộ CSDL sang XLSX";
             // 
             // gửiMailCảnhBáoToolStripMenuItem
             // 
@@ -379,7 +365,7 @@
             this.quáHạnTrảSáchToolStripMenuItem,
             this.thôngBáoTrạngTháiToolStripMenuItem});
             this.gửiMailCảnhBáoToolStripMenuItem.Name = "gửiMailCảnhBáoToolStripMenuItem";
-            this.gửiMailCảnhBáoToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.gửiMailCảnhBáoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.gửiMailCảnhBáoToolStripMenuItem.Text = "Gửi Mail Cảnh Báo";
             // 
             // testToolStripMenuItem
@@ -407,6 +393,13 @@
             this.thôngBáoTrạngTháiToolStripMenuItem.Name = "thôngBáoTrạngTháiToolStripMenuItem";
             this.thôngBáoTrạngTháiToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.thôngBáoTrạngTháiToolStripMenuItem.Text = "Thông báo trạng thái";
+            // 
+            // xuấtBáoCáoToolStripMenuItem
+            // 
+            this.xuấtBáoCáoToolStripMenuItem.Name = "xuấtBáoCáoToolStripMenuItem";
+            this.xuấtBáoCáoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.xuấtBáoCáoToolStripMenuItem.Text = "Xuất Báo Cáo Bằng CrystalReport";
+            this.xuấtBáoCáoToolStripMenuItem.Click += new System.EventHandler(this.xuấtBáoCáoToolStripMenuItem_Click);
             // 
             // giớiThiệuToolStripMenuItem
             // 
@@ -462,6 +455,7 @@
             this.càiĐặtGiaHạnToolStripMenuItem.Name = "càiĐặtGiaHạnToolStripMenuItem";
             this.càiĐặtGiaHạnToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.càiĐặtGiaHạnToolStripMenuItem.Text = "Cài đặt gia hạn";
+            this.càiĐặtGiaHạnToolStripMenuItem.Click += new System.EventHandler(this.càiĐặtGiaHạnToolStripMenuItem_Click);
             // 
             // tàiKhoảnGửiMailThôngBáoToolStripMenuItem
             // 
@@ -604,8 +598,6 @@
         private System.Windows.Forms.Label lblTotalOverdue;
         private System.Windows.Forms.ToolStripMenuItem menuChangePassword;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
-        private System.Windows.Forms.ToolStripMenuItem menuExportCSV;
-        private System.Windows.Forms.ToolStripMenuItem menuExportExcel;
         private System.Windows.Forms.ToolStripMenuItem giớiThiệuToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnReload;
@@ -627,5 +619,6 @@
         private System.Windows.Forms.ToolStripMenuItem tựĐộngGửiEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vềTácGiảToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngBáoTrạngTháiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xuấtBáoCáoToolStripMenuItem;
     }
 }

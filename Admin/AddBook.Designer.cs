@@ -51,8 +51,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnImportExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBookCover)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -285,7 +283,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(492, 76);
+            this.btnSave.Location = new System.Drawing.Point(153, 288);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 40);
@@ -294,32 +292,11 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(443, 205);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(192, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Hoặc nếu muốn thêm nhiều sách từ file";
-            // 
-            // btnImportExcel
-            // 
-            this.btnImportExcel.Location = new System.Drawing.Point(468, 221);
-            this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.Size = new System.Drawing.Size(142, 29);
-            this.btnImportExcel.TabIndex = 8;
-            this.btnImportExcel.Text = "Thêm từ Excel hoặc CSV";
-            this.btnImportExcel.UseVisualStyleBackColor = true;
-            this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
-            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 283);
-            this.Controls.Add(this.btnImportExcel);
-            this.Controls.Add(this.label9);
+            this.ClientSize = new System.Drawing.Size(423, 349);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -337,7 +314,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -365,7 +341,5 @@
         private System.Windows.Forms.ComboBox cboCategory;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnImportExcel;
     }
 }

@@ -13,7 +13,7 @@ namespace Elibse.Admin
         }
 
         // 1. Khi Form hiện lên -> Tự lấy email cũ điền vào
-        private void NotificationServiceEmail_Load(object sender, EventArgs e)
+        private void ConfigNotificationServiceEmail_Load(object sender, EventArgs e)
         {
             // 1. Đảm bảo các ô nhập luôn mở (đề phòng lỗi do giao diện khóa)
             txtEmail.Enabled = true;

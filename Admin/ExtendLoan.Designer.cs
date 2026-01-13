@@ -58,6 +58,7 @@
             this.cboReaders.Name = "cboReaders";
             this.cboReaders.Size = new System.Drawing.Size(164, 21);
             this.cboReaders.TabIndex = 1;
+            this.cboReaders.SelectedIndexChanged += new System.EventHandler(this.cboReaders_SelectedIndexChanged);
             // 
             // dgvLoans
             // 

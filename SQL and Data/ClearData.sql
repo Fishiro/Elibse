@@ -37,11 +37,7 @@ BEGIN TRY
     DELETE FROM READERS;
     PRINT '>> Đã xóa sạch: READERS';
 
-    -- 4. Xóa Danh mục
-    DELETE FROM CATEGORIES;
-    PRINT '>> Đã xóa sạch: CATEGORIES';
-
-    -- 5. Xóa Nhật ký & Cấu hình (Tùy chọn)
+    -- 4. Xóa Nhật ký & Cấu hình (Tùy chọn)
     DELETE FROM ADMIN_LOGS;
     DELETE FROM SYSTEM_CONFIG;
     -- DELETE FROM ADMINS; -- Khoan xóa Admin vội, để lại đăng nhập

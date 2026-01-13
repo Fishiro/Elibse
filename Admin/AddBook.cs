@@ -131,34 +131,46 @@ namespace Elibse.Admin
                             return;
                         }
 
-                        string abbreviation = GetAbbreviation(txtTitle.Text);
+                        SqlTransaction transaction = conn.BeginTransaction();
 
-                        for (int i = 0; i < quantity; i++)
+                        try
                         {
-                            long nextGlobal = GetNextGlobalNumber(conn);
-                            int nextLocal = GetNextLocalNumber(conn, abbreviation);
+                            string abbreviation = GetAbbreviation(txtTitle.Text);
 
-                            // Tạo ID: #0000001-DNT-0001
-                            string finalID = $"#{nextGlobal:D7}-{abbreviation}-{nextLocal:D4}";
+                            for (int i = 0; i < quantity; i++)
+                            {
+                                long nextGlobal = GetNextGlobalNumber(conn);
+                                int nextLocal = GetNextLocalNumber(conn, abbreviation);
 
-                            string insertQ = @"INSERT INTO BOOKS (BookID, Title, Author, CategoryID, ImportDate, Price, BookImage, Status)
-                                               VALUES (@id, @title, @author, @catID, GETDATE(), @price, @img, N'Available')";
+                                string finalID = $"#{nextGlobal:D7}-{abbreviation}-{nextLocal:D4}";
 
-                            SqlCommand cmd = new SqlCommand(insertQ, conn);
-                            cmd.Parameters.AddWithValue("@id", finalID);
-                            cmd.Parameters.AddWithValue("@title", txtTitle.Text.Trim());
-                            cmd.Parameters.AddWithValue("@author", txtAuthor.Text.Trim());
-                            cmd.Parameters.AddWithValue("@catID", cboCategory.SelectedValue);
-                            cmd.Parameters.AddWithValue("@price", price);
+                                string insertQ = @"INSERT INTO BOOKS (BookID, Title, Author, CategoryID, ImportDate, Price, BookImage, Status)
+                               VALUES (@id, @title, @author, @catID, GETDATE(), @price, @img, N'Available')";
 
-                            if (imageBytes != null) cmd.Parameters.AddWithValue("@img", imageBytes);
-                            else cmd.Parameters.Add("@img", SqlDbType.VarBinary).Value = DBNull.Value;
+                                SqlCommand cmd = new SqlCommand(insertQ, conn, transaction);
+                                cmd.Parameters.AddWithValue("@id", finalID);
+                                cmd.Parameters.AddWithValue("@title", txtTitle.Text.Trim());
+                                cmd.Parameters.AddWithValue("@author", txtAuthor.Text.Trim());
+                                cmd.Parameters.AddWithValue("@catID", cboCategory.SelectedValue);
+                                cmd.Parameters.AddWithValue("@price", price);
 
-                            cmd.ExecuteNonQuery();
+                                if (imageBytes != null)
+                                    cmd.Parameters.Add("@img", SqlDbType.VarBinary, -1).Value = imageBytes;
+                                else
+                                    cmd.Parameters.Add("@img", SqlDbType.VarBinary).Value = DBNull.Value;
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            Logger.Log("Thêm Sách", $"Thêm mới {quantity} cuốn: {txtTitle.Text} (Tác giả: {txtAuthor.Text})");
+                            MessageBox.Show($"Đã thêm thành công {quantity} quyển sách!");
                         }
-                        Logger.Log("Thêm Sách", $"Thêm mới {quantity} cuốn: {txtTitle.Text} (Tác giả: {txtAuthor.Text})");
-
-                        MessageBox.Show($"Đã thêm thành công {quantity} quyển sách!");
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                     // === TRƯỜNG HỢP 2: CẬP NHẬT (SỬA) ===
                     else
@@ -296,19 +308,23 @@ namespace Elibse.Admin
             return ConvertToUnSign(abbr);
         }
 
-        private long GetNextGlobalNumber(SqlConnection conn)
+        private long GetNextGlobalNumber(SqlConnection conn, SqlTransaction transaction = null)
         {
-            string sql = "SELECT ISNULL(MAX(CAST(SUBSTRING(BookID, 2, 7) AS INT)), 0) FROM BOOKS";
+            string sql = @"SELECT ISNULL(MAX(CAST(SUBSTRING(BookID, 2, 7) AS INT)), 0) 
+                   FROM BOOKS WITH (UPDLOCK, HOLDLOCK)";
 
             SqlCommand cmd = new SqlCommand(sql, conn);
+            if (transaction != null) cmd.Transaction = transaction;
 
-            // Lấy số lớn nhất tìm được cộng thêm 1 để ra số mới
             return (int)cmd.ExecuteScalar() + 1;
         }
 
-        private int GetNextLocalNumber(SqlConnection conn, string abbr)
+        private int GetNextLocalNumber(SqlConnection conn, string abbr, SqlTransaction transaction = null)
         {
-            SqlCommand cmd = new SqlCommand("SELECT BookID FROM BOOKS WHERE BookID LIKE @p", conn);
+            SqlCommand cmd = new SqlCommand(@"SELECT BookID FROM BOOKS WITH (UPDLOCK, HOLDLOCK) 
+                                      WHERE BookID LIKE @p", conn);
+            if (transaction != null) cmd.Transaction = transaction;
+
             cmd.Parameters.AddWithValue("@p", $"%-{abbr}-%");
             SqlDataReader reader = cmd.ExecuteReader();
             int maxVal = 0;
@@ -327,148 +343,6 @@ namespace Elibse.Admin
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
-        }
-
-        // --- HÀM MỚI: Tìm ID danh mục dựa vào tên (Nếu chưa có thì tự tạo mới) ---
-        private int GetCategoryIDByName(SqlConnection conn, string categoryName)
-        {
-            if (string.IsNullOrWhiteSpace(categoryName)) categoryName = "Chưa phân loại";
-
-            // 1. Tìm xem danh mục đã có chưa
-            string sqlFind = "SELECT CategoryID FROM CATEGORIES WHERE CategoryName = @name";
-            using (SqlCommand cmd = new SqlCommand(sqlFind, conn, conn.BeginTransaction())) // Lưu ý transaction nếu cần, ở đây mình dùng context của conn ngoài
-            {
-                // Lưu ý: Code dưới dùng cmd riêng nên không cần transaction nếu gọi từ btnImport
-                // Sửa lại đơn giản để tránh lỗi transaction lồng nhau:
-                cmd.Transaction = null;
-            }
-
-            // Viết lại đơn giản hơn để khớp với logic import bên dưới:
-            using (SqlCommand cmd = new SqlCommand("SELECT CategoryID FROM CATEGORIES WHERE CategoryName = @name", conn))
-            {
-                cmd.Parameters.AddWithValue("@name", categoryName);
-                object result = cmd.ExecuteScalar();
-
-                if (result != null) return Convert.ToInt32(result);
-            }
-
-            // 2. Nếu chưa có thì INSERT mới và lấy ID về ngay lập tức
-            string sqlInsert = "INSERT INTO CATEGORIES (CategoryName) OUTPUT INSERTED.CategoryID VALUES (@name)";
-            using (SqlCommand cmd = new SqlCommand(sqlInsert, conn))
-            {
-                cmd.Parameters.AddWithValue("@name", categoryName);
-                return (int)cmd.ExecuteScalar();
-            }
-        }
-
-        private void btnImportExcel_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel 97-2003 Workbook|*.xls|CSV File|*.csv", ValidateNames = true })
-            {
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        using (var stream = File.Open(ofd.FileName, FileMode.Open, FileAccess.Read))
-                        {
-                            // 1. Cấu hình đọc Excel/CSV
-                            IExcelDataReader reader;
-                            if (Path.GetExtension(ofd.FileName).Equals(".csv", StringComparison.OrdinalIgnoreCase))
-                                reader = ExcelReaderFactory.CreateCsvReader(stream);
-                            else
-                                reader = ExcelReaderFactory.CreateReader(stream);
-
-                            var conf = new ExcelDataSetConfiguration
-                            {
-                                ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
-                            };
-
-                            DataSet result = reader.AsDataSet(conf);
-                            DataTable dt = result.Tables[0];
-                            reader.Close();
-
-                            // 2. Bắt đầu xử lý import
-                            int totalAdded = 0;
-                            int errorCount = 0;
-
-                            using (SqlConnection conn = DatabaseConnection.GetConnection())
-                            {
-                                conn.Open();
-
-                                foreach (DataRow row in dt.Rows)
-                                {
-                                    try
-                                    {
-                                        // --- Lấy dữ liệu từ Excel ---
-                                        string tenSach = row["TenSach"].ToString().Trim();
-                                        if (string.IsNullOrEmpty(tenSach)) continue; // Bỏ qua dòng trống
-
-                                        string tacGia = row["TacGia"].ToString().Trim();
-                                        string tenTheLoai = row["TheLoai"].ToString().Trim();
-
-                                        decimal gia = 0;
-                                        decimal.TryParse(row["Gia"].ToString(), out gia);
-
-                                        int soLuong = 1;
-                                        int.TryParse(row["SoLuong"].ToString(), out soLuong);
-                                        if (soLuong < 1) soLuong = 1;
-
-                                        // --- Gọi các hàm Helper CÓ SẴN trong AddBook.cs ---
-
-                                        // 1. Xử lý Category (Hàm mới thêm ở Bước 2)
-                                        int categoryId = GetCategoryIDByName(conn, tenTheLoai);
-
-                                        // 2. Tạo mã viết tắt (Hàm cũ đã có)
-                                        string abbreviation = GetAbbreviation(tenSach);
-
-                                        // 3. Vòng lặp Insert theo số lượng
-                                        for (int i = 0; i < soLuong; i++)
-                                        {
-                                            // Gọi hàm sinh mã (Hàm cũ đã có)
-                                            long nextGlobal = GetNextGlobalNumber(conn);
-                                            int nextLocal = GetNextLocalNumber(conn, abbreviation);
-
-                                            string finalID = $"#{nextGlobal:D7}-{abbreviation}-{nextLocal:D4}";
-
-                                            // Insert
-                                            string query = @"INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status) 
-                                                     VALUES (@id, @title, @author, @catID, @price, GETDATE(), N'Available')";
-
-                                            using (SqlCommand cmd = new SqlCommand(query, conn))
-                                            {
-                                                cmd.Parameters.AddWithValue("@id", finalID);
-                                                cmd.Parameters.AddWithValue("@title", tenSach);
-                                                cmd.Parameters.AddWithValue("@author", tacGia);
-                                                cmd.Parameters.AddWithValue("@catID", categoryId);
-                                                cmd.Parameters.AddWithValue("@price", gia);
-
-                                                cmd.ExecuteNonQuery();
-                                            }
-                                            totalAdded++;
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        errorCount++;
-                                        Console.WriteLine($"Lỗi dòng excel: {ex.Message}");
-                                    }
-                                }
-                            }
-
-                            // 3. Thông báo kết quả
-                            MessageBox.Show($"Hoàn tất!\n- Thêm thành công: {totalAdded} cuốn.\n- Lỗi/Bỏ qua: {errorCount} dòng.",
-                                            "Kết quả Import", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Sau khi import xong, bạn có thể muốn đóng form AddBook luôn để quay về màn hình chính xem danh sách
-                            this.Close();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Lỗi khi đọc file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
         }
     }
 }

@@ -51,7 +51,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBooks.Location = new System.Drawing.Point(8, 42);
-            this.dgvBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvBooks.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBooks.Name = "dgvBooks";
             this.dgvBooks.RowHeadersWidth = 62;
             this.dgvBooks.RowTemplate.Height = 28;
@@ -63,7 +63,7 @@
             this.txtSearchBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearchBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchBook.Location = new System.Drawing.Point(279, 10);
-            this.txtSearchBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearchBook.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearchBook.Name = "txtSearchBook";
             this.txtSearchBook.Size = new System.Drawing.Size(302, 26);
             this.txtSearchBook.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Location = new System.Drawing.Point(584, 9);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(60, 23);
             this.btnSearch.TabIndex = 1;
@@ -88,7 +88,7 @@
             "Danh mục",
             "Ngày nhập"});
             this.cboFilterCategory.Location = new System.Drawing.Point(70, 12);
-            this.cboFilterCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboFilterCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cboFilterCategory.Name = "cboFilterCategory";
             this.cboFilterCategory.Size = new System.Drawing.Size(82, 21);
             this.cboFilterCategory.TabIndex = 3;
@@ -108,7 +108,7 @@
             // 
             this.btnReload.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnReload.Location = new System.Drawing.Point(301, 323);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(50, 23);
             this.btnReload.TabIndex = 5;
@@ -134,7 +134,7 @@
             "A->Z",
             "Z->A"});
             this.cboSortOrder.Location = new System.Drawing.Point(199, 12);
-            this.cboSortOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboSortOrder.Margin = new System.Windows.Forms.Padding(2);
             this.cboSortOrder.Name = "cboSortOrder";
             this.cboSortOrder.Size = new System.Drawing.Size(50, 21);
             this.cboSortOrder.TabIndex = 19;
@@ -144,7 +144,7 @@
             // 
             this.btnAddBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddBook.Location = new System.Drawing.Point(485, 323);
-            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(81, 23);
             this.btnAddBook.TabIndex = 5;
@@ -156,7 +156,7 @@
             // 
             this.btnDeleteBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteBook.Location = new System.Drawing.Point(571, 323);
-            this.btnDeleteBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteBook.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteBook.Name = "btnDeleteBook";
             this.btnDeleteBook.Size = new System.Drawing.Size(73, 23);
             this.btnDeleteBook.TabIndex = 5;
@@ -168,19 +168,19 @@
             // 
             this.btnEditBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditBook.Location = new System.Drawing.Point(400, 323);
-            this.btnEditBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEditBook.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditBook.Name = "btnEditBook";
             this.btnEditBook.Size = new System.Drawing.Size(81, 23);
             this.btnEditBook.TabIndex = 5;
             this.btnEditBook.Text = "Sửa sách";
             this.btnEditBook.UseVisualStyleBackColor = true;
-            this.btnEditBook.Click += new System.EventHandler(this.btnAddBook_Click);
+            this.btnEditBook.Click += new System.EventHandler(this.btnEditBook_Click);
             // 
             // btnLiquidate
             // 
             this.btnLiquidate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLiquidate.Location = new System.Drawing.Point(8, 323);
-            this.btnLiquidate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLiquidate.Margin = new System.Windows.Forms.Padding(2);
             this.btnLiquidate.Name = "btnLiquidate";
             this.btnLiquidate.Size = new System.Drawing.Size(81, 23);
             this.btnLiquidate.TabIndex = 5;
@@ -206,7 +206,7 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.dgvBooks);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TotalBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Xem Số Lượng Sách";

@@ -158,6 +158,7 @@
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(87, 20);
             this.dtpDOB.TabIndex = 5;
+            this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
             // 
             // btnUploadImg
             // 
