@@ -3,3 +3,12 @@
 .vs/
 *.user
 *.suo
+
+packages/
+*.nupkg
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+*.log
