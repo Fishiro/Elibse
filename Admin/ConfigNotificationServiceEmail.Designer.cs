@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigNotificationServiceEmail));
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,16 +43,16 @@
             this.label1.Location = new System.Drawing.Point(101, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Email";
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(137, 29);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(170, 26);
+            this.txtEmail.Size = new System.Drawing.Size(170, 20);
             this.txtEmail.TabIndex = 1;
             // 
             // label2
@@ -60,22 +61,22 @@
             this.label2.Location = new System.Drawing.Point(36, 64);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 20);
+            this.label2.Size = new System.Drawing.Size(100, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mật khẩu ứng dụng";
             // 
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(137, 62);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(170, 26);
+            this.txtPassword.Size = new System.Drawing.Size(170, 20);
             this.txtPassword.TabIndex = 1;
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(215, 103);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(68, 22);
             this.btnSave.TabIndex = 2;
@@ -86,7 +87,7 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(63, 103);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(68, 22);
             this.btnClose.TabIndex = 2;
@@ -106,7 +107,8 @@
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ConfigNotificationServiceEmail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

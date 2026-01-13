@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashboard));
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
@@ -97,16 +98,18 @@
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(936, 585);
+            this.panel3.Size = new System.Drawing.Size(624, 380);
             this.panel3.TabIndex = 2;
             // 
             // btnHistory
             // 
             this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHistory.Location = new System.Drawing.Point(822, 383);
+            this.btnHistory.Location = new System.Drawing.Point(548, 249);
+            this.btnHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(80, 37);
+            this.btnHistory.Size = new System.Drawing.Size(53, 24);
             this.btnHistory.TabIndex = 9;
             this.btnHistory.Text = "Lịch sử";
             this.btnHistory.UseVisualStyleBackColor = true;
@@ -115,9 +118,10 @@
             // btnReload
             // 
             this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReload.Location = new System.Drawing.Point(822, 432);
+            this.btnReload.Location = new System.Drawing.Point(548, 281);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(80, 37);
+            this.btnReload.Size = new System.Drawing.Size(53, 24);
             this.btnReload.TabIndex = 4;
             this.btnReload.Text = "Tải lại";
             this.btnReload.UseVisualStyleBackColor = true;
@@ -128,17 +132,18 @@
             this.chartStats.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartStats.Legends.Add(legend2);
-            this.chartStats.Location = new System.Drawing.Point(12, 298);
+            chartArea1.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartStats.Legends.Add(legend1);
+            this.chartStats.Location = new System.Drawing.Point(8, 194);
+            this.chartStats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chartStats.Name = "chartStats";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartStats.Series.Add(series2);
-            this.chartStats.Size = new System.Drawing.Size(538, 260);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartStats.Series.Add(series1);
+            this.chartStats.Size = new System.Drawing.Size(359, 169);
             this.chartStats.TabIndex = 7;
             this.chartStats.Text = "chart2";
             // 
@@ -158,18 +163,21 @@
             this.groupBox1.Controls.Add(this.lblTotalViolations);
             this.groupBox1.Controls.Add(this.lblBorrowedBooks);
             this.groupBox1.Controls.Add(this.lblTotalBooks);
-            this.groupBox1.Location = new System.Drawing.Point(12, 48);
+            this.groupBox1.Location = new System.Drawing.Point(8, 31);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(912, 229);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(608, 149);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thống kê";
             // 
             // btnViewOverdue
             // 
-            this.btnViewOverdue.Location = new System.Drawing.Point(716, 132);
+            this.btnViewOverdue.Location = new System.Drawing.Point(477, 86);
+            this.btnViewOverdue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewOverdue.Name = "btnViewOverdue";
-            this.btnViewOverdue.Size = new System.Drawing.Size(72, 35);
+            this.btnViewOverdue.Size = new System.Drawing.Size(48, 23);
             this.btnViewOverdue.TabIndex = 2;
             this.btnViewOverdue.Text = "Xem";
             this.btnViewOverdue.UseVisualStyleBackColor = true;
@@ -177,9 +185,10 @@
             // 
             // btnViewViolators
             // 
-            this.btnViewViolators.Location = new System.Drawing.Point(531, 132);
+            this.btnViewViolators.Location = new System.Drawing.Point(354, 86);
+            this.btnViewViolators.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewViolators.Name = "btnViewViolators";
-            this.btnViewViolators.Size = new System.Drawing.Size(72, 35);
+            this.btnViewViolators.Size = new System.Drawing.Size(48, 23);
             this.btnViewViolators.TabIndex = 2;
             this.btnViewViolators.Text = "Xem";
             this.btnViewViolators.UseVisualStyleBackColor = true;
@@ -187,9 +196,10 @@
             // 
             // btnViewBorrowed
             // 
-            this.btnViewBorrowed.Location = new System.Drawing.Point(318, 132);
+            this.btnViewBorrowed.Location = new System.Drawing.Point(212, 86);
+            this.btnViewBorrowed.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewBorrowed.Name = "btnViewBorrowed";
-            this.btnViewBorrowed.Size = new System.Drawing.Size(72, 35);
+            this.btnViewBorrowed.Size = new System.Drawing.Size(48, 23);
             this.btnViewBorrowed.TabIndex = 2;
             this.btnViewBorrowed.Text = "Xem";
             this.btnViewBorrowed.UseVisualStyleBackColor = true;
@@ -199,9 +209,10 @@
             // 
             this.label.AutoSize = true;
             this.label.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label.Location = new System.Drawing.Point(80, 65);
+            this.label.Location = new System.Drawing.Point(53, 42);
+            this.label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(104, 20);
+            this.label.Size = new System.Drawing.Size(72, 13);
             this.label.TabIndex = 0;
             this.label.Text = "Tổng số sách";
             this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -210,9 +221,10 @@
             // 
             this.lbl4.AutoSize = true;
             this.lbl4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbl4.Location = new System.Drawing.Point(698, 65);
+            this.lbl4.Location = new System.Drawing.Point(465, 42);
+            this.lbl4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(111, 20);
+            this.lbl4.Size = new System.Drawing.Size(76, 13);
             this.lbl4.TabIndex = 0;
             this.lbl4.Text = "Mượn quá hạn";
             this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -221,9 +233,10 @@
             // 
             this.lbl3.AutoSize = true;
             this.lbl3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbl3.Location = new System.Drawing.Point(508, 65);
+            this.lbl3.Location = new System.Drawing.Point(339, 42);
+            this.lbl3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(121, 20);
+            this.lbl3.Size = new System.Drawing.Size(84, 13);
             this.lbl3.TabIndex = 0;
             this.lbl3.Text = "Độc giả vi phạm";
             this.lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,18 +245,20 @@
             // 
             this.lbl.AutoSize = true;
             this.lbl.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbl.Location = new System.Drawing.Point(273, 65);
+            this.lbl.Location = new System.Drawing.Point(182, 42);
+            this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(168, 20);
+            this.lbl.Size = new System.Drawing.Size(117, 13);
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Tổng đang được mượn";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnViewTotalBooks
             // 
-            this.btnViewTotalBooks.Location = new System.Drawing.Point(96, 132);
+            this.btnViewTotalBooks.Location = new System.Drawing.Point(64, 86);
+            this.btnViewTotalBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewTotalBooks.Name = "btnViewTotalBooks";
-            this.btnViewTotalBooks.Size = new System.Drawing.Size(72, 35);
+            this.btnViewTotalBooks.Size = new System.Drawing.Size(48, 23);
             this.btnViewTotalBooks.TabIndex = 2;
             this.btnViewTotalBooks.Text = "Xem";
             this.btnViewTotalBooks.UseVisualStyleBackColor = true;
@@ -253,7 +268,8 @@
             // 
             this.lblTotalOverdue.AutoSize = true;
             this.lblTotalOverdue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalOverdue.Location = new System.Drawing.Point(738, 92);
+            this.lblTotalOverdue.Location = new System.Drawing.Point(492, 60);
+            this.lblTotalOverdue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalOverdue.Name = "lblTotalOverdue";
             this.lblTotalOverdue.Size = new System.Drawing.Size(21, 24);
             this.lblTotalOverdue.TabIndex = 1;
@@ -264,7 +280,8 @@
             // 
             this.lblTotalViolations.AutoSize = true;
             this.lblTotalViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalViolations.Location = new System.Drawing.Point(554, 92);
+            this.lblTotalViolations.Location = new System.Drawing.Point(369, 60);
+            this.lblTotalViolations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalViolations.Name = "lblTotalViolations";
             this.lblTotalViolations.Size = new System.Drawing.Size(21, 24);
             this.lblTotalViolations.TabIndex = 1;
@@ -275,7 +292,8 @@
             // 
             this.lblBorrowedBooks.AutoSize = true;
             this.lblBorrowedBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrowedBooks.Location = new System.Drawing.Point(340, 92);
+            this.lblBorrowedBooks.Location = new System.Drawing.Point(227, 60);
+            this.lblBorrowedBooks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBorrowedBooks.Name = "lblBorrowedBooks";
             this.lblBorrowedBooks.Size = new System.Drawing.Size(21, 24);
             this.lblBorrowedBooks.TabIndex = 1;
@@ -286,7 +304,8 @@
             // 
             this.lblTotalBooks.AutoSize = true;
             this.lblTotalBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalBooks.Location = new System.Drawing.Point(117, 92);
+            this.lblTotalBooks.Location = new System.Drawing.Point(78, 60);
+            this.lblTotalBooks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalBooks.Name = "lblTotalBooks";
             this.lblTotalBooks.Size = new System.Drawing.Size(21, 24);
             this.lblTotalBooks.TabIndex = 1;
@@ -305,7 +324,8 @@
             this.quảnLýToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(936, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(624, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -315,7 +335,7 @@
             this.menuChangePassword,
             this.menuLogout});
             this.tàiKhoảnToolStripMenuItem.Name = "tàiKhoảnToolStripMenuItem";
-            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.tàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(70, 22);
             this.tàiKhoảnToolStripMenuItem.Text = "Tài khoản";
             // 
             // menuChangePassword
@@ -339,7 +359,7 @@
             this.menuExportExcel,
             this.gửiMailCảnhBáoToolStripMenuItem});
             this.tínhNăngToolStripMenuItem.Name = "tínhNăngToolStripMenuItem";
-            this.tínhNăngToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.tínhNăngToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
             this.tínhNăngToolStripMenuItem.Text = "Tính năng";
             // 
             // menuExportCSV
@@ -398,27 +418,27 @@
             this.menuAboutUs,
             this.vềTácGiảToolStripMenuItem});
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
             this.giớiThiệuToolStripMenuItem.Text = "Giới Thiệu";
             // 
             // menuManual
             // 
             this.menuManual.Name = "menuManual";
-            this.menuManual.Size = new System.Drawing.Size(147, 22);
+            this.menuManual.Size = new System.Drawing.Size(180, 22);
             this.menuManual.Text = "Cách sử dụng";
             this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuAboutUs
             // 
             this.menuAboutUs.Name = "menuAboutUs";
-            this.menuAboutUs.Size = new System.Drawing.Size(147, 22);
+            this.menuAboutUs.Size = new System.Drawing.Size(180, 22);
             this.menuAboutUs.Text = "Về Elibse";
             this.menuAboutUs.Click += new System.EventHandler(this.menuAboutUs_Click);
             // 
             // vềTácGiảToolStripMenuItem
             // 
             this.vềTácGiảToolStripMenuItem.Name = "vềTácGiảToolStripMenuItem";
-            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.vềTácGiảToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vềTácGiảToolStripMenuItem.Text = "Về tác giả";
             this.vềTácGiảToolStripMenuItem.Click += new System.EventHandler(this.vềTácGiảToolStripMenuItem_Click);
             // 
@@ -430,7 +450,7 @@
             this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem,
             this.tựĐộngGửiEmailToolStripMenuItem});
             this.phầnMềmToolStripMenuItem.Name = "phầnMềmToolStripMenuItem";
-            this.phầnMềmToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.phầnMềmToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.phầnMềmToolStripMenuItem.Text = "Thiết lập";
             // 
             // menuFineSetting
@@ -466,7 +486,7 @@
             this.thêmNhiềuSáchToolStripMenuItem,
             this.giaHạnTrảSáchToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
             this.quảnLýToolStripMenuItem.Text = "Quản lý";
             // 
             // menuManageReaders
@@ -519,18 +539,21 @@
             this.groupBox2.Controls.Add(this.btnReturn);
             this.groupBox2.Controls.Add(this.btnBorrow);
             this.groupBox2.Controls.Add(this.btnAddBook);
-            this.groupBox2.Location = new System.Drawing.Point(582, 322);
+            this.groupBox2.Location = new System.Drawing.Point(388, 209);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(206, 218);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(137, 142);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nghiệp vụ";
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(34, 92);
+            this.btnReturn.Location = new System.Drawing.Point(23, 60);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(136, 49);
+            this.btnReturn.Size = new System.Drawing.Size(91, 32);
             this.btnReturn.TabIndex = 2;
             this.btnReturn.Text = "Ký trả sách";
             this.btnReturn.UseVisualStyleBackColor = true;
@@ -538,9 +561,10 @@
             // 
             // btnBorrow
             // 
-            this.btnBorrow.Location = new System.Drawing.Point(34, 148);
+            this.btnBorrow.Location = new System.Drawing.Point(23, 96);
+            this.btnBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBorrow.Name = "btnBorrow";
-            this.btnBorrow.Size = new System.Drawing.Size(136, 49);
+            this.btnBorrow.Size = new System.Drawing.Size(91, 32);
             this.btnBorrow.TabIndex = 4;
             this.btnBorrow.Text = "Ký mượn";
             this.btnBorrow.UseVisualStyleBackColor = true;
@@ -548,9 +572,10 @@
             // 
             // btnAddBook
             // 
-            this.btnAddBook.Location = new System.Drawing.Point(34, 37);
+            this.btnAddBook.Location = new System.Drawing.Point(23, 24);
+            this.btnAddBook.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddBook.Name = "btnAddBook";
-            this.btnAddBook.Size = new System.Drawing.Size(136, 49);
+            this.btnAddBook.Size = new System.Drawing.Size(91, 32);
             this.btnAddBook.TabIndex = 2;
             this.btnAddBook.Text = "Thêm sách mới";
             this.btnAddBook.UseVisualStyleBackColor = true;
@@ -558,11 +583,13 @@
             // 
             // AdminDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 585);
+            this.ClientSize = new System.Drawing.Size(624, 380);
             this.Controls.Add(this.panel3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AdminDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Admin dashboard";

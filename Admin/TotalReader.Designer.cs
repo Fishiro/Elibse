@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TotalReader));
             this.dgvReaders = new System.Windows.Forms.DataGridView();
             this.picReader = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -296,6 +297,7 @@
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.dgvReaders);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TotalReader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SendEmailForm));
             this.label1 = new System.Windows.Forms.Label();
             this.cboReaders = new System.Windows.Forms.ComboBox();
             this.txtSubject = new System.Windows.Forms.TextBox();
@@ -43,7 +44,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Người nhận:";
             // 
@@ -60,7 +61,7 @@
             // 
             this.txtSubject.Location = new System.Drawing.Point(91, 52);
             this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(273, 26);
+            this.txtSubject.Size = new System.Drawing.Size(273, 20);
             this.txtSubject.TabIndex = 2;
             // 
             // rtbContent
@@ -86,7 +87,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(38, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tiêu đề:";
             // 
@@ -95,7 +96,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(32, 81);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 20);
+            this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Nội dung:";
             // 
@@ -104,7 +105,7 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(20, 317);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(169, 20);
+            this.lblStatus.Size = new System.Drawing.Size(117, 13);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Trạng thái: Đang chờ...";
             // 
@@ -122,6 +123,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SendEmailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtendLoan));
             this.label1 = new System.Windows.Forms.Label();
             this.cboReaders = new System.Windows.Forms.ComboBox();
             this.dgvLoans = new System.Windows.Forms.DataGridView();
@@ -41,9 +42,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 27);
+            this.label1.Location = new System.Drawing.Point(8, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(193, 20);
+            this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chọn Độc giả đang mượn:";
             // 
@@ -51,32 +53,36 @@
             // 
             this.cboReaders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReaders.FormattingEnabled = true;
-            this.cboReaders.Location = new System.Drawing.Point(211, 24);
+            this.cboReaders.Location = new System.Drawing.Point(141, 16);
+            this.cboReaders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboReaders.Name = "cboReaders";
-            this.cboReaders.Size = new System.Drawing.Size(244, 28);
+            this.cboReaders.Size = new System.Drawing.Size(164, 21);
             this.cboReaders.TabIndex = 1;
             // 
             // dgvLoans
             // 
             this.dgvLoans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLoans.Location = new System.Drawing.Point(12, 68);
+            this.dgvLoans.Location = new System.Drawing.Point(8, 44);
+            this.dgvLoans.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvLoans.Name = "dgvLoans";
             this.dgvLoans.RowTemplate.Height = 28;
-            this.dgvLoans.Size = new System.Drawing.Size(443, 307);
+            this.dgvLoans.Size = new System.Drawing.Size(295, 200);
             this.dgvLoans.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 396);
+            this.label2.Location = new System.Drawing.Point(8, 257);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 20);
+            this.label2.Size = new System.Drawing.Size(116, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Số ngày muốn gia hạn:";
             // 
             // numDays
             // 
-            this.numDays.Location = new System.Drawing.Point(189, 394);
+            this.numDays.Location = new System.Drawing.Point(126, 256);
+            this.numDays.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numDays.Maximum = new decimal(new int[] {
             30,
             0,
@@ -88,7 +94,7 @@
             0,
             0});
             this.numDays.Name = "numDays";
-            this.numDays.Size = new System.Drawing.Size(81, 26);
+            this.numDays.Size = new System.Drawing.Size(54, 20);
             this.numDays.TabIndex = 3;
             this.numDays.Value = new decimal(new int[] {
             7,
@@ -98,9 +104,10 @@
             // 
             // btnExtend
             // 
-            this.btnExtend.Location = new System.Drawing.Point(325, 388);
+            this.btnExtend.Location = new System.Drawing.Point(217, 252);
+            this.btnExtend.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExtend.Name = "btnExtend";
-            this.btnExtend.Size = new System.Drawing.Size(130, 37);
+            this.btnExtend.Size = new System.Drawing.Size(87, 24);
             this.btnExtend.TabIndex = 4;
             this.btnExtend.Text = "Gia hạn sách";
             this.btnExtend.UseVisualStyleBackColor = true;
@@ -108,15 +115,17 @@
             // 
             // ExtendLoan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 440);
+            this.ClientSize = new System.Drawing.Size(311, 286);
             this.Controls.Add(this.btnExtend);
             this.Controls.Add(this.numDays);
             this.Controls.Add(this.dgvLoans);
             this.Controls.Add(this.cboReaders);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ExtendLoan";
             this.Text = "Elibse: Gia Hạn Sách";
             this.Load += new System.EventHandler(this.ExtendLoan_Load);

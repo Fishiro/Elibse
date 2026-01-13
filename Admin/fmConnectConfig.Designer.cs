@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmConnectConfig));
             this.label1 = new System.Windows.Forms.Label();
             this.txtServerName = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
@@ -38,7 +39,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(63, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(370, 20);
+            this.label1.Size = new System.Drawing.Size(252, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nhập tên SQL Server (Để trống để dùng mặc định):";
             // 
@@ -46,7 +47,7 @@
             // 
             this.txtServerName.Location = new System.Drawing.Point(12, 54);
             this.txtServerName.Name = "txtServerName";
-            this.txtServerName.Size = new System.Drawing.Size(354, 26);
+            this.txtServerName.Size = new System.Drawing.Size(354, 20);
             this.txtServerName.TabIndex = 1;
             // 
             // btnConnect
@@ -68,6 +69,7 @@
             this.Controls.Add(this.txtServerName);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "fmConnectConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

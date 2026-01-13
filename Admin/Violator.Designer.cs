@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Violator));
             this.dgvViolators = new System.Windows.Forms.DataGridView();
             this.btnReload = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvViolators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvViolators.Location = new System.Drawing.Point(8, 44);
-            this.dgvViolators.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvViolators.Margin = new System.Windows.Forms.Padding(2);
             this.dgvViolators.Name = "dgvViolators";
             this.dgvViolators.RowHeadersWidth = 62;
             this.dgvViolators.RowTemplate.Height = 28;
@@ -56,7 +57,7 @@
             // 
             this.btnReload.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnReload.Location = new System.Drawing.Point(301, 323);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(2);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(50, 23);
             this.btnReload.TabIndex = 8;
@@ -69,7 +70,7 @@
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(274, 8);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(302, 26);
             this.txtSearch.TabIndex = 10;
@@ -78,7 +79,7 @@
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Location = new System.Drawing.Point(584, 8);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(60, 23);
             this.btnSearch.TabIndex = 9;
@@ -104,7 +105,7 @@
             "A->Z",
             "Z->A"});
             this.cboSort.Location = new System.Drawing.Point(52, 11);
-            this.cboSort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboSort.Margin = new System.Windows.Forms.Padding(2);
             this.cboSort.Name = "cboSort";
             this.cboSort.Size = new System.Drawing.Size(50, 21);
             this.cboSort.TabIndex = 11;
@@ -114,7 +115,7 @@
             // 
             this.btnUnlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUnlock.Location = new System.Drawing.Point(573, 323);
-            this.btnUnlock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUnlock.Margin = new System.Windows.Forms.Padding(2);
             this.btnUnlock.Name = "btnUnlock";
             this.btnUnlock.Size = new System.Drawing.Size(71, 23);
             this.btnUnlock.TabIndex = 8;
@@ -134,7 +135,8 @@
             this.Controls.Add(this.btnUnlock);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.dgvViolators);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Violator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Độc Giả Vi Phạm";

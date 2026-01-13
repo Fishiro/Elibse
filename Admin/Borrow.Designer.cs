@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Borrow));
             this.btnConfirmBorrow = new System.Windows.Forms.Button();
             this.txtReaderName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             // btnConfirmBorrow
             // 
             this.btnConfirmBorrow.Location = new System.Drawing.Point(578, 205);
-            this.btnConfirmBorrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnConfirmBorrow.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmBorrow.Name = "btnConfirmBorrow";
             this.btnConfirmBorrow.Size = new System.Drawing.Size(105, 34);
             this.btnConfirmBorrow.TabIndex = 0;
@@ -73,9 +74,9 @@
             // txtReaderName
             // 
             this.txtReaderName.Location = new System.Drawing.Point(107, 142);
-            this.txtReaderName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReaderName.Margin = new System.Windows.Forms.Padding(2);
             this.txtReaderName.Name = "txtReaderName";
-            this.txtReaderName.Size = new System.Drawing.Size(133, 26);
+            this.txtReaderName.Size = new System.Drawing.Size(133, 20);
             this.txtReaderName.TabIndex = 1;
             this.txtReaderName.Text = "Nguyen Ngoc Ngan";
             // 
@@ -85,7 +86,7 @@
             this.label1.Location = new System.Drawing.Point(45, 116);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 20);
+            this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Mã độc giả";
             // 
@@ -95,7 +96,7 @@
             this.label2.Location = new System.Drawing.Point(42, 144);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 20);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Tên độc giả";
             // 
@@ -105,16 +106,16 @@
             this.label3.Location = new System.Drawing.Point(9, 171);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(141, 20);
+            this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Ngày tạo tài khoản";
             // 
             // txtReaderID
             // 
             this.txtReaderID.Location = new System.Drawing.Point(107, 114);
-            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReaderID.Margin = new System.Windows.Forms.Padding(2);
             this.txtReaderID.Name = "txtReaderID";
-            this.txtReaderID.Size = new System.Drawing.Size(133, 26);
+            this.txtReaderID.Size = new System.Drawing.Size(133, 20);
             this.txtReaderID.TabIndex = 1;
             this.txtReaderID.Text = "#0000000-12302025";
             this.txtReaderID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReaderID_KeyDown);
@@ -122,10 +123,10 @@
             // txtCreatedDate
             // 
             this.txtCreatedDate.Location = new System.Drawing.Point(107, 169);
-            this.txtCreatedDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCreatedDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreatedDate.Name = "txtCreatedDate";
             this.txtCreatedDate.ReadOnly = true;
-            this.txtCreatedDate.Size = new System.Drawing.Size(100, 26);
+            this.txtCreatedDate.Size = new System.Drawing.Size(100, 20);
             this.txtCreatedDate.TabIndex = 1;
             this.txtCreatedDate.Text = "20/03/2004";
             // 
@@ -143,9 +144,9 @@
             this.groupBox1.Controls.Add(this.txtCreatedDate);
             this.groupBox1.Controls.Add(this.txtReaderID);
             this.groupBox1.Location = new System.Drawing.Point(19, 18);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(260, 263);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -155,7 +156,7 @@
             // 
             this.picReaderAvatar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picReaderAvatar.Location = new System.Drawing.Point(98, 27);
-            this.picReaderAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picReaderAvatar.Margin = new System.Windows.Forms.Padding(2);
             this.picReaderAvatar.Name = "picReaderAvatar";
             this.picReaderAvatar.Size = new System.Drawing.Size(67, 66);
             this.picReaderAvatar.TabIndex = 3;
@@ -167,7 +168,7 @@
             this.label8.Location = new System.Drawing.Point(29, 226);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(111, 20);
+            this.label8.Size = new System.Drawing.Size(75, 13);
             this.label8.TabIndex = 2;
             this.label8.Text = "Số sách mượn";
             // 
@@ -177,17 +178,17 @@
             this.label7.Location = new System.Drawing.Point(52, 198);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 20);
+            this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "Vi phạm?";
             // 
             // txtBorrowCount
             // 
             this.txtBorrowCount.Location = new System.Drawing.Point(107, 224);
-            this.txtBorrowCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBorrowCount.Margin = new System.Windows.Forms.Padding(2);
             this.txtBorrowCount.Name = "txtBorrowCount";
             this.txtBorrowCount.ReadOnly = true;
-            this.txtBorrowCount.Size = new System.Drawing.Size(51, 26);
+            this.txtBorrowCount.Size = new System.Drawing.Size(51, 20);
             this.txtBorrowCount.TabIndex = 1;
             this.txtBorrowCount.Text = "?/6";
             this.txtBorrowCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -195,10 +196,10 @@
             // txtViolationStatus
             // 
             this.txtViolationStatus.Location = new System.Drawing.Point(107, 196);
-            this.txtViolationStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtViolationStatus.Margin = new System.Windows.Forms.Padding(2);
             this.txtViolationStatus.Name = "txtViolationStatus";
             this.txtViolationStatus.ReadOnly = true;
-            this.txtViolationStatus.Size = new System.Drawing.Size(51, 26);
+            this.txtViolationStatus.Size = new System.Drawing.Size(51, 20);
             this.txtViolationStatus.TabIndex = 1;
             this.txtViolationStatus.Text = "Không";
             this.txtViolationStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -213,9 +214,9 @@
             this.groupBox2.Controls.Add(this.txtAuthor);
             this.groupBox2.Controls.Add(this.txtBookID);
             this.groupBox2.Location = new System.Drawing.Point(305, 18);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(416, 130);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
@@ -225,7 +226,7 @@
             // 
             this.picBookCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picBookCover.Location = new System.Drawing.Point(295, 16);
-            this.picBookCover.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBookCover.Margin = new System.Windows.Forms.Padding(2);
             this.picBookCover.Name = "picBookCover";
             this.picBookCover.Size = new System.Drawing.Size(83, 103);
             this.picBookCover.TabIndex = 3;
@@ -237,7 +238,7 @@
             this.label4.Location = new System.Drawing.Point(25, 95);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 20);
+            this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Tên tác giả";
             // 
@@ -247,17 +248,17 @@
             this.label5.Location = new System.Drawing.Point(34, 64);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 20);
+            this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Tên sách";
             // 
             // txtBookTitle
             // 
             this.txtBookTitle.Location = new System.Drawing.Point(87, 62);
-            this.txtBookTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBookTitle.Margin = new System.Windows.Forms.Padding(2);
             this.txtBookTitle.Name = "txtBookTitle";
             this.txtBookTitle.ReadOnly = true;
-            this.txtBookTitle.Size = new System.Drawing.Size(175, 26);
+            this.txtBookTitle.Size = new System.Drawing.Size(175, 20);
             this.txtBookTitle.TabIndex = 1;
             // 
             // label6
@@ -266,25 +267,25 @@
             this.label6.Location = new System.Drawing.Point(37, 32);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 20);
+            this.label6.Size = new System.Drawing.Size(48, 13);
             this.label6.TabIndex = 2;
             this.label6.Text = "Mã sách";
             // 
             // txtAuthor
             // 
             this.txtAuthor.Location = new System.Drawing.Point(87, 93);
-            this.txtAuthor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAuthor.Margin = new System.Windows.Forms.Padding(2);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.ReadOnly = true;
-            this.txtAuthor.Size = new System.Drawing.Size(175, 26);
+            this.txtAuthor.Size = new System.Drawing.Size(175, 20);
             this.txtAuthor.TabIndex = 1;
             // 
             // txtBookID
             // 
             this.txtBookID.Location = new System.Drawing.Point(87, 31);
-            this.txtBookID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBookID.Margin = new System.Windows.Forms.Padding(2);
             this.txtBookID.Name = "txtBookID";
-            this.txtBookID.Size = new System.Drawing.Size(175, 26);
+            this.txtBookID.Size = new System.Drawing.Size(175, 20);
             this.txtBookID.TabIndex = 1;
             this.txtBookID.Text = "#0000000-TENSACH-0000";
             this.txtBookID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookID_KeyDown);
@@ -292,7 +293,7 @@
             // btnViewReaders
             // 
             this.btnViewReaders.Location = new System.Drawing.Point(63, 65);
-            this.btnViewReaders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewReaders.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewReaders.Name = "btnViewReaders";
             this.btnViewReaders.Size = new System.Drawing.Size(105, 29);
             this.btnViewReaders.TabIndex = 4;
@@ -302,7 +303,7 @@
             // btnViewBooks
             // 
             this.btnViewBooks.Location = new System.Drawing.Point(63, 30);
-            this.btnViewBooks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewBooks.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewBooks.Name = "btnViewBooks";
             this.btnViewBooks.Size = new System.Drawing.Size(105, 29);
             this.btnViewBooks.TabIndex = 4;
@@ -314,9 +315,9 @@
             this.groupBox3.Controls.Add(this.btnViewBooks);
             this.groupBox3.Controls.Add(this.btnViewReaders);
             this.groupBox3.Location = new System.Drawing.Point(305, 161);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(219, 119);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
@@ -332,7 +333,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Borrow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
