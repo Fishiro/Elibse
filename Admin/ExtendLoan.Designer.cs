@@ -54,7 +54,7 @@
             this.cboReaders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReaders.FormattingEnabled = true;
             this.cboReaders.Location = new System.Drawing.Point(141, 16);
-            this.cboReaders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboReaders.Margin = new System.Windows.Forms.Padding(2);
             this.cboReaders.Name = "cboReaders";
             this.cboReaders.Size = new System.Drawing.Size(164, 21);
             this.cboReaders.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             this.dgvLoans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLoans.Location = new System.Drawing.Point(8, 44);
-            this.dgvLoans.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvLoans.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLoans.Name = "dgvLoans";
             this.dgvLoans.RowTemplate.Height = 28;
             this.dgvLoans.Size = new System.Drawing.Size(295, 200);
@@ -82,7 +82,7 @@
             // numDays
             // 
             this.numDays.Location = new System.Drawing.Point(126, 256);
-            this.numDays.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numDays.Margin = new System.Windows.Forms.Padding(2);
             this.numDays.Maximum = new decimal(new int[] {
             30,
             0,
@@ -105,7 +105,7 @@
             // btnExtend
             // 
             this.btnExtend.Location = new System.Drawing.Point(217, 252);
-            this.btnExtend.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExtend.Margin = new System.Windows.Forms.Padding(2);
             this.btnExtend.Name = "btnExtend";
             this.btnExtend.Size = new System.Drawing.Size(87, 24);
             this.btnExtend.TabIndex = 4;
@@ -124,9 +124,12 @@
             this.Controls.Add(this.cboReaders);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "ExtendLoan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Gia Hạn Sách";
             this.Load += new System.EventHandler(this.ExtendLoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoans)).EndInit();

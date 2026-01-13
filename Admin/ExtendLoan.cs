@@ -126,6 +126,19 @@ namespace Elibse.Admin
 
             int daysToAdd = (int)numDays.Value; // Lấy số ngày từ NumericUpDown
 
+            int maxAllowedDays = GetMaxExtendDays(); // Gọi hàm lấy cấu hình từ DB
+
+            if (daysToAdd > maxAllowedDays)
+            {
+                MessageBox.Show($"Quy định thư viện chỉ cho phép gia hạn tối đa {maxAllowedDays} ngày mỗi lần.\n" +
+                                $"Bạn đang chọn: {daysToAdd} ngày.",
+                                "Vi phạm quy định", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                // Tự động chỉnh lại số ngày về mức tối đa cho người dùng đỡ phải gõ lại
+                numDays.Value = maxAllowedDays;
+                return; // Dừng lại, không cho thực hiện tiếp
+            }
+
             // Tính ngày mới
             DateTime newDueDate = currentDueDate.AddDays(daysToAdd);
 
@@ -137,6 +150,33 @@ namespace Elibse.Admin
             {
                 PerformExtension(loanID, newDueDate, daysToAdd, bookTitle);
             }
+        }
+
+        // --- HÀM LẤY SỐ NGÀY GIA HẠN TỐI ĐA TỪ CSDL ---
+        private int GetMaxExtendDays()
+        {
+            int maxDays = 7; // Giá trị mặc định nếu chưa cấu hình
+            try
+            {
+                using (SqlConnection conn = DatabaseConnection.GetConnection())
+                {
+                    conn.Open();
+                    // Lấy dòng cấu hình đầu tiên
+                    string query = "SELECT TOP 1 MaxExtendDays FROM SYSTEM_CONFIG";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        maxDays = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Lỗi Hệ Thống", "Không lấy được cấu hình gia hạn: " + ex.Message);
+            }
+            return maxDays;
         }
 
         private void PerformExtension(string loanID, DateTime newDate, int days, string bookTitle)

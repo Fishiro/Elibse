@@ -105,11 +105,23 @@
     <Compile Include="Admin\ChangeAdminPassword.Designer.cs">
       <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ConfigExtend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ConfigExtend.Designer.cs">
+      <DependentUpon>ConfigExtend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ConfigNotificationServiceEmail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Admin\ConfigNotificationServiceEmail.Designer.cs">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ConfigPenalty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ConfigPenalty.Designer.cs">
+      <DependentUpon>ConfigPenalty.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\ExtendLoan.cs">
       <SubType>Form</SubType>
@@ -229,8 +241,14 @@
     <EmbeddedResource Include="Admin\ChangeAdminPassword.resx">
       <DependentUpon>ChangeAdminPassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ConfigExtend.resx">
+      <DependentUpon>ConfigExtend.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\ConfigNotificationServiceEmail.resx">
       <DependentUpon>ConfigNotificationServiceEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ConfigPenalty.resx">
+      <DependentUpon>ConfigPenalty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\ExtendLoan.resx">
       <DependentUpon>ExtendLoan.cs</DependentUpon>
