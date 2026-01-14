@@ -50,7 +50,7 @@ namespace Elibse.Admin
             }
         }
 
-        // --- 2. NÚT GỬI EMAIL (Kèm Chữ Ký "Inspired by Ngân") ---
+        // --- 2. NÚT GỬI EMAIL ---
         private void btnSend_Click(object sender, EventArgs e)
         {
             // Kiểm tra nhập liệu
@@ -86,7 +86,6 @@ namespace Elibse.Admin
                                    "<div style='color: #999999; font-style: italic; font-size: 12px; font-family: Arial, sans-serif;'>" +
                                    "Email này được gửi tự động từ Hệ thống Quản lý Thư viện (Elibse).<br>" +
                                    "Vui lòng không trả lời tin nhắn này.<br>" +
-                                   "<b>Developed by Quí | Inspired by Ngân</b>" + // Điểm nhấn ở đây
                                    "</div>";
 
                 // Ghép nội dung hoàn chỉnh

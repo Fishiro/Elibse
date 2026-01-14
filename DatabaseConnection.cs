@@ -53,5 +53,30 @@ namespace Elibse
             Properties.Settings.Default.ServerName = newServerName;
             Properties.Settings.Default.Save(); // Lệnh này quan trọng để ghi xuống ổ cứng
         }
+
+        public static System.Data.DataTable GetDataTable(string query)
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            try
+            {
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                // Ghi log hoặc ném lỗi ra để form biết
+                throw new System.Exception("Lỗi truy vấn SQL: " + ex.Message);
+            }
+            return dt;
+        }
     }
 }

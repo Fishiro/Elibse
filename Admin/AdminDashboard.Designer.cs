@@ -55,7 +55,6 @@
             this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.tínhNăngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gửiMailCảnhBáoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tớiTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quáHạnTrảSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngBáoTrạngTháiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +67,6 @@
             this.menuFineSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.càiĐặtGiaHạnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tựĐộngGửiEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManageReaders = new System.Windows.Forms.ToolStripMenuItem();
             this.addCategory = new System.Windows.Forms.ToolStripMenuItem();
@@ -208,7 +206,7 @@
             this.label.Location = new System.Drawing.Point(53, 42);
             this.label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(72, 13);
+            this.label.Size = new System.Drawing.Size(104, 20);
             this.label.TabIndex = 0;
             this.label.Text = "Tổng số sách";
             this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -220,7 +218,7 @@
             this.lbl4.Location = new System.Drawing.Point(465, 42);
             this.lbl4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(76, 13);
+            this.lbl4.Size = new System.Drawing.Size(111, 20);
             this.lbl4.TabIndex = 0;
             this.lbl4.Text = "Mượn quá hạn";
             this.lbl4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,7 +230,7 @@
             this.lbl3.Location = new System.Drawing.Point(339, 42);
             this.lbl3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(84, 13);
+            this.lbl3.Size = new System.Drawing.Size(121, 20);
             this.lbl3.TabIndex = 0;
             this.lbl3.Text = "Độc giả vi phạm";
             this.lbl3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,7 +242,7 @@
             this.lbl.Location = new System.Drawing.Point(182, 42);
             this.lbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(117, 13);
+            this.lbl.Size = new System.Drawing.Size(168, 20);
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Tổng đang được mượn";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -360,20 +358,12 @@
             // gửiMailCảnhBáoToolStripMenuItem
             // 
             this.gửiMailCảnhBáoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
             this.tớiTàiKhoảnToolStripMenuItem,
             this.quáHạnTrảSáchToolStripMenuItem,
             this.thôngBáoTrạngTháiToolStripMenuItem});
             this.gửiMailCảnhBáoToolStripMenuItem.Name = "gửiMailCảnhBáoToolStripMenuItem";
             this.gửiMailCảnhBáoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.gửiMailCảnhBáoToolStripMenuItem.Text = "Gửi Mail Cảnh Báo";
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // tớiTàiKhoảnToolStripMenuItem
             // 
@@ -387,12 +377,14 @@
             this.quáHạnTrảSáchToolStripMenuItem.Name = "quáHạnTrảSáchToolStripMenuItem";
             this.quáHạnTrảSáchToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.quáHạnTrảSáchToolStripMenuItem.Text = "Quá hạn trả sách";
+            this.quáHạnTrảSáchToolStripMenuItem.Click += new System.EventHandler(this.quáHạnTrảSáchToolStripMenuItem_Click);
             // 
             // thôngBáoTrạngTháiToolStripMenuItem
             // 
             this.thôngBáoTrạngTháiToolStripMenuItem.Name = "thôngBáoTrạngTháiToolStripMenuItem";
             this.thôngBáoTrạngTháiToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.thôngBáoTrạngTháiToolStripMenuItem.Text = "Thông báo trạng thái";
+            this.thôngBáoTrạngTháiToolStripMenuItem.Click += new System.EventHandler(this.thôngBáoTrạngTháiToolStripMenuItem_Click);
             // 
             // xuấtBáoCáoToolStripMenuItem
             // 
@@ -437,8 +429,7 @@
             this.phầnMềmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFineSetting,
             this.càiĐặtGiaHạnToolStripMenuItem,
-            this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem,
-            this.tựĐộngGửiEmailToolStripMenuItem});
+            this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem});
             this.phầnMềmToolStripMenuItem.Name = "phầnMềmToolStripMenuItem";
             this.phầnMềmToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.phầnMềmToolStripMenuItem.Text = "Thiết lập";
@@ -463,12 +454,6 @@
             this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem.Text = "Tài khoản gửi Email thông báo";
             this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem.Click += new System.EventHandler(this.tàiKhoảnGửiMailThôngBáoToolStripMenuItem_Click);
-            // 
-            // tựĐộngGửiEmailToolStripMenuItem
-            // 
-            this.tựĐộngGửiEmailToolStripMenuItem.Name = "tựĐộngGửiEmailToolStripMenuItem";
-            this.tựĐộngGửiEmailToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.tựĐộngGửiEmailToolStripMenuItem.Text = "Tự động gửi Email";
             // 
             // quảnLýToolStripMenuItem
             // 
@@ -611,12 +596,10 @@
         private System.Windows.Forms.ToolStripMenuItem addCategory;
         private System.Windows.Forms.ToolStripMenuItem càiĐặtGiaHạnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gửiMailCảnhBáoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tàiKhoảnGửiMailThôngBáoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem giaHạnTrảSáchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tớiTàiKhoảnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quáHạnTrảSáchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tựĐộngGửiEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vềTácGiảToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngBáoTrạngTháiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xuấtBáoCáoToolStripMenuItem;

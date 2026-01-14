@@ -230,7 +230,7 @@
             this.txtReaderName.Name = "txtReaderName";
             this.txtReaderName.Size = new System.Drawing.Size(133, 20);
             this.txtReaderName.TabIndex = 1;
-            this.txtReaderName.Text = "Nguyen Ngoc Ngan";
+            this.txtReaderName.Text = "";
             // 
             // label1
             // 

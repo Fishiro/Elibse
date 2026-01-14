@@ -5,25 +5,27 @@ namespace Elibse
 {
     internal static class Program
     {
-        [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            // BƯỚC 1: Hiện form cấu hình Server trước
-            fmConnectConfig configForm = new fmConnectConfig();
-
-            // Nếu người dùng kết nối thành công (DialogResult.OK) thì mới vào App
-            if (configForm.ShowDialog() == DialogResult.OK)
+            try
             {
-                // BƯỚC 2: Vào màn hình đăng nhập chính
-                Application.Run(new fmLoginDialog());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                fmConnectConfig configForm = new fmConnectConfig();
+                if (configForm.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new fmLoginDialog());
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Nếu họ tắt form cấu hình mà chưa kết nối -> Thoát luôn
-                Application.Exit();
+                MessageBox.Show($"Lỗi nghiêm trọng: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

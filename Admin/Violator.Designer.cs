@@ -94,7 +94,7 @@
             this.label2.Location = new System.Drawing.Point(12, 13);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(54, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "Thứ tự";
             // 
@@ -141,6 +141,7 @@
             this.Name = "Violator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Độc Giả Vi Phạm";
+            this.Load += new System.EventHandler(this.Violator_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvViolators)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

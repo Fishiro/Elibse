@@ -1,12 +1,15 @@
 ﻿using Elibse.Admin;
 using ExcelDataReader;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Text.RegularExpressions;
 
 namespace Elibse
 {
@@ -24,7 +27,7 @@ namespace Elibse
             LoadChartData();      // Tải biểu đồ
         }
 
-        // --- 2. HÀM LẤY SỐ LIỆU THỐNG KÊ ---
+        // --- 2. HÀM LẤY SỐ LIỆU THỐNG KÊ (Đã chuẩn theo DB Tiếng Anh) ---
         private void LoadDashboardStats()
         {
             try
@@ -34,30 +37,30 @@ namespace Elibse
                     conn.Open();
 
                     // a. Tổng số sách
-                    // SỬA LỖI: Phải dùng đúng tên lblTotalBooks thay vì 'label'
-                    string q1 = "SELECT COUNT(*) FROM BOOKS";
-                    SqlCommand cmd1 = new SqlCommand(q1, conn);
-                    lblTotalBooks.Text = cmd1.ExecuteScalar().ToString();
+                    SqlCommand cmd1 = new SqlCommand("SELECT COUNT(*) FROM BOOKS", conn);
+                    object result1 = cmd1.ExecuteScalar();
+                    lblTotalBooks.Text = (result1 != null) ? result1.ToString() : "0";
 
-                    // b. Sách đang được mượn
-                    string q2 = "SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReturnDate IS NULL";
-                    SqlCommand cmd2 = new SqlCommand(q2, conn);
-                    lblBorrowedBooks.Text = cmd2.ExecuteScalar().ToString();
+                    // b. Sách đang được mượn (Chưa trả)
+                    SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReturnDate IS NULL", conn);
+                    object result2 = cmd2.ExecuteScalar();
+                    lblBorrowedBooks.Text = (result2 != null) ? result2.ToString() : "0";
 
-                    // c. Độc giả vi phạm
-                    string q3 = "SELECT COUNT(*) FROM READERS WHERE Status = 'Locked'";
-                    SqlCommand cmd3 = new SqlCommand(q3, conn);
-                    lblTotalViolations.Text = cmd3.ExecuteScalar().ToString();
+                    // c. Độc giả vi phạm (Trạng thái Locked)
+                    SqlCommand cmd3 = new SqlCommand("SELECT COUNT(*) FROM READERS WHERE Status = 'Locked'", conn);
+                    object result3 = cmd3.ExecuteScalar();
+                    lblTotalViolations.Text = (result3 != null) ? result3.ToString() : "0";
 
-                    // d. Mượn quá hạn
-                    string q4 = "SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReturnDate IS NULL AND DueDate < GETDATE()";
-                    SqlCommand cmd4 = new SqlCommand(q4, conn);
-                    lblTotalOverdue.Text = cmd4.ExecuteScalar().ToString();
+                    // d. Mượn quá hạn (Chưa trả + Hạn trả < Hôm nay)
+                    SqlCommand cmd4 = new SqlCommand("SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReturnDate IS NULL AND DueDate < GETDATE()", conn);
+                    object result4 = cmd4.ExecuteScalar();
+                    lblTotalOverdue.Text = (result4 != null) ? result4.ToString() : "0";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải dữ liệu Dashboard: " + ex.Message);
+                // Ghi log thay vì hiện popup để tránh phiền khi mở app
+                Console.WriteLine("Lỗi tải thống kê: " + ex.Message);
             }
         }
 
@@ -69,6 +72,7 @@ namespace Elibse
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
+                    // Thống kê sách theo danh mục
                     string query = @"SELECT c.CategoryName, COUNT(b.BookID) as Qty 
                                      FROM BOOKS b 
                                      JOIN CATEGORIES c ON b.CategoryID = c.CategoryID 
@@ -80,7 +84,7 @@ namespace Elibse
                     chartStats.Series.Clear();
 
                     Series series = new Series("BooksByCategory");
-                    series.ChartType = SeriesChartType.Column;
+                    series.ChartType = SeriesChartType.Column; // Biểu đồ cột
                     series.IsValueShownAsLabel = true;
 
                     while (reader.Read())
@@ -93,10 +97,13 @@ namespace Elibse
                     chartStats.Series.Add(series);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi vẽ biểu đồ: " + ex.Message);
+            }
         }
 
-        // --- 4. CÁC NÚT BẤM ---
+        // --- 4. CÁC NÚT BẤM (BUTTON EVENTS) ---
 
         private void btnReload_Click(object sender, EventArgs e)
         {
@@ -107,39 +114,14 @@ namespace Elibse
         private void btnAddBook_Click(object sender, EventArgs e)
         {
             AddBook frm = new AddBook();
-            frm.ShowDialog(); // Chặn luồng
-
-            // SỬA LỖI: Gọi đúng tên hàm LoadDashboardStats
-            LoadDashboardStats();
+            frm.ShowDialog(); // Chặn luồng để người dùng nhập xong mới về
+            LoadDashboardStats(); // Tải lại số liệu sau khi thêm
         }
 
         private void addCategory_Click(object sender, EventArgs e)
         {
             CategoryManager frm = new CategoryManager();
             frm.ShowDialog();
-        }
-
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Lấy email độc giả từ TextBox (ví dụ)
-            string emailNguoiNhan = "nguyenduquicm1@gmail.com";
-
-            string tieuDe = "Thông báo quá hạn trả sách - Thư Viện Số";
-
-            // Nội dung email (có thể dùng thẻ HTML để trình bày đẹp hơn)
-            string noiDung = "<h3>Chào bạn,</h3>" +
-                             "<p>Bạn đang có sách mượn quá hạn tại thư viện. Vui lòng đến trả sớm để tránh phát sinh phí phạt.</p>" +
-                             "<p>Trân trọng,<br><b>Admin Quí</b></p>";
-
-            string signature = "<br><br><hr>" +
-                           "<div style='color: #999999; font-style: italic; font-size: 12px; font-family: Arial, sans-serif;'>" +
-                           "Email này được gửi tự động từ Hệ thống Quản lý Thư viện.<br>" +
-                           "Vui lòng không trả lời tin nhắn này.<br>" +
-                           "Developed by Quí" + // Dòng chi ân tinh tế ở đây
-                           "</div>";
-
-            // Gọi hàm gửi mail đã viết ở trên
-            EmailService.SendEmail(emailNguoiNhan, tieuDe, noiDung + signature);
         }
 
         private void tàiKhoảnGửiMailThôngBáoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,97 +133,66 @@ namespace Elibse
         private void menuLogout_Click(object sender, EventArgs e)
         {
             DialogResult check = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
             if (check == DialogResult.Yes)
             {
-                this.Close(); // Chỉ cần đóng Dashboard lại, code bên AdminLogin sẽ chạy tiếp dòng this.Show()
+                this.Close();
             }
         }
 
         private void menuChangePassword_Click(object sender, EventArgs e)
         {
-            // 1. Khởi tạo form Đổi mật khẩu
-            // Lưu ý: Nếu báo lỗi đỏ, hãy chuột phải chọn Quick Actions -> using Elibse.Admin;
             Elibse.Admin.ChangeAdminPassword fm = new Elibse.Admin.ChangeAdminPassword();
-
-            // 2. Hiển thị form dưới dạng Dialog (Cửa sổ con)
-            // Dùng ShowDialog() để bắt buộc người dùng xử lý xong form này mới được quay lại Dashboard
             fm.ShowDialog();
         }
 
         private void btnViewTotalBooks_Click(object sender, EventArgs e)
         {
-            // Tạo một đối tượng form TotalBook
             Elibse.Admin.TotalBook frm = new Elibse.Admin.TotalBook();
-
-            // Hiển thị form lên
-            // ShowDialog() sẽ chặn không cho thao tác ở Dashboard cho đến khi tắt form con đi (an toàn hơn)
             frm.ShowDialog();
-
             LoadDashboardStats();
         }
 
         private void btnViewBorrowed_Click(object sender, EventArgs e)
         {
-            // Tạo một đối tượng form TotalBook
             Elibse.BeingBorrowed frm = new Elibse.BeingBorrowed();
             frm.ShowDialog();
         }
 
         private void btnViewViolators_Click(object sender, EventArgs e)
         {
-            
             Elibse.Violator frm = new Elibse.Violator();
             frm.ShowDialog();
-
-            //Tải lại số liệu trên Dashboard ngay sau khi đóng form
             LoadDashboardStats();
         }
 
         private void btnViewOverdue_Click(object sender, EventArgs e)
         {
-            // Tạo một đối tượng form TotalBook
             Elibse.LateReturn frm = new Elibse.LateReturn();
             frm.ShowDialog();
         }
 
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            // 1. Khởi tạo form Mượn
             Elibse.Borrow frm = new Elibse.Borrow();
-
-            // 2. Hiện form lên
             frm.ShowDialog();
-
-            // 3. Sau khi tắt form mượn, tải lại số liệu Dashboard (để cập nhật số sách đang mượn tăng lên)
             LoadDashboardStats();
         }
 
-        // --- XỬ LÝ NÚT KÝ TRẢ ---
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            // 1. Khởi tạo form Trả (Form này nằm trong namespace Elibse.Admin)
             Elibse.Return frm = new Elibse.Return();
-
             frm.ShowDialog();
-
-            // 3. Cập nhật lại số liệu Dashboard
             LoadDashboardStats();
         }
 
-        // --- 1. MENU QUẢN LÝ ĐỘC GIẢ (QUAN TRỌNG) ---
         private void menuManageReaders_Click(object sender, EventArgs e)
         {
-            // Mở form Quản lý độc giả (TotalReader)
-            // Lưu ý: Chúng ta sẽ cần kiểm tra xem form TotalReader đã code xong chưa ở bước sau
             Elibse.Admin.TotalReader frm = new Elibse.Admin.TotalReader();
             frm.ShowDialog();
-
-            // Tải lại thống kê Dashboard sau khi đóng form (vì có thể đã xóa độc giả)
             LoadDashboardStats();
         }
 
-        // --- 2. CÁC MENU GIỚI THIỆU (Làm nhanh để lấy điểm) ---
+        // --- 5. CÁC MENU GIỚI THIỆU & TIỆN ÍCH ---
 
         private void menuManual_Click(object sender, EventArgs e)
         {
@@ -257,7 +208,7 @@ namespace Elibse
         private void menuAboutUs_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Phần mềm Quản lý Thư viện (Elibse)\n" +
-                            "Phiên bản: 1.0.0 (Beta)\n" +
+                            "Phiên bản: 1.0.0 (Release)\n" +
                             "Ngày phát hành: 01/2026\n" +
                             "Nền tảng: .NET Framework / SQL Server",
                             "Về Elibse", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -266,19 +217,18 @@ namespace Elibse
         private void vềTácGiảToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Sinh viên thực hiện:\n" +
-                            "- Nguyễn Du Quí\n" +
-                            "- (Và sự hỗ trợ tinh thần từ Ngân)\n\n" +
-                            "Lớp: Công nghệ thông tin\n" +
+                            "- Nguyễn Dư Quí\n" +
+                            "- Sơn Yến Vy\n" +
+                            "- Bùi Nguyễn Minh Thư\n" +
+                            "\n\n" +
+                            "Lớp: CNTT K17\n" +
                             "Đồ án môn học: Lập trình Windows",
                             "Tác giả", MessageBoxButtons.OK);
         }
 
         private void tớiTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Khởi tạo Form Gửi Email
             Elibse.Admin.SendEmailForm frm = new Elibse.Admin.SendEmailForm();
-
-            // Hiển thị form lên (ShowDialog để bắt buộc xử lý xong mới được quay lại dashboard)
             frm.ShowDialog();
         }
 
@@ -302,11 +252,7 @@ namespace Elibse
 
         private void xuấtBáoCáoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Tạo form báo cáo
             fmReportBook reportForm = new fmReportBook();
-
-            // Hiển thị form dưới dạng Dialog (Cửa sổ con, bắt buộc tắt nó mới được thao tác cái khác)
-            // Cách này giúp người dùng tập trung xem báo cáo
             reportForm.ShowDialog();
         }
 
@@ -314,6 +260,154 @@ namespace Elibse
         {
             ConfigExtend frm = new ConfigExtend();
             frm.ShowDialog();
+        }
+
+        // --- 6. LOGIC GỬI EMAIL TỰ ĐỘNG (QUAN TRỌNG NHẤT) ---
+
+        // Menu: Gửi cảnh báo quá hạn
+        private void quáHạnTrảSáchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc chắn muốn gửi email nhắc nhở đến tất cả độc giả đang bị QUÁ HẠN trả sách không?",
+                "Xác nhận gửi email hàng loạt",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                ThucHienGuiEmail(onlyOverdue: true);
+            }
+        }
+
+        // Menu: Gửi thông báo trạng thái
+        private void thôngBáoTrạngTháiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Bạn có muốn gửi email thông báo danh sách sách đang mượn cho TOÀN BỘ độc giả không?",
+                "Xác nhận gửi thông báo",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
+
+            if (result == DialogResult.Yes)
+            {
+                ThucHienGuiEmail(onlyOverdue: false);
+            }
+        }
+
+        // Hàm xử lý chung
+        private async void ThucHienGuiEmail(bool onlyOverdue)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    // 1. Chuẩn bị câu truy vấn SQL
+                    // Điều kiện cơ bản: Sách chưa trả (ReturnDate IS NULL)
+                    string condition = "lr.ReturnDate IS NULL";
+
+                    if (onlyOverdue)
+                    {
+                        // Nếu là quá hạn: Thêm điều kiện DueDate < Ngày hiện tại
+                        condition += " AND lr.DueDate < GETDATE()";
+                    }
+
+                    // Query kết nối 3 bảng: LOAN_RECORDS - READERS - BOOKS
+                    string query = $@"
+                        SELECT 
+                            r.FullName,
+                            r.Email,
+                            b.Title,
+                            lr.LoanDate,
+                            lr.DueDate
+                        FROM LOAN_RECORDS lr
+                        JOIN READERS r ON lr.ReaderID = r.ReaderID
+                        JOIN BOOKS b ON lr.BookID = b.BookID
+                        WHERE {condition} 
+                        AND r.Email IS NOT NULL 
+                        AND r.Email <> ''";
+
+                    DataTable dt = DatabaseConnection.GetDataTable(query);
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        Invoke(new Action(() => MessageBox.Show("Không tìm thấy dữ liệu phù hợp để gửi mail!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information)));
+                        return;
+                    }
+
+                    // 2. Gom nhóm sách theo Email
+                    var mailQueue = new Dictionary<string, (string TenDocGia, StringBuilder NoiDungSach)>();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string email = row["Email"].ToString();
+                        string tenDocGia = row["FullName"].ToString(); // Tiếng Anh: FullName
+                        string tenSach = row["Title"].ToString();      // Tiếng Anh: Title
+                        string hanTra = Convert.ToDateTime(row["DueDate"]).ToString("dd/MM/yyyy"); // Tiếng Anh: DueDate
+
+                        if (!mailQueue.ContainsKey(email))
+                        {
+                            mailQueue[email] = (tenDocGia, new StringBuilder());
+                        }
+
+                        // Format dòng sách
+                        mailQueue[email].NoiDungSach.AppendLine($"- {tenSach} (Hạn trả: {hanTra})");
+                    }
+
+                    // 3. Gửi Email
+                    int sentCount = 0;
+                    int errorCount = 0;
+
+                    foreach (var item in mailQueue)
+                    {
+                        string emailNhan = item.Key;
+                        string tenNhan = item.Value.TenDocGia;
+                        string listSach = item.Value.NoiDungSach.ToString();
+
+                        string subject = "";
+                        string body = "";
+
+                        if (onlyOverdue)
+                        {
+                            subject = "[THƯ VIỆN ELIBSE] CẢNH BÁO QUÁ HẠN TRẢ SÁCH";
+                            body = $"Chào {tenNhan},<br/><br/>" +
+                                   $"Hệ thống ghi nhận bạn đang có các cuốn sách <b>ĐÃ QUÁ HẠN</b> trả:<br/>" +
+                                   $"<pre style='font-family:Arial; font-size:14px;'>{listSach}</pre><br/>" +
+                                   $"Vui lòng mang sách đến trả gấp để tránh phí phạt.<br/>Trân trọng,<br/>Thư viện Elibse";
+                        }
+                        else
+                        {
+                            subject = "[THƯ VIỆN ELIBSE] THÔNG BÁO TRẠNG THÁI MƯỢN SÁCH";
+                            body = $"Chào {tenNhan},<br/><br/>" +
+                                   $"Đây là danh sách sách bạn đang mượn:<br/>" +
+                                   $"<pre style='font-family:Arial; font-size:14px;'>{listSach}</pre><br/>" +
+                                   $"Vui lòng lưu ý hạn trả.<br/>Trân trọng,<br/>Thư viện Elibse";
+                        }
+
+                        // Gọi hàm SendEmail (Trả về bool, không popup)
+                        bool isSuccess = EmailService.SendEmail(emailNhan, subject, body);
+
+                        if (isSuccess) sentCount++;
+                        else errorCount++;
+                    }
+
+                    // 4. Thông báo kết quả
+                    Invoke(new Action(() =>
+                    {
+                        string msg = $"Đã gửi thành công: {sentCount} email.";
+                        if (errorCount > 0) msg += $"\nGửi thất bại: {errorCount} email (Kiểm tra lại cấu hình).";
+
+                        MessageBoxIcon icon = (errorCount > 0) ? MessageBoxIcon.Warning : MessageBoxIcon.Information;
+                        MessageBox.Show(msg, "Hoàn tất tác vụ", MessageBoxButtons.OK, icon);
+                    }));
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+            }
         }
     }
 }

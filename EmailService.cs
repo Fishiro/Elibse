@@ -5,56 +5,59 @@ using System.Net.Mail;
 using System.Windows.Forms;
 using Elibse; // Để dùng DatabaseConnection
 
-public class EmailService
+namespace Elibse
 {
-    public static void SendEmail(string toEmail, string subject, string body)
+    public class EmailService
     {
-        string fromEmail = "";
-        string password = "";
-
-        // 1. Lấy thông tin từ Database thay vì hardcode
-        try
+        public static bool SendEmail(string toEmail, string subject, string body)
         {
-            using (SqlConnection conn = DatabaseConnection.GetConnection())
+            string fromEmail = "";
+            string password = "";
+
+            // 1. Lấy thông tin từ Database thay vì hardcode
+            try
             {
-                conn.Open();
-                string query = "SELECT TOP 1 EmailSender, EmailPassword FROM SYSTEM_CONFIG";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
-                    if (reader.Read())
+                    conn.Open();
+                    string query = "SELECT TOP 1 EmailSender, EmailPassword FROM SYSTEM_CONFIG";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        fromEmail = reader["EmailSender"].ToString();
-                        password = reader["EmailPassword"].ToString();
+                        if (reader.Read())
+                        {
+                            fromEmail = reader["EmailSender"].ToString();
+                            password = reader["EmailPassword"].ToString();
+                        }
                     }
                 }
-            }
 
-            if (string.IsNullOrEmpty(fromEmail) || string.IsNullOrEmpty(password))
+                if (string.IsNullOrEmpty(fromEmail) || string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Chưa cấu hình Email gửi đi! Vui lòng liên hệ Admin.", "Lỗi cấu hình", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                // 2. Cấu hình gửi mail (Giữ nguyên logic cũ)
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(fromEmail);
+                mail.To.Add(toEmail);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(fromEmail, password);
+
+                smtp.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Chưa cấu hình Email gửi đi! Vui lòng liên hệ Admin.", "Lỗi cấu hình", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
-
-            // 2. Cấu hình gửi mail (Giữ nguyên logic cũ)
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(fromEmail);
-            mail.To.Add(toEmail);
-            mail.Subject = subject;
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential(fromEmail, password);
-
-            smtp.Send(mail);
-            MessageBox.Show("Đã gửi email thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Gửi email thất bại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

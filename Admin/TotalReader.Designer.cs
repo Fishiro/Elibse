@@ -86,7 +86,7 @@
             this.label1.Location = new System.Drawing.Point(39, 115);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.Size = new System.Drawing.Size(36, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tên";
             // 
@@ -96,7 +96,7 @@
             this.label2.Location = new System.Drawing.Point(5, 136);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Mã độc giả";
             // 
@@ -105,7 +105,7 @@
             this.txtFullName.Location = new System.Drawing.Point(67, 113);
             this.txtFullName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(121, 20);
+            this.txtFullName.Size = new System.Drawing.Size(121, 26);
             this.txtFullName.TabIndex = 3;
             // 
             // txtReaderID
@@ -114,7 +114,7 @@
             this.txtReaderID.Margin = new System.Windows.Forms.Padding(2);
             this.txtReaderID.Name = "txtReaderID";
             this.txtReaderID.ReadOnly = true;
-            this.txtReaderID.Size = new System.Drawing.Size(121, 20);
+            this.txtReaderID.Size = new System.Drawing.Size(121, 26);
             this.txtReaderID.TabIndex = 3;
             // 
             // txtPhone
@@ -122,7 +122,7 @@
             this.txtPhone.Location = new System.Drawing.Point(67, 176);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(121, 20);
+            this.txtPhone.Size = new System.Drawing.Size(121, 26);
             this.txtPhone.TabIndex = 3;
             // 
             // btnEditReader
@@ -166,7 +166,7 @@
             this.txtSearchReader.Location = new System.Drawing.Point(8, 15);
             this.txtSearchReader.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearchReader.Name = "txtSearchReader";
-            this.txtSearchReader.Size = new System.Drawing.Size(211, 20);
+            this.txtSearchReader.Size = new System.Drawing.Size(211, 26);
             this.txtSearchReader.TabIndex = 5;
             // 
             // btnSearch
@@ -209,7 +209,7 @@
             this.label4.Location = new System.Drawing.Point(31, 157);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(48, 20);
             this.label4.TabIndex = 2;
             this.label4.Text = "Email";
             // 
@@ -218,7 +218,7 @@
             this.txtEmail.Location = new System.Drawing.Point(67, 155);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(121, 20);
+            this.txtEmail.Size = new System.Drawing.Size(121, 26);
             this.txtEmail.TabIndex = 3;
             // 
             // label3
@@ -227,7 +227,7 @@
             this.label3.Location = new System.Drawing.Point(35, 177);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "SĐT";
             // 
@@ -263,7 +263,7 @@
             this.dtpDOB.Location = new System.Drawing.Point(67, 196);
             this.dtpDOB.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(180, 20);
+            this.dtpDOB.Size = new System.Drawing.Size(180, 26);
             this.dtpDOB.TabIndex = 6;
             // 
             // btnChangeImage
@@ -283,7 +283,7 @@
             this.label5.Location = new System.Drawing.Point(11, 196);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.Size = new System.Drawing.Size(78, 20);
             this.label5.TabIndex = 2;
             this.label5.Text = "Ngày sinh";
             // 
@@ -303,6 +303,7 @@
             this.Name = "TotalReader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Danh Sách Độc Giả";
+            this.Load += new System.EventHandler(this.TotalReader_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReaders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picReader)).EndInit();
             this.groupBox1.ResumeLayout(false);

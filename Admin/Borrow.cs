@@ -270,5 +270,18 @@ namespace Elibse
                 }
             }
         }
+        private void btnViewBooks_Click(object sender, EventArgs e)
+        {
+            // Mở form xem sách (TotalBook)
+            Elibse.Admin.TotalBook frm = new Elibse.Admin.TotalBook();
+            frm.ShowDialog();
+        }
+
+        private void btnViewReaders_Click(object sender, EventArgs e)
+        {
+            // Mở form xem độc giả (TotalReader)
+            Elibse.Admin.TotalReader frm = new Elibse.Admin.TotalReader();
+            frm.ShowDialog();
+        }
     }
 }

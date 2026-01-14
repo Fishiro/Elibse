@@ -113,7 +113,7 @@
             this.Name = "ConfigNotificationServiceEmail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Nhập Email Để Gửi Thông Báo";
-            this.Load += new System.EventHandler(this.NotificationServiceEmail_Load);
+            this.Load += new System.EventHandler(this.ConfigNotificationServiceEmail_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
