@@ -107,7 +107,7 @@ namespace Elibse.Admin
                     // Chuyển từ byte[] ngược lại thành Image để hiện lên
 
                     MemoryStream ms = new MemoryStream(imgData); // Tạo dòng chảy
-                    picReader.Image = Image.FromStream(ms);      // Gán vào ảnh
+                    picReader.Image = new Bitmap(Image.FromStream(ms));      // Gán vào ảnh
                     picReader.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else

@@ -77,7 +77,7 @@ namespace Elibse.Admin
                         {
                             byte[] imgData = (byte[])reader["BookImage"];
                             MemoryStream ms = new MemoryStream(imgData);
-                            picBookCover.Image = Image.FromStream(ms);
+                            picBookCover.Image = new Bitmap(Image.FromStream(ms));
                             picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
                         }
                     }
