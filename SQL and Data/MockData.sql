@@ -1,38 +1,32 @@
 -- =============================================================
--- MOCK DATA SCRIPT - DỰ ÁN ELIBSE (FULL DEMO VERSION)
--- Mục đích: Tạo dữ liệu giả để thuyết trình và test full chức năng
--- Bao gồm: Danh mục, Sách, Độc giả, Lịch sử mượn trả, Phạt
+-- MOCK DATA SCRIPT - DỰ ÁN ELIBSE (FULL DEMO VERSION - SYNCHRONIZED)
+-- Ngày cập nhật: 14/01/2026
+-- Pass mặc định cho mọi User: 123456
 -- =============================================================
 
 USE ElibseDB;
 GO
 
--- 1. XÓA DỮ LIỆU CŨ (Nếu muốn làm sạch trước khi demo)
--- Bỏ comment các dòng dưới nếu bạn muốn Reset toàn bộ dữ liệu mỗi lần chạy
-/*
+-- 1. DỌN DẸP DỮ LIỆU CŨ (Để đảm bảo ID không bị trùng lặp khi chạy lại)
 DELETE FROM LOAN_RECORDS;
 DELETE FROM BOOKS;
 DELETE FROM READERS;
 DELETE FROM CATEGORIES;
+-- Reset lại bộ đếm tự tăng (Identity) nếu có
 DBCC CHECKIDENT ('CATEGORIES', RESEED, 0);
 DBCC CHECKIDENT ('LOAN_RECORDS', RESEED, 0);
-*/
 
 PRINT N'>> BẮT ĐẦU KHỞI TẠO DỮ LIỆU DEMO...';
 
 -- =============================================
 -- 2. TẠO DANH MỤC SÁCH (CATEGORIES)
 -- =============================================
-IF NOT EXISTS (SELECT * FROM CATEGORIES WHERE CategoryName = N'Công nghệ thông tin')
-    INSERT INTO CATEGORIES (CategoryName) VALUES (N'Công nghệ thông tin');
-IF NOT EXISTS (SELECT * FROM CATEGORIES WHERE CategoryName = N'Kinh tế - Tài chính')
-    INSERT INTO CATEGORIES (CategoryName) VALUES (N'Kinh tế - Tài chính');
-IF NOT EXISTS (SELECT * FROM CATEGORIES WHERE CategoryName = N'Văn học - Tiểu thuyết')
-    INSERT INTO CATEGORIES (CategoryName) VALUES (N'Văn học - Tiểu thuyết');
-IF NOT EXISTS (SELECT * FROM CATEGORIES WHERE CategoryName = N'Truyện tranh - Manga')
-    INSERT INTO CATEGORIES (CategoryName) VALUES (N'Truyện tranh - Manga');
+INSERT INTO CATEGORIES (CategoryName) VALUES (N'Công nghệ thông tin');
+INSERT INTO CATEGORIES (CategoryName) VALUES (N'Kinh tế - Tài chính');
+INSERT INTO CATEGORIES (CategoryName) VALUES (N'Văn học - Tiểu thuyết');
+INSERT INTO CATEGORIES (CategoryName) VALUES (N'Truyện tranh - Manga');
 
--- Lấy ID danh mục để dùng (tránh hardcode số)
+-- Lấy ID danh mục tự động
 DECLARE @CatID_CNTT INT = (SELECT TOP 1 CategoryID FROM CATEGORIES WHERE CategoryName = N'Công nghệ thông tin');
 DECLARE @CatID_KT   INT = (SELECT TOP 1 CategoryID FROM CATEGORIES WHERE CategoryName = N'Kinh tế - Tài chính');
 DECLARE @CatID_VH   INT = (SELECT TOP 1 CategoryID FROM CATEGORIES WHERE CategoryName = N'Văn học - Tiểu thuyết');
@@ -40,120 +34,92 @@ DECLARE @CatID_TT   INT = (SELECT TOP 1 CategoryID FROM CATEGORIES WHERE Categor
 
 -- =============================================
 -- 3. TẠO DỮ LIỆU SÁCH (BOOKS)
--- Kết hợp cả mã ngắn (B001) và mã vạch dài (#000...) để demo sự linh hoạt
+-- Chuẩn hóa theo format của AddBook.cs: #{Global:D7}-{Abbr}-{Local:D4}
 -- =============================================
-PRINT N'... Đang thêm sách ...';
+PRINT N'... Đang thêm sách (Chuẩn hóa ID) ...';
 
--- Sách CNTT
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = 'B001')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('B001', N'Lập trình C# WinForm', N'Nguyễn Văn Code', @CatID_CNTT, 150000, GETDATE(), 'Available', N'Giáo trình cơ bản cho người mới bắt đầu.');
+-- Sách 1: Lập trình C# WinForm -> Abbr: LTCW
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000001-LTCW-0001', N'Lập trình C# WinForm', N'Nguyễn Văn Code', @CatID_CNTT, 150000, GETDATE(), 'Borrowed', N'Giáo trình cơ bản cho người mới bắt đầu.');
 
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = 'B002')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('B002', N'SQL Server Toàn tập', N'Trần Database', @CatID_CNTT, 120000, GETDATE(), 'Borrowed', N'Sách chuyên sâu về truy vấn dữ liệu.');
+-- Sách 2: SQL Server Toàn tập -> Abbr: SSTT
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000002-SSTT-0001', N'SQL Server Toàn tập', N'Trần Database', @CatID_CNTT, 120000, DATEADD(month, -2, GETDATE()), 'Available', N'Sách chuyên sâu về truy vấn dữ liệu.');
 
--- Sách Clean Code (Dùng mã dài kiểu thư viện lớn)
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = '#CC-001')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('#CC-001', N'Clean Code: Mã sạch', N'Robert C. Martin', @CatID_CNTT, 350000, GETDATE(), 'Borrowed', N'Cuốn sách gối đầu giường của lập trình viên.');
+-- Sách 3: Clean Code: Mã sạch -> Abbr: CCMS
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000003-CCMS-0001', N'Clean Code: Mã sạch', N'Robert C. Martin', @CatID_CNTT, 350000, GETDATE(), 'Borrowed', N'Cuốn sách gối đầu giường của lập trình viên.');
 
--- Sách Truyện tranh (Số lượng nhiều để test List)
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = '#DRM-001')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('#DRM-001', N'Doraemon Tập 1', N'Fujiko F. Fujio', @CatID_TT, 25000, GETDATE(), 'Available', N'Chú mèo máy đến từ tương lai.');
+-- Sách 4: Doraemon Tập 1 -> Abbr: DT1
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000004-DT1-0001', N'Doraemon Tập 1', N'Fujiko F. Fujio', @CatID_TT, 25000, GETDATE(), 'Available', N'Chú mèo máy đến từ tương lai.');
 
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = '#DRM-002')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('#DRM-002', N'Doraemon Tập 2', N'Fujiko F. Fujio', @CatID_TT, 25000, GETDATE(), 'Available', N'Nobita và những người bạn.');
+-- Sách 5: Doraemon Tập 2 -> Abbr: DT2
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000005-DT2-0001', N'Doraemon Tập 2', N'Fujiko F. Fujio', @CatID_TT, 25000, GETDATE(), 'Available', N'Nobita và những người bạn.');
 
--- Sách Văn học
-IF NOT EXISTS (SELECT * FROM BOOKS WHERE BookID = 'B005')
-    INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
-    VALUES ('B005', N'Nhà Giả Kim', N'Paulo Coelho', @CatID_VH, 80000, GETDATE(), 'Lost', N'Sách bán chạy nhất mọi thời đại.');
+-- Sách 6: Nhà Giả Kim -> Abbr: NGK
+INSERT INTO BOOKS (BookID, Title, Author, CategoryID, Price, ImportDate, Status, Description) 
+VALUES ('#0000006-NGK-0001', N'Nhà Giả Kim', N'Paulo Coelho', @CatID_VH, 80000, DATEADD(year, -1, GETDATE()), 'Lost', N'Sách bán chạy nhất mọi thời đại.');
 
 -- =============================================
 -- 4. TẠO DỮ LIỆU ĐỘC GIẢ (READERS)
+-- Pass: 123456 (Hash SHA256 + Salt chuẩn)
 -- =============================================
 PRINT N'... Đang thêm độc giả ...';
 
--- 1. Độc giả VIP (Demo mượn trả suôn sẻ)
-IF NOT EXISTS (SELECT * FROM READERS WHERE ReaderID = 'R001')
-    INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status)
-    VALUES ('R001', N'Nguyễn Dư Quí', '2006-01-01', '0942655776', 'phamd4869@gmail.com', N'Cà Mau', GETDATE(), 'Active');
+DECLARE @DefaultPassHash VARCHAR(100) = '398DE8522A0CF03BD64C48026A2E1EF675A59EEA2373F6E73D789339FF56AA51';
 
--- 2. Độc giả QUÁ HẠN (Demo tính năng gửi Email nhắc nhở)
-IF NOT EXISTS (SELECT * FROM READERS WHERE ReaderID = 'R002')
-    INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status)
-    VALUES ('R002', N'Trần Thị Quá Hạn', '1999-05-05', '0902222222', 'peanutbutter262626@outlook.com', N'TP.HCM', GETDATE(), 'Active');
+-- 1. Độc giả VIP (Nguyễn Dư Quí)
+INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status, Password)
+VALUES ('RD00001', N'Nguyễn Dư Quí', '2006-01-01', '0942655776', 'phamd4869@gmail.com', N'Cà Mau', GETDATE(), 'Active', @DefaultPassHash);
 
--- 3. Độc giả NỢ TIỀN (Demo tính năng chặn mượn sách)
-IF NOT EXISTS (SELECT * FROM READERS WHERE ReaderID = 'R003')
-    INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status)
-    VALUES ('R003', N'Lê Văn Nợ', '2006-10-12', '0903333333', 'impeanut2266@gmail.com', N'Đà Nẵng', GETDATE(), 'Active');
+-- 2. Độc giả QUÁ HẠN (Trần Thị Quá Hạn)
+INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status, Password)
+VALUES ('RD00002', N'Trần Thị Quá Hạn', '1999-05-05', '0902222222', 'peanutbutter262626@outlook.com', N'TP.HCM', GETDATE(), 'Active', @DefaultPassHash);
 
--- 4. Độc giả BỊ KHÓA (Demo validation trạng thái)
-IF NOT EXISTS (SELECT * FROM READERS WHERE ReaderID = 'R004')
-    INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status)
-    VALUES ('R004', N'Phạm Vi Phạm', '2000-01-01', '0904444444', 'blocked@example.com', N'Hà Nội', GETDATE(), 'Locked');
+-- 3. Độc giả NỢ TIỀN (Lê Văn Nợ)
+INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status, Password)
+VALUES ('RD00003', N'Lê Văn Nợ', '2006-10-12', '0903333333', 'impeanut2266@gmail.com', N'Đà Nẵng', GETDATE(), 'Active', @DefaultPassHash);
+
+-- 4. Độc giả BỊ KHÓA (Phạm Vi Phạm)
+INSERT INTO READERS (ReaderID, FullName, DOB, PhoneNumber, Email, Address, CreatedDate, Status, Password)
+VALUES ('RD00004', N'Phạm Vi Phạm', '2000-01-01', '0904444444', 'blocked@example.com', N'Hà Nội', GETDATE(), 'Locked', @DefaultPassHash);
 
 -- =============================================
 -- 5. TẠO KỊCH BẢN MƯỢN TRẢ (LOAN_RECORDS)
+-- Cập nhật BookID theo mã mới
 -- =============================================
 PRINT N'... Đang tạo kịch bản giao dịch ...';
 
 -- CASE 1: ĐANG MƯỢN BÌNH THƯỜNG (Chưa đến hạn)
--- Độc giả R001 mượn sách B001 (C#)
-IF NOT EXISTS (SELECT * FROM LOAN_RECORDS WHERE ReaderID = 'R001' AND BookID = 'B001' AND ReturnDate IS NULL)
-BEGIN
-    INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
-    VALUES ('B001', 'R001', GETDATE(), DATEADD(day, 7, GETDATE()), NULL, NULL, 0, 0);
-    
-    -- Cập nhật trạng thái sách thành Borrowed
-    UPDATE BOOKS SET Status = 'Borrowed' WHERE BookID = 'B001';
-END
+-- Độc giả RD00001 mượn sách #0000001-LTCW-0001 (C#)
+INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
+VALUES ('#0000001-LTCW-0001', 'RD00001', GETDATE(), DATEADD(day, 7, GETDATE()), NULL, NULL, 0, 0);
 
--- CASE 2: ĐANG MƯỢN QUÁ HẠN (Để test Email Service)
--- Độc giả R002 mượn sách #CC-001 (Clean Code)
--- Mượn từ 20 ngày trước, hạn 7 ngày -> Đã trễ 13 ngày
-IF NOT EXISTS (SELECT * FROM LOAN_RECORDS WHERE ReaderID = 'R002' AND BookID = '#CC-001' AND ReturnDate IS NULL)
-BEGIN
-    INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
-    VALUES ('#CC-001', 'R002', DATEADD(day, -20, GETDATE()), DATEADD(day, -13, GETDATE()), NULL, NULL, 0, 0);
-    
-    -- Cập nhật trạng thái sách thành Borrowed
-    UPDATE BOOKS SET Status = 'Borrowed' WHERE BookID = '#CC-001';
-END
+-- CASE 2: ĐANG MƯỢN QUÁ HẠN (Test Email)
+-- Độc giả RD00002 mượn sách #0000003-CCMS-0001 (Clean Code)
+-- Mượn từ 20 ngày trước -> Trễ 13 ngày
+INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
+VALUES ('#0000003-CCMS-0001', 'RD00002', DATEADD(day, -20, GETDATE()), DATEADD(day, -13, GETDATE()), NULL, NULL, 0, 0);
 
--- CASE 3: ĐÃ TRẢ NHƯNG CHƯA ĐÓNG PHẠT (Để test chặn mượn tiếp)
--- Độc giả R003 (Lê Văn Nợ) đã trả sách B002 nhưng còn nợ 50k
-IF NOT EXISTS (SELECT * FROM LOAN_RECORDS WHERE ReaderID = 'R003' AND FineAmount > 0 AND IsPaid = 0)
-BEGIN
-    INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
-    VALUES ('B002', 'R003', DATEADD(day, -30, GETDATE()), DATEADD(day, -23, GETDATE()), DATEADD(day, -5, GETDATE()), N'Quá hạn', 50000, 0);
-    
-    -- Sách đã trả nên trạng thái là Available (nhưng người dùng thì bị dính nợ)
-    UPDATE BOOKS SET Status = 'Available' WHERE BookID = 'B002';
-END
+-- CASE 3: ĐÃ TRẢ NHƯNG CHƯA ĐÓNG PHẠT (Test chặn mượn)
+-- Độc giả RD00003 (Lê Văn Nợ) đã trả sách #0000002-SSTT-0001 (SQL) nhưng nợ 50k
+INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
+VALUES ('#0000002-SSTT-0001', 'RD00003', DATEADD(day, -30, GETDATE()), DATEADD(day, -23, GETDATE()), DATEADD(day, -5, GETDATE()), N'Quá hạn', 50000, 0);
 
 -- CASE 4: SÁCH BỊ MẤT (Lost)
--- Độc giả R001 báo mất sách B005 (Nhà Giả Kim) và đã đền tiền
-IF NOT EXISTS (SELECT * FROM LOAN_RECORDS WHERE BookID = 'B005' AND ReturnStatus = N'Mất')
-BEGIN
-    INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
-    VALUES ('B005', 'R001', DATEADD(month, -1, GETDATE()), DATEADD(day, 7, DATEADD(month, -1, GETDATE())), GETDATE(), N'Mất', 80000, 1);
-    
-    -- Cập nhật trạng thái sách vĩnh viễn là Lost (hoặc Liquidated)
-    UPDATE BOOKS SET Status = 'Lost' WHERE BookID = 'B005';
-END
+-- Độc giả RD00001 làm mất sách #0000006-NGK-0001 (Nhà Giả Kim)
+INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate, ReturnDate, ReturnStatus, FineAmount, IsPaid)
+VALUES ('#0000006-NGK-0001', 'RD00001', DATEADD(month, -1, GETDATE()), DATEADD(day, 7, DATEADD(month, -1, GETDATE())), GETDATE(), N'Mất', 80000, 1);
 
 -- =============================================
 -- 6. TỔNG KẾT
 -- =============================================
 PRINT N'==========================================================';
-PRINT N'>> ĐÃ TẠO DỮ LIỆU TEST THÀNH CÔNG!';
-PRINT N'1. Sách B001 (C#): Đang được mượn bởi R001 (Đúng hạn).';
-PRINT N'2. Sách #CC-001 (Clean Code): Đang được mượn bởi R002 (QUÁ HẠN -> Test gửi Mail).';
-PRINT N'3. Độc giả R003 (Lê Văn Nợ): Đang nợ 50k -> Thử mượn sách mới sẽ bị chặn.';
-PRINT N'4. Sách B005 (Nhà Giả Kim): Trạng thái LOST -> Không thể mượn.';
+PRINT N'>> ĐÃ TẠO DỮ LIỆU TEST THÀNH CÔNG (SYNCHRONIZED)!';
+PRINT N'1. RD00001 (Pass: 123456): Đang mượn C# (Đúng hạn).';
+PRINT N'2. RD00002 (Pass: 123456): Đang mượn Clean Code (QUÁ HẠN).';
+PRINT N'3. RD00003 (Pass: 123456): Đã trả SQL Server nhưng NỢ 50k.';
+PRINT N'4. Sách Nhà Giả Kim: Trạng thái LOST.';
 PRINT N'==========================================================';

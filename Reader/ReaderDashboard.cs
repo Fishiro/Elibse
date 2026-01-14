@@ -33,6 +33,16 @@ namespace Elibse.Reader
             dgvMyBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            // --- BỔ SUNG ĐOẠN NÀY ---
+            // Giúp chọn cả hàng khi click, thay vì chỉ chọn 1 ô
+            dgvBooks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMyBooks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Chặn chọn nhiều dòng cùng lúc để tránh lỗi logic
+            dgvBooks.MultiSelect = false;
+            dgvMyBooks.MultiSelect = false;
+            // ------------------------
+
             // Tải dữ liệu cho cả 3 tab
             LoadAvailableBooks();
             LoadMyBooks();
@@ -86,19 +96,37 @@ namespace Elibse.Reader
 
         private void btnBorrow_Click(object sender, EventArgs e)
         {
+            // 1. Kiểm tra chọn hàng
             if (dgvBooks.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Vui lòng chọn một cuốn sách để mượn!");
+                MessageBox.Show("Vui lòng chọn một cuốn sách để mượn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // 2. Kiểm tra dữ liệu ô
             if (dgvBooks.SelectedRows[0].Cells["Mã Sách"].Value == null)
             {
-                MessageBox.Show("Dữ liệu sách không hợp lệ!");
+                MessageBox.Show("Dữ liệu sách không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            // Lấy thông tin sách
             string bookId = dgvBooks.SelectedRows[0].Cells["Mã Sách"].Value.ToString();
+            // Lấy thêm Tên Sách để hiện trong câu hỏi cho thân thiện
+            string bookTitle = dgvBooks.SelectedRows[0].Cells["Tên Sách"].Value.ToString();
+
+            // HỘP THOẠI XÁC NHẬN ---
+            DialogResult result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn mượn cuốn sách:\n\n\"{bookTitle}\"\n\nkhông?",
+                "Xác nhận mượn sách",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            // Nếu người dùng bấm No (Không), thì dừng hàm tại đây (return)
+            if (result == DialogResult.No)
+            {
+                return;
+            }
 
             try
             {
@@ -106,7 +134,7 @@ namespace Elibse.Reader
                 {
                     conn.Open();
 
-                    // 1. Kiểm tra xem độc giả có đang mượn cuốn này mà chưa trả không?
+                    // 3. Kiểm tra xem độc giả có đang mượn cuốn này chưa trả không?
                     string checkQuery = "SELECT COUNT(*) FROM LOAN_RECORDS WHERE BookID = @bid AND ReaderID = @rid AND ReturnDate IS NULL";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                     checkCmd.Parameters.AddWithValue("@bid", bookId);
@@ -114,46 +142,47 @@ namespace Elibse.Reader
 
                     if ((int)checkCmd.ExecuteScalar() > 0)
                     {
-                        MessageBox.Show("Bạn đang mượn cuốn này rồi, không thể mượn thêm!");
+                        MessageBox.Show($"Bạn đang mượn cuốn \"{bookTitle}\" rồi, không thể mượn thêm!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // 2. Thực hiện mượn (Trừ số lượng sách + Thêm vào LoanRecords)
-                    // Dùng Transaction để đảm bảo cả 2 việc cùng thành công
+                    // 4. Thực hiện mượn (Transaction)
                     SqlTransaction transaction = conn.BeginTransaction();
                     SqlCommand cmd = conn.CreateCommand();
                     cmd.Transaction = transaction;
 
                     try
                     {
-                        // Trừ số lượng sách
+                        // Trừ số lượng (Cập nhật trạng thái)
                         cmd.CommandText = "UPDATE BOOKS SET Status = 'Borrowed' WHERE BookID = @BookID";
                         cmd.Parameters.AddWithValue("@BookID", bookId);
                         cmd.ExecuteNonQuery();
 
-                        // Thêm phiếu mượn (Hạn trả mặc định +7 ngày)
+                        // Thêm phiếu mượn
                         cmd.CommandText = @"INSERT INTO LOAN_RECORDS (BookID, ReaderID, LoanDate, DueDate) 
-                                            VALUES (@BookID, @ReaderID, GETDATE(), GETDATE() + 7)";
+                                    VALUES (@BookID, @ReaderID, GETDATE(), GETDATE() + 7)";
                         cmd.Parameters.AddWithValue("@ReaderID", currentReaderID);
                         cmd.ExecuteNonQuery();
 
                         transaction.Commit();
-                        MessageBox.Show("Mượn sách thành công! Hạn trả là 7 ngày.");
 
-                        // Refresh lại dữ liệu các tab
+                        // Thông báo thành công kèm Icon vui vẻ
+                        MessageBox.Show($"Mượn sách \"{bookTitle}\" thành công!\nHạn trả là 7 ngày.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Refresh lại dữ liệu
                         LoadAvailableBooks();
                         LoadMyBooks();
                     }
                     catch
                     {
                         transaction.Rollback();
-                        throw; // Ném lỗi ra ngoài để catch bắt
+                        throw;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi mượn sách: " + ex.Message);
+                MessageBox.Show("Lỗi mượn sách: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -275,12 +304,13 @@ namespace Elibse.Reader
 
                     // 2. Load Lịch sử
                     string histQuery = @"SELECT B.Title AS [Sách], 
-                                       L.LoanDate AS [Ngày Mượn], 
-                                       L.ReturnDate AS [Ngày Trả]
-                                FROM LOAN_RECORDS L
-                                JOIN BOOKS B ON L.BookID = B.BookID
-                                WHERE L.ReaderID = @rid AND L.ReturnDate IS NOT NULL
-                                ORDER BY L.ReturnDate DESC";
+                                        L.LoanDate AS [Ngày Mượn], 
+                                        L.ReturnDate AS [Ngày Trả],
+                                        (CASE WHEN L.ReturnDate IS NULL THEN N'Đang mượn' ELSE N'Đã trả' END) AS [Trạng Thái]
+                                        FROM LOAN_RECORDS L
+                                        JOIN BOOKS B ON L.BookID = B.BookID
+                                        WHERE L.ReaderID = @rid 
+                                        ORDER BY L.LoanDate DESC";
 
                     SqlDataAdapter da = new SqlDataAdapter(histQuery, conn);
                     da.SelectCommand.Parameters.AddWithValue("@rid", currentReaderID);

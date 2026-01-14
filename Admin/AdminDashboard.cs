@@ -210,16 +210,18 @@ namespace Elibse
             MessageBox.Show("Phần mềm Quản lý Thư viện (Elibse)\n" +
                             "Phiên bản: 1.0.0 (Release)\n" +
                             "Ngày phát hành: 01/2026\n" +
-                            "Nền tảng: .NET Framework / SQL Server",
+                            "Nền tảng: .NET Framework / SQL Server\n" +
+                            "Hỗ trợ Reporting: Crystal Report\n" +
+                            "Mã nguồn: https://github.com/Fishiro/Elibse", 
                             "Về Elibse", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void vềTácGiảToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Sinh viên thực hiện:\n" +
-                            "- Nguyễn Dư Quí\n" +
-                            "- Sơn Yến Vy\n" +
-                            "- Bùi Nguyễn Minh Thư\n" +
+                            "- Nguyễn Dư Quí (CK2402A33)\n" +
+                            "- Sơn Yến Vy (CK2402A32)\n" +
+                            "- Bùi Nguyễn Minh Thư (CK2402A25)\n" +
                             "\n\n" +
                             "Lớp: CNTT K17\n" +
                             "Đồ án môn học: Lập trình Windows",

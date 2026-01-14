@@ -114,7 +114,7 @@
             // 
             this.txtSearch.Location = new System.Drawing.Point(8, 20);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(337, 20);
+            this.txtSearch.Size = new System.Drawing.Size(337, 26);
             this.txtSearch.TabIndex = 0;
             // 
             // tabPage2
@@ -197,7 +197,7 @@
             this.lblUserInfo.AutoSize = true;
             this.lblUserInfo.Location = new System.Drawing.Point(29, 69);
             this.lblUserInfo.Name = "lblUserInfo";
-            this.lblUserInfo.Size = new System.Drawing.Size(57, 13);
+            this.lblUserInfo.Size = new System.Drawing.Size(86, 20);
             this.lblUserInfo.TabIndex = 0;
             this.lblUserInfo.Text = "lblUserInfo";
             // 
@@ -206,7 +206,7 @@
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Location = new System.Drawing.Point(29, 38);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(58, 13);
+            this.lblWelcome.Size = new System.Drawing.Size(83, 20);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Xin chào...";
             // 
@@ -215,7 +215,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 172);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.Size = new System.Drawing.Size(141, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Lịch sử mượn sách";
             // 
@@ -230,7 +230,7 @@
             this.MaximizeBox = false;
             this.Name = "ReaderDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ReaderDashboard";
+            this.Text = "Elibse: Dashboard Độc Giả";
             this.Load += new System.EventHandler(this.ReaderDashboard_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

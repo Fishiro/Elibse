@@ -43,13 +43,13 @@
             this.txtBorrowCount = new System.Windows.Forms.TextBox();
             this.txtViolationStatus = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboBookSelect = new System.Windows.Forms.ComboBox();
             this.picBookCover = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtBookTitle = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtAuthor = new System.Windows.Forms.TextBox();
-            this.txtBookID = new System.Windows.Forms.TextBox();
             this.btnViewReaders = new System.Windows.Forms.Button();
             this.btnViewBooks = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -127,7 +127,6 @@
             this.txtCreatedDate.ReadOnly = true;
             this.txtCreatedDate.Size = new System.Drawing.Size(100, 26);
             this.txtCreatedDate.TabIndex = 1;
-            this.txtCreatedDate.Text = "20/03/2004";
             // 
             // groupBox1
             // 
@@ -205,21 +204,30 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cboBookSelect);
             this.groupBox2.Controls.Add(this.picBookCover);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtBookTitle);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtAuthor);
-            this.groupBox2.Controls.Add(this.txtBookID);
             this.groupBox2.Location = new System.Drawing.Point(305, 18);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(416, 130);
+            this.groupBox2.Size = new System.Drawing.Size(416, 136);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sách mượn";
+            // 
+            // cboBookSelect
+            // 
+            this.cboBookSelect.FormattingEnabled = true;
+            this.cboBookSelect.Location = new System.Drawing.Point(111, 31);
+            this.cboBookSelect.Name = "cboBookSelect";
+            this.cboBookSelect.Size = new System.Drawing.Size(151, 21);
+            this.cboBookSelect.TabIndex = 4;
+            this.cboBookSelect.SelectedIndexChanged += new System.EventHandler(this.cboBookSelect_SelectedIndexChanged);
             // 
             // picBookCover
             // 
@@ -234,7 +242,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 95);
+            this.label4.Location = new System.Drawing.Point(19, 96);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 20);
@@ -244,7 +252,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 64);
+            this.label5.Location = new System.Drawing.Point(32, 65);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 20);
@@ -253,11 +261,11 @@
             // 
             // txtBookTitle
             // 
-            this.txtBookTitle.Location = new System.Drawing.Point(87, 62);
+            this.txtBookTitle.Location = new System.Drawing.Point(111, 62);
             this.txtBookTitle.Margin = new System.Windows.Forms.Padding(2);
             this.txtBookTitle.Name = "txtBookTitle";
             this.txtBookTitle.ReadOnly = true;
-            this.txtBookTitle.Size = new System.Drawing.Size(175, 26);
+            this.txtBookTitle.Size = new System.Drawing.Size(151, 26);
             this.txtBookTitle.TabIndex = 1;
             // 
             // label6
@@ -272,22 +280,12 @@
             // 
             // txtAuthor
             // 
-            this.txtAuthor.Location = new System.Drawing.Point(87, 93);
+            this.txtAuthor.Location = new System.Drawing.Point(111, 93);
             this.txtAuthor.Margin = new System.Windows.Forms.Padding(2);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.ReadOnly = true;
-            this.txtAuthor.Size = new System.Drawing.Size(175, 26);
+            this.txtAuthor.Size = new System.Drawing.Size(151, 26);
             this.txtAuthor.TabIndex = 1;
-            // 
-            // txtBookID
-            // 
-            this.txtBookID.Location = new System.Drawing.Point(87, 31);
-            this.txtBookID.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBookID.Name = "txtBookID";
-            this.txtBookID.Size = new System.Drawing.Size(175, 26);
-            this.txtBookID.TabIndex = 1;
-            this.txtBookID.Text = "#0000000-TENSACH-0000";
-            this.txtBookID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBookID_KeyDown);
             // 
             // btnViewReaders
             // 
@@ -340,6 +338,7 @@
             this.Name = "Borrow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elibse: Độc Giả Ký Mượn ";
+            this.Load += new System.EventHandler(this.Borrow_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReaderAvatar)).EndInit();
@@ -367,7 +366,6 @@
         private System.Windows.Forms.TextBox txtBookTitle;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtAuthor;
-        private System.Windows.Forms.TextBox txtBookID;
         private System.Windows.Forms.Button btnViewReaders;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtViolationStatus;
@@ -377,5 +375,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBorrowCount;
         private System.Windows.Forms.PictureBox picBookCover;
+        private System.Windows.Forms.ComboBox cboBookSelect;
     }
 }

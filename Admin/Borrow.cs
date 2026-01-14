@@ -17,9 +17,18 @@ namespace Elibse
         public Borrow()
         {
             InitializeComponent();
+            // Đăng ký sự kiện Load bằng code (cho chắc chắn)
+            this.Load += Borrow_Load;
         }
 
-        // --- 1. HÀM TÌM ĐỘC GIẢ ---
+        // --- SỰ KIỆN FORM LOAD ---
+        private void Borrow_Load(object sender, EventArgs e)
+        {
+            // Tự động tải danh sách sách khi mở form
+            LoadAvailableBooksIntoComboBox();
+        }
+
+        // --- 1. HÀM TÌM ĐỘC GIẢ (Giữ nguyên) ---
         private void LoadReaderInfo()
         {
             string readerId = txtReaderID.Text.Trim();
@@ -32,7 +41,6 @@ namespace Elibse
                     conn.Open();
 
                     // A. Lấy thông tin độc giả
-                    // Kiểm tra xem độc giả có tồn tại và đang hoạt động (Active) không
                     string sqlReader = "SELECT FullName, CreatedDate, ReaderImage, Status FROM READERS WHERE ReaderID = @rid";
                     SqlCommand cmd = new SqlCommand(sqlReader, conn);
                     cmd.Parameters.AddWithValue("@rid", readerId);
@@ -40,7 +48,6 @@ namespace Elibse
                     SqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
-                        // Kiểm tra trạng thái tài khoản
                         string status = r["Status"].ToString();
                         if (status != "Active")
                         {
@@ -50,19 +57,16 @@ namespace Elibse
                             return;
                         }
 
-                        // Hiển thị thông tin
                         txtReaderName.Text = r["FullName"].ToString();
                         txtCreatedDate.Text = Convert.ToDateTime(r["CreatedDate"]).ToString("dd/MM/yyyy");
-                        txtViolationStatus.Text = "Không"; // Mặc định, sẽ update nếu có module phạt
+                        txtViolationStatus.Text = "Không";
 
-                        // Hiển thị ảnh (nếu có)
                         if (r["ReaderImage"] != DBNull.Value)
                         {
                             byte[] img = (byte[])r["ReaderImage"];
                             MemoryStream ms = new MemoryStream(img);
                             picReaderAvatar.Image = new Bitmap(Image.FromStream(ms));
                             picReaderAvatar.SizeMode = PictureBoxSizeMode.StretchImage;
-                            
                         }
                         else picReaderAvatar.Image = null;
                     }
@@ -74,7 +78,7 @@ namespace Elibse
                     }
                     r.Close();
 
-                    // B. Đếm số sách đang mượn (Chưa trả)
+                    // B. Đếm số sách đang mượn
                     string sqlCount = "SELECT COUNT(*) FROM LOAN_RECORDS WHERE ReaderID = @rid AND ReturnDate IS NULL";
                     SqlCommand cmdCount = new SqlCommand(sqlCount, conn);
                     cmdCount.Parameters.AddWithValue("@rid", readerId);
@@ -82,18 +86,16 @@ namespace Elibse
                     int borrowingCount = (int)cmdCount.ExecuteScalar();
                     txtBorrowCount.Text = borrowingCount.ToString() + "/6";
 
-                    // Cảnh báo nếu đã mượn quá giới hạn
                     if (borrowingCount >= 6)
                     {
                         MessageBox.Show("Độc giả này đã mượn tối đa (6 cuốn). Vui lòng trả sách cũ trước khi mượn thêm!", "Đạt giới hạn", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        txtBookID.Enabled = false; // Khóa ô nhập sách
-                        btnConfirmBorrow.Enabled = false; // Khóa nút mượn
+                        cboBookSelect.Enabled = false; // Khóa chọn sách
+                        btnConfirmBorrow.Enabled = false;
                     }
                     else
                     {
-                        txtBookID.Enabled = true;
+                        cboBookSelect.Enabled = true;
                         btnConfirmBorrow.Enabled = true;
-                        txtBookID.Focus(); // Nhảy sang ô nhập sách luôn cho tiện
                     }
                 }
             }
@@ -109,158 +111,144 @@ namespace Elibse
             txtCreatedDate.Clear();
             txtBorrowCount.Text = "?/6";
             picReaderAvatar.Image = null;
-            txtBookID.Enabled = false;
+            cboBookSelect.Enabled = false;
         }
 
-        // --- 2. HÀM TÌM SÁCH ---
-        private void LoadBookInfo()
+        // --- 2. HÀM LOAD SÁCH VÀO COMBOBOX (Mới) ---
+        private void LoadAvailableBooksIntoComboBox()
         {
-            string bookId = txtBookID.Text.Trim();
-            if (string.IsNullOrEmpty(bookId)) return;
-
             try
             {
                 using (SqlConnection conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
-                    string sql = "SELECT Title, Author, Status, BookImage FROM BOOKS WHERE BookID = @bid";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@bid", bookId);
+                    // Chỉ lấy sách Available
+                    string query = "SELECT BookID, Title, Author FROM BOOKS WHERE Status = 'Available'";
 
-                    SqlDataReader r = cmd.ExecuteReader();
-                    if (r.Read())
-                    {
-                        string status = r["Status"].ToString();
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                        // Kiểm tra chặn sách đã thanh lý
-                        if (status == "Liquidated")
-                        {
-                            MessageBox.Show("Sách này đã được thanh lý khỏi thư viện! Không thể thực hiện mượn.",
-                                            "Ngừng giao dịch", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                            ResetBookPanel(); // Xóa sạch các ô nhập liệu để tránh nhìn thấy dữ liệu rác
-                            return; // Dừng hàm ngay lập tức
-                        }
+                    cboBookSelect.DataSource = dt;
+                    cboBookSelect.DisplayMember = "Title"; // Hiển thị Tên
+                    cboBookSelect.ValueMember = "BookID";  // Giá trị ngầm là ID
 
-                        if (status != "Available")
-                        {
-                            MessageBox.Show($"Sách này hiện không khả dụng! (Trạng thái: {status})", "Không thể mượn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            ResetBookPanel();
-                            return;
-                        }
-
-                        txtBookTitle.Text = r["Title"].ToString();
-                        txtAuthor.Text = r["Author"].ToString();
-
-                        if (r["BookImage"] != DBNull.Value)
-                        {
-                            byte[] img = (byte[])r["BookImage"];
-                            MemoryStream ms = new MemoryStream(img);
-                            picBookCover.Image = new Bitmap(Image.FromStream(ms));
-                            picBookCover.SizeMode = PictureBoxSizeMode.StretchImage;
-                        }
-                        else picBookCover.Image = null;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tìm thấy sách có mã này!");
-                        ResetBookPanel();
-                    }
+                    cboBookSelect.SelectedIndex = -1; // Mặc định chưa chọn
+                    txtAuthor.Text = ""; // Xóa tác giả cũ
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tìm sách: " + ex.Message);
+                MessageBox.Show("Lỗi tải sách: " + ex.Message);
             }
         }
 
-        private void ResetBookPanel()
+        private void cboBookSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtBookTitle.Clear();
-            txtAuthor.Clear();
-            picBookCover.Image = null;
+            if (cboBookSelect.SelectedIndex == -1 || cboBookSelect.SelectedItem == null)
+            {
+                txtAuthor.Text = "";
+                return;
+            }
+
+            try
+            {
+                DataRowView row = cboBookSelect.SelectedItem as DataRowView;
+                if (row != null)
+                {
+                    txtAuthor.Text = row["Author"].ToString();
+                }
+            }
+            catch { }
         }
 
-        // --- 3. SỰ KIỆN NHẬP MÃ (Dùng KeyDown thay vì DoubleClick) ---
-
-        // Khi nhấn Enter ở ô Độc giả
+        // --- 3. SỰ KIỆN NHẬP MÃ ĐỘC GIẢ ---
         private void txtReaderID_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 LoadReaderInfo();
-                e.SuppressKeyPress = true; // Tắt tiếng bíp
-            }
-        }
-
-        // Khi nhấn Enter ở ô Mã sách
-        private void txtBookID_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                LoadBookInfo();
                 e.SuppressKeyPress = true;
             }
         }
 
-        // --- 4. NÚT XÁC NHẬN MƯỢN ---
+        // (Đã xóa các sự kiện KeyDown của txtBookID cũ vì không cần nữa)
+
+        // --- 4. NÚT XÁC NHẬN MƯỢN (Đã sửa để dùng ComboBox) ---
         private void btnConfirmBorrow_Click(object sender, EventArgs e)
         {
-            // Kiểm tra dữ liệu đầu vào
-            if (string.IsNullOrEmpty(txtReaderName.Text) || string.IsNullOrEmpty(txtBookTitle.Text))
+            // 1. Kiểm tra Độc giả
+            if (string.IsNullOrEmpty(txtReaderName.Text))
             {
-                MessageBox.Show("Vui lòng xác định Độc giả và Sách trước khi ký mượn!");
+                MessageBox.Show("Vui lòng nhập Mã độc giả và nhấn Enter để xác thực!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtReaderID.Focus();
                 return;
             }
 
-            if (MessageBox.Show($"Xác nhận cho {txtReaderName.Text} mượn sách '{txtBookTitle.Text}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // 2. Kiểm tra Sách (Từ ComboBox)
+            if (cboBookSelect.SelectedIndex == -1 || cboBookSelect.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn một cuốn sách từ danh sách!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboBookSelect.Focus();
+                return;
+            }
+
+            // Lấy dữ liệu từ ComboBox
+            string bookId = cboBookSelect.SelectedValue.ToString();
+            string bookTitle = cboBookSelect.Text;
+            string readerName = txtReaderName.Text;
+
+            // Hộp thoại xác nhận
+            if (MessageBox.Show($"Xác nhận cho độc giả {readerName}\nmượn cuốn sách: \"{bookTitle}\"?",
+                "Xác nhận mượn", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
                     using (SqlConnection conn = DatabaseConnection.GetConnection())
                     {
                         conn.Open();
-
-                        // 1. BẮT ĐẦU GIAO DỊCH
                         SqlTransaction transaction = conn.BeginTransaction();
 
                         try
                         {
-                            // A. Thêm vào bảng LOAN_RECORDS
+                            // A. Thêm vào LOAN_RECORDS
                             string sqlInsert = @"INSERT INTO LOAN_RECORDS (ReaderID, BookID, LoanDate, DueDate, IsPaid)
-                                     VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
+                                                 VALUES (@rid, @bid, GETDATE(), GETDATE() + 7, 0)";
 
                             SqlCommand cmdInsert = new SqlCommand(sqlInsert, conn);
                             cmdInsert.Transaction = transaction;
                             cmdInsert.Parameters.AddWithValue("@rid", txtReaderID.Text);
-                            cmdInsert.Parameters.AddWithValue("@bid", txtBookID.Text);
+                            cmdInsert.Parameters.AddWithValue("@bid", bookId); // Dùng ID từ ComboBox
                             cmdInsert.ExecuteNonQuery();
 
-                            // B. Cập nhật trạng thái sách trong bảng BOOKS
-                            string sqlUpdate = "UPDATE BOOKS SET Status = N'Borrowed' WHERE BookID = @bid";
+                            // B. Cập nhật trạng thái BOOKS
+                            string sqlUpdate = "UPDATE BOOKS SET Status = 'Borrowed' WHERE BookID = @bid";
                             SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, conn);
                             cmdUpdate.Transaction = transaction;
-                            cmdUpdate.Parameters.AddWithValue("@bid", txtBookID.Text);
+                            cmdUpdate.Parameters.AddWithValue("@bid", bookId);
                             cmdUpdate.ExecuteNonQuery();
 
-                            // 2. NẾU KHÔNG CÓ LỖI -> LƯU TẤT CẢ (COMMIT)
                             transaction.Commit();
 
-                            // C. Ghi Log (Log không ảnh hưởng dữ liệu chính nên để ngoài cũng được, hoặc cho vào trong tuỳ bạn)
-                            Logger.Log("Mượn Sách", $"Độc giả {txtReaderID.Text} mượn sách {txtBookTitle.Text} ({txtBookID.Text})");
+                            // Ghi Log
+                            Logger.Log("Mượn Sách", $"Độc giả {txtReaderID.Text} mượn sách {bookTitle} ({bookId})");
 
-                            MessageBox.Show("Mượn sách thành công! Hạn trả: " + DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"));
+                            MessageBox.Show("Mượn sách thành công! Hạn trả: " + DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"), "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            // Reset giao diện
-                            ResetBookPanel();
-                            txtBookID.Clear();
-                            txtBookID.Focus();
+                            // --- CẬP NHẬT LẠI GIAO DIỆN ---
+                            // 1. Load lại danh sách sách (để cuốn vừa mượn biến mất)
+                            LoadAvailableBooksIntoComboBox();
+
+                            // 2. Load lại thông tin độc giả (để cập nhật số lượng mượn ?/6)
                             LoadReaderInfo();
+
+                            // 3. Reset ô chọn sách
+                            cboBookSelect.SelectedIndex = -1;
                         }
                         catch (Exception ex)
                         {
-                            // 3. NẾU CÓ BẤT KỲ LỖI GÌ -> HOÀN TÁC MỌI THỨ (ROLLBACK)
                             transaction.Rollback();
-                            MessageBox.Show("Giao dịch thất bại! Hệ thống đã hoàn tác dữ liệu.\nLỗi: " + ex.Message, "Lỗi Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Giao dịch thất bại! Lỗi: " + ex.Message, "Lỗi Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -270,16 +258,17 @@ namespace Elibse
                 }
             }
         }
+
         private void btnViewBooks_Click(object sender, EventArgs e)
         {
-            // Mở form xem sách (TotalBook)
             Elibse.Admin.TotalBook frm = new Elibse.Admin.TotalBook();
             frm.ShowDialog();
+            // Sau khi đóng form xem sách, load lại ComboBox phòng trường hợp có thay đổi
+            LoadAvailableBooksIntoComboBox();
         }
 
         private void btnViewReaders_Click(object sender, EventArgs e)
         {
-            // Mở form xem độc giả (TotalReader)
             Elibse.Admin.TotalReader frm = new Elibse.Admin.TotalReader();
             frm.ShowDialog();
         }
