@@ -116,7 +116,7 @@
             this.txtReaderID.Name = "txtReaderID";
             this.txtReaderID.Size = new System.Drawing.Size(133, 26);
             this.txtReaderID.TabIndex = 1;
-            this.txtReaderID.Text = "#0000000-12302025";
+            this.txtReaderID.Text = "RD";
             this.txtReaderID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReaderID_KeyDown);
             // 
             // txtCreatedDate

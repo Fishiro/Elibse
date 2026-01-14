@@ -282,5 +282,17 @@ namespace Elibse
                 }
             }
         }
+
+        private void btnViewBookStock_Click(object sender, EventArgs e)
+        {
+            Elibse.Admin.TotalBook frm = new Elibse.Admin.TotalBook();
+            frm.ShowDialog();
+        }
+
+        private void btnViewReaderList_Click(object sender, EventArgs e)
+        {
+            Elibse.Admin.TotalReader frm = new Elibse.Admin.TotalReader();
+            frm.ShowDialog();
+        }
     }
 }
